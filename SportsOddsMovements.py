@@ -96,19 +96,19 @@ spread_movements = spread_movements.pivot(index = spread_movements['GameID'], co
 ### Question 4 - What are the implied team totals for each game?
 
 # Get the current average totals for each game
-home_totals = average_home_odds.reset_index()
-home_totals = home_totals[home_totals['BetType'] == 'O/U']
-home_totals = home_totals[['GameID', 'HomePoints']]
-home_totals.set_index('GameID', inplace = True)
+totals = average_home_odds.reset_index()
+totals = totals[totals['BetType'] == 'O/U']
+totals = totals[['GameID', 'HomePoints']]
+totals.set_index('GameID', inplace = True)
 
 # Get the current average spreads for each game
-home_spreads = average_home_odds.reset_index()
-home_spreads = home_spreads[home_spreads['BetType'] == 'Spread']
-home_spreads = home_spreads[['GameID', 'HomePoints']]
-home_spreads.set_index('GameID', inplace = True)
+spreads = average_home_odds.reset_index()
+spreads = spreads[spreads['BetType'] == 'Spread']
+spreads = spreads[['GameID', 'HomePoints']]
+spreads.set_index('GameID', inplace = True)
 
 # Combine and format the tables
-implied_points = home_totals.merge(home_spreads, left_index = True, right_index = True)
+implied_points = totals.merge(spreads, left_index = True, right_index = True)
 implied_points.columns = ['TotalPoints', 'Spread']
 
 # Derive the home and team implied points
