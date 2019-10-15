@@ -77,7 +77,7 @@ TRUNCATE TABLE nflgames;
 INSERT INTO nflgames (commencetimelong, commencetimeshort, nfl_week, hometeam, awayteam)
 VALUES ('Monday, September 23, 2019 08:15:00', '09/23/2019', 3, 'Chicago Bears', 'Washington Redskins')
 
-SELECT * FROM player_projections;
+SELECT * FROM player_projections ORDER BY nfl_week DESC, position, fpts DESC;
 TRUNCATE TABLE player_projections;
 
 -- Finding Duplicates
