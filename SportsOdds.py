@@ -148,13 +148,18 @@ def requestsOnPace(requests_remaining):
     else:
         return(False)
 
-def lastRequestPace():
+def performAPIPull():
     """
     The automatic nature of the script running seems to be unpredictable, with it running
-    multiple time within the hour plus the 4 hour gaps. Will try to investigate why it is
-    doing this, but for now can easily stop it doing a request by checking when the last
-    request was and then only pulling from the api if the last request is past the desired
-    hour gap. 
+    multiple time within the hour plus within the 4 hour gaps. Since we are working with a
+    limited number of monthly requests we need to be able to prevent. This function will 
+    serve this purpose by checking some requirments before making an API pull. 
+    Requirements:
+            1. There is a time gap between requests (this will vary based on day of week)
+                a. 1 hour gap on Monday (most fluctuations occur here)
+                b. 2 hour gap on Tuesday 
+                c. 3 hour gap all other days
+            2. Only run during certain hours (between 6am and 8pm)
     """
     try:
         connection = psycopg2.connect(user = "postgres",
@@ -203,9 +208,12 @@ def lastRequestPace():
                        5: 3,
                        6: 3}
     hour_gap = hour_gap_lookup[day]
+    
+    # We don't want to pull between the hours of 9pm to 5am
+    hour = now.hour
 
     # Return True or False based on whether we are inside or outside hour gap
-    if delta_hours >= hour_gap:
+    if (delta_hours >= hour_gap) & (5 < hour < 21):
         return(True)
     else:
         return(False)
@@ -216,7 +224,7 @@ def lastRequestPace():
 #   or set sport to "upcoming" to see live and upcoming across all sports
 sport_key = 'americanfootball_nfl'
 
-if lastRequestPace(): #only pull if last request was outside of hour gap
+if performAPIPull(): #only pull if last request was outside of hour gap
     
     odds_response = requests.get('https://api.the-odds-api.com/v3/odds', params={
         'api_key': config.api_key,
