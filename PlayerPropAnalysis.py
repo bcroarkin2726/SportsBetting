@@ -234,7 +234,10 @@ for game in bovada_events:
             for player_prop in bet_markets:
                 player = find_between( player_prop['description'], ' - ', '(').lstrip().rstrip()
                 prop = player_prop['description'].split('-')[0].rstrip()
-                line = player_prop['outcomes'][0]['price']['handicap']
+                try:
+                    line = player_prop['outcomes'][0]['price']['handicap']
+                except IndexError:
+                    continue
                 team = find_between(player_prop['id'],'(', ')')
                 prop_list = [player, team, prop, line, '']
                 # Append the list to the dataframe         
