@@ -203,6 +203,78 @@ def upsertPlayerProjections(row):
            cursor.close()
            connection.close()
 
+def checkPlayerStatistics(nfl_week):
+    """
+    @@nfl_week the current nfl_week
+    This function is used to see if we already have player statistics for a given
+    NFL week. If we do, we do not need to insert any values. If not, we need to 
+    run the insertPlayerStatistics function on each row of fp_statistics df. 
+    """
+    try:
+        connection = psycopg2.connect(user = "postgres",
+                                      password = "RfC93TiD!ab",
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Check if row already exists
+        sql_select_query = f"SELECT * FROM player_statistics WHERE nfl_week = {nfl_week}"
+        cursor.execute(sql_select_query)
+        results = cursor.fetchone()
+        if results:
+            return(True)
+        else:
+            return(False)
+    except (Exception, psycopg2.Error) as error:
+       print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+
+def insertPlayerStatistics(row):
+    """
+    @@row - row from fp_statistics with statisitcs for a player in a given nfl week
+    This function will go row-by-by through fp_statistics and insert player statistics
+    for all relevant players within the week. Values are assumed to be final once 
+    inserted.
+    """
+    try:
+        connection = psycopg2.connect(user = "postgres",
+                                      password = "RfC93TiD!ab",
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Insert single record
+        sql_insert_query = f"INSERT INTO player_statistics (nfl_week, player, position, \
+            team, pass_att, cmp, pass_pct, pass_yds, pass_yds_att, pass_tds, ints, \
+            sacks, rush_att, rush_yds, rush_yds_att, lg_rush, rush_20plus, rush_tds, \
+            rec, tgt, rec_yds, lg_rec, rec_20plus, rec_yds_per, rec_tds, sack, int, fr, \
+            ff, def_td, safety, spc_td, fg, fga, fg_pct, lg_fg, fg_1_19, fg_20_29, \
+            fg_30_39, fg_40_49, fg_50plus, xpt, xpa, pct_own, fpts) \
+            VALUES ({row['NFL_WEEK']}, $${row['PLAYER']}$$, $${row['POSITION']}$$, \
+            $${row['TEAM']}$$, {row['PASS_ATT']}, {row['CMP']}, {row['PASS_PCT']}, \
+            {row['PASS_YDS']}, {row['PASS_YDS_ATT']}, {row['PASS_TDS']}, {row['INTS']}, \
+            {row['SACKS']}, {row['RUSH_ATT']}, {row['RUSH_YDS']}, {row['RUSH_YDS_ATT']}, \
+            {row['LG_RUSH']}, {row['RUSH_20PLUS']}, {row['RUSH_TDS']}, {row['REC']}, \
+            {row['TGT']}, {row['REC_YDS']}, {row['LG_REC']}, {row['REC_20PLUS']}, \
+            {row['REC_YDS_PER']}, {row['REC_TDS']}, {row['SACK']},  {row['INT']}, \
+            {row['FR']}, {row['FF']}, {row['DEF_TD']}, {row['SAFETY']}, {row['SPC_TD']}, \
+            {row['FG']}, {row['FGA']}, {row['FG_PCT']}, {row['LG_FG']}, {row['FG_1_19']}, \
+            {row['FG_20_29']}, {row['FG_30_39']}, {row['FG_40_49']}, {row['FG_50PLUS']}, \
+            {row['XPT']}, {row['XPA']}, {row['PCT_OWN']}, {row['FPTS']})"
+        cursor.execute(sql_insert_query)
+        connection.commit()
+    except (Exception, psycopg2.Error) as error:
+       print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+
 ########################### ESPN API ####################
 #league_id = 28265348
 #year = 2019
@@ -538,6 +610,11 @@ for position, url in fantasy_pros_statistic_urls.items():
 # Filter the fp_statistics table to just relevant players (either have a pass_att, rush_att, tgt, fga, or are a DST)
 fp_statistics = fp_statistics[(fp_statistics['PASS_ATT'] > 0) | (fp_statistics['RUSH_ATT'] > 0) | \
                               (fp_statistics['TGT'] > 0) | (fp_statistics['FGA'] > 0) | (fp_statistics['POSITION'] == 'DST') ]
+
+# Upload the fantasy pros player projections to a postgres table
+for index, row in fp_statistics.iterrows():
+    insertPlayerStatistics(row)
+    print(row['PLAYER'] + "'s player statistics have been added.")
 
 # NOTES: 
 # 1. There appears to be a minor glitch with Fantasy Pros where it does not list fantasy point for
