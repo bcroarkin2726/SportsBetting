@@ -110,6 +110,17 @@ CREATE TABLE player_statistics(
 	fpts FLOAT
 );
 
+CREATE TABLE bovada_prop_comparison(
+	nfl_week INT,
+	player TEXT,
+	team TEXT,
+	prop TEXT,
+	bovada_line FLOAT,
+	fp_projection FLOAT,
+	bet_score FLOAT,
+	bet_grade TEXT
+)
+
 /* Example/test queries */
 
 SELECT * FROM nflweeks;
@@ -126,7 +137,8 @@ INSERT INTO nflgames (commencetimelong, commencetimeshort, nfl_week, hometeam, a
 VALUES ('Monday, September 23, 2019 08:15:00', '09/23/2019', 3, 'Chicago Bears', 'Washington Redskins')
 
 SELECT * FROM player_projections ORDER BY nfl_week DESC, position, fpts DESC;
-TRUNCATE TABLE player_projections;
+
+SELECT * FROM player_statistics;
 
 -- Finding Duplicates
 SELECT * FROM
