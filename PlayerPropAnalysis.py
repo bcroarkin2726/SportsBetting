@@ -215,12 +215,16 @@ def upsertPlayerProjections(row):
 ##################### BOVADA PLAYER PROPS ################################
 
 # Create an empty dataframe to append data to (excluding Def and K)
-bovada_props_comparison = pd.DataFrame(columns = ['PLAYER', 'TEAM', 'PROP', 'BOVADA_LINE', 'FP_PROJECTION'])
+bovada_props_comparison = pd.DataFrame(columns = ['NFL_WEEK', 'PLAYER', 'TEAM', 'PROP', 'BOVADA_LINE', 'FP_PROJECTION'])
 
-# USING THE ACTUAL API
-bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/description/football/nfl'
-bovada_response = requests.get(bovada_url)
-bovada_txt = bovada_response.text
+# We are getting the stats from the current week
+todays_date = datetime.now().strftime("%m/%d/%Y")
+nfl_week = findNFLWeek(todays_date)
+
+## USING THE ACTUAL API
+#bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/description/football/nfl'
+#bovada_response = requests.get(bovada_url)
+#bovada_txt = bovada_response.text
 
 # USING THE TXT FILE (TESTING)
 with open('BovadaAPI2.txt', 'r') as file:
@@ -243,7 +247,7 @@ for game in bovada_events:
                 prop = player_prop['description'].split('-')[0].rstrip()
                 line = player_prop['outcomes'][0]['price']['handicap']
                 team = find_between(player_prop['id'],'(', ')')
-                prop_list = [player, team, prop, line, '']
+                prop_list = [nfl_week, player, team, prop, line, '']
                 # Append the list to the dataframe         
                 bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
 
@@ -325,15 +329,11 @@ fp_projections = pd.DataFrame(columns = ['NFL_WEEK', 'PLAYER', 'POSITION', 'TEAM
                                          'YDS_AGN', 'FG', 'FGA', 'XPT', 'FPTS'])
 
 # Iterate over dictionary of URLs to add data to dictionary
-for key, url in fantasy_pros_projection_urls.items():  
-    # Get the position from the key
-    position = key
+for position, url in fantasy_pros_projection_urls.items():  
     # Get the stat keys lookup for position
     lookup = stats_lookup[position]
     # Lookup the fpts index 
     fpts_index = position_fpts_index[position]
-    # Create an empty list to update the data for
-    player_projections = [0] * 27
     # Web scrape Fantasy Pros for relevant information
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -342,6 +342,8 @@ for key, url in fantasy_pros_projection_urls.items():
     nfl_week = int(find_between(str(list(list(list(soup.children)[2])[1])[1]), 'Week ', ' ' + position))
     for num, item in enumerate(projections_list):
         if item != '\n':
+            # Create an empty list to update the data for
+            player_projections = [0] * 27
             # Add the NFL Week to the list
             player_projections[0] = nfl_week
             proj_list = list(item)
@@ -355,7 +357,7 @@ for key, url in fantasy_pros_projection_urls.items():
             # Add the position to the list
             player_projections[2] = position
             # Extract the team of the player
-            team = list(proj_list[0])[1].strip() if key != 'DST' else team_abrv_lookup[find_between(str(list(proj_list[0])[0]), '>', '<')]
+            team = list(proj_list[0])[1].strip() if position != 'DST' else team_abrv_lookup[find_between(str(list(proj_list[0])[0]), '>', '<')]
             player_projections[3] = team
             for i, stat in enumerate(proj_list):
                 if i in lookup.keys():
@@ -432,150 +434,122 @@ bovada_props_comparison['BET_GRADE'] = bovada_props_comparison.apply(bet_grades,
 todays_date = datetime.now().strftime("%m/%d/%Y")
 nfl_week = findNFLWeek(todays_date) - 1 
 
-# To add to the dataframe we'll need a consistent format of the lists
-statistics_format = {'PLAYER': 0, 'POSITION': 1, 'TEAM': 2, 'WEEK': 3, 'CMP': 4, 
-                        'PASS_ATT': 5, 'PCT': 6, 'PASS_YDS': 7, 'Y/A': 8, 'PASS_TDS': 9, 
-                        'INTS': 10, 'SACKS': 11, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 
-                        'RUSH_TDS': 14, 'FPTS': 15, '%OWN': 16}
-
 # Create an empty dataframe to append data to (excluding Def and K)
 fp_statistics = pd.DataFrame(columns = ['NFL_WEEK', 'PLAYER', 'POSITION', 'TEAM', 'PASS_ATT', 
-                                         'CMP', 'PASS_YDS', 'PASS_TDS', 'INTS', 
-                                         'RUSH_ATT', 'RUSH_YDS', 'RUSH_TDS', 'REC', 
-                                         'REC_YDS', 'REC_TDS', 'SACK', 'INT',
-                                         'FR', 'FF', 'DEF_TD', 'SAFETY', 'PA',
-                                         'YDS_AGN', 'FG', 'FGA', 'XPT', 'FPTS'])
+                                         'CMP', 'PCT', 'PASS_YDS', 'PASS_Y/A', 'PASS_TDS', 'INTS', 
+                                         'SACKS', 'RUSH_ATT', 'RUSH_YDS', 'RUSH_Y/A', 'LG_RUSH', 
+                                         'RUSH_20+', 'RUSH_TDS', 'REC', 'TGT', 'REC_YDS', 'LG_REC', 
+                                         'REC_20+', 'Y/R', 'REC_TDS', 'SACK', 'INT', 'FR', 'FF', 
+                                         'DEF_TD', 'SAFETY', 'SPC_TD', 'FG', 'FGA', 'PCT', 
+                                         'LG_FG', '1-19', '20-29', '30-39', '40-49', '50+', 'XPT', 
+                                         'XPA', '%OWN', 'FPTS'])
 
-# Create lookup for the stat columns we are collecting
-stats_lookup = {'QB': {1: 'CMP', 2: 'PASS_ATT', 3: 'PCT', 4: 'PASS_YDS', 5: 'Y/A',
-                  6: 'PASS_TDS', 7: 'INTS', 8: 'SACKS', 9: 'RUSH_ATT', 10: 'RUSH_ATT',
-                  11: 'RUSH_YDS', 12: 'RUSH_TDS', 14: 'FPTS'},
-    'RB': {},
-    'WR': {}
+# Need to make an additional dictionary for the index of FPTS of each position
+position_fpts_index = {'QB': 14, 'RB': 14, 'WR': 13, 'TE': 13, 'DST': 9, 'K': 13}
+
+# To add to the dataframe we'll need a consistent format of the keys place in dataframe
+statistics_format = {'QB': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'PASS_ATT': 4, 
+                            'CMP': 5, 'PCT': 6, 'PASS_YDS': 7, 'Y/A': 8, 'PASS_TDS': 9, 
+                            'INTS': 10, 'SACKS': 11, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 
+                            'RUSH_TDS': 16, '%OWN': 43, 'FPTS': 44},
+                    'RB': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'RUSH_ATT': 12,
+                           'RUSH_YDS': 13, 'RUSH_Y/A': 14, 'LG_RUSH': 15, 'RUSH_20+': 16,
+                           'RUSH_TDS': 17, 'REC': 18, 'TGT': 19, 'REC_YDS': 20, 'Y/R': 23,
+                           'REC_TDS': 24, '%OWN': 43, 'FPTS': 44},
+                    'WR': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'REC': 18,
+                           'TGT': 19, 'REC_YDS': 20, 'Y/R': 23, 'LG_REC': 21, 'REC_20+': 22,
+                           'REC_TDS': 24, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 'RUSH_TDS': 17,
+                           '%OWN': 43, 'FPTS': 44},
+                    'TE': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'REC': 18,
+                           'TGT': 19, 'REC_YDS': 20, 'Y/R': 23, 'LG_REC': 21, 'REC_20+': 22,
+                           'REC_TDS': 24, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 'RUSH_TDS': 17,
+                           '%OWN': 43, 'FPTS': 44},
+                    'DST': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'SACK': 25,
+                            'INT': 26, 'FR': 27, 'FF': 28, 'DEF_TD': 29, 'SAFETY': 30, 
+                            'SPC_TD': 31, '%OWN': 43, 'FPTS': 44},
+                    'K': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'FG': 32,
+                          'FGA': 33, 'PCT': 34, 'LG_FG': 35, '1-19': 36, '20-29': 37, '30-39': 38,
+                          '40-49': 39, '50+': 40, 'XPT': 41, 'XPA': 42, '%OWN': 43, 'FPTS': 44}
+        }
+
+# Create lookup for the stat columns we are collecting from fantasy pros
+# The nested key is the loop index and the value is the stat it corresponds to
+stats_lookup = {'QB': {1: 'CMP', 2: 'PASS_ATT', 3: 'PCT', 4: 'PASS_YDS', 5: 'Y/A', 
+                       6: 'PASS_TDS', 7: 'INTS', 8: 'SACKS', 9: 'RUSH_ATT', 
+                       10: 'RUSH_YDS', 11: 'RUSH_TDS', 12: '%OWN', 14: 'FPTS'},
+    'RB': {1: 'RUSH_ATT', 2: 'RUSH_YDS', 3: 'RUSH_Y/A', 4: 'LG_RUSH', 5: 'RUSH_20+',
+           6: 'RUSH_TDS', 7: 'REC', 8: 'TGT', 9: 'REC_YDS', 10: 'Y/R', 11: 'REC_TDS',
+           16: '%OWN', 14: 'FPTS'},
+    'WR': {1: 'REC', 2: 'TGT', 3: 'REC_YDS', 4: 'Y/R', 5: 'LG_REC', 6: 'REC_20+',
+           7: 'REC_TDS', 8: 'RUSH_ATT', 9: 'RUSH_YDS', 10: 'RUSH_TDS', 
+           15: '%OWN', 13: 'FPTS'},
+    'TE': {1: 'REC', 2: 'TGT', 3: 'REC_YDS', 4: 'Y/R', 5: 'LG_REC', 6: 'REC_20+',
+           7: 'REC_TDS', 8: 'RUSH_ATT', 9: 'RUSH_YDS', 10: 'RUSH_TDS', 
+           15: '%OWN', 13: 'FPTS'},
+    'K': {1: 'FG', 2: 'FGA', 3: 'PCT', 4: 'LG_FG', 5: '1-19', 6: '20-29', 7: '30-39',
+          8: '40-49', 9: '50+', 10: 'XPT', 11: 'XPA', 15: '%OWN', 'FPTS': 13},
+    'DST': {1: 'SACK', 2: 'INT', 3: 'FR', 4: 'FF', 5: 'DEF_TD', 6: 'SAFETY',
+            7: 'SPC_TD', 9: 'FPTS', 11: '%OWN'}
     }
 
 # A dictionary with f-string of the URL to hit for each position given the position and nfl_week
-fantasy_pros_statistic_urls = {'QB': 'https://www.fantasypros.com/nfl/stats/qb.php?week={nfl_week}&range=week&scoring=HALF', 
-                               'RB': 'https://www.fantasypros.com/nfl/stats/rb.php?week={nfl_week}&range=week&scoring=HALF,
-                               'WR': 'https://www.fantasypros.com/nfl/stats/wr.php?week={nfl_week}&range=week&scoring=HALF,
-                               'TE': 'https://www.fantasypros.com/nfl/stats/te.php?week={nfl_week}&range=week&scoring=HALF,
-                               'DST': 'https://www.fantasypros.com/nfl/stats/dst.php?week={nfl_week}&range=week&scoring=HALF, 
-                               'K': 'https://www.fantasypros.com/nfl/stats/k.php?week={nfl_week}&range=week&scoring=HALF}
-
+fantasy_pros_statistic_urls = {'QB': f'https://www.fantasypros.com/nfl/stats/qb.php?week={nfl_week}&range=week&scoring=HALF', 
+                               'RB': f'https://www.fantasypros.com/nfl/stats/rb.php?week={nfl_week}&range=week&scoring=HALF',
+                               'WR': f'https://www.fantasypros.com/nfl/stats/wr.php?week={nfl_week}&range=week&scoring=HALF',
+                               'TE': f'https://www.fantasypros.com/nfl/stats/te.php?week={nfl_week}&range=week&scoring=HALF',
+                               'DST': f'https://www.fantasypros.com/nfl/stats/dst.php?week={nfl_week}&range=week&scoring=HALF', 
+                               'K': f'https://www.fantasypros.com/nfl/stats/k.php?week={nfl_week}&range=week&scoring=HALF'}
 
 # Iterate over dictionary of URLs to add data to dictionary
-for key, url in fantasy_pros_projection_urls.items():  
-    # Grab information from URL and format into dataframe
-    response = requests.get(qb_url)
-    soup = BeautifulSoup(qb_response.text, "html.parser")
-    stats_list = list(list(list(list(list(list(list(list(qb_soup.children)[25].children)[1])[1])[1])[13])[1])[3])
+for position, url in fantasy_pros_statistic_urls.items():  
+    # Get the stat keys lookup for position
+    lookup = stats_lookup[position]
+    # Lookup the fpts index 
+    fpts_index = position_fpts_index[position]
+    # Web scrape Fantasy Pros for relevant information
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    stats_list = list(list(list(list(list(list(list(list(soup.children)[25].children)[1])[1])[1])[13])[1])[3])
     for num, item in enumerate(stats_list):
         if item != '\n':
             stat_list = list(item)
             # filter out the '\n'
-            stat_list = [x for x in qb_list if x != '\n']
+            stat_list = [x for x in stat_list if x != '\n']
             # Create an empty list to update the data for
-            statistics = [0] * 16
+            statistics = [0] * 45
+            # Update the NFL Week
+            statistics[0] = nfl_week
+            # Update the position
+            statistics[2]= position
             # Extract the team of the player
-            team = list(qb_list[0])[1].strip().replace('(','').replace(')','')
-            statistics[2] = team
+            team = list(stat_list[0])[1].strip().replace('(','').replace(')','')
+            statistics[3] = team
             # Extract the player name
             player_name = str(stat_list[0]).split("fp-player-name=")[1]
             start, stop = [m.start() for m in re.finditer('"', player_name)][0:2]
             player_name = player_name[start+1:stop]
-            statistics[0] = player_name
-            # Extract the player position
-            statistics[1] = 'QB'
-            for i, stat in enumerate(qb_list):
-                if i in qb_stats_lookup.keys():
-                    if i != 15:
-                        # For default format of stat results
-                        stat_name = qb_stats_lookup[i] # get the stat name from lookup
-                        list_index = qb_statistics_format[stat_name] # get the list index for this stat
-                        result = re.search('<td class="center">(.*)</td>', str(stat))
-                        stat_result = float(result.group(1))
-    #                    print(i, stat_name, stat_result)
-                        qb_statistics[list_index] = stat_result
+            statistics[1] = player_name
+            for i, stat in enumerate(stat_list):
+                if i in lookup.keys():
+                    stat_name = lookup[i] # get the stat name from lookup
+                    list_index = statistics_format[position][stat_name] # get the list index for this stat
+                    result = re.search('<td class="center">(.*)</td>', str(stat))
+                    if result.group(1) != '':
+                        try:
+                            stat_result = float(result.group(1))
+                        except:
+                            # for handling %OWN (ex: 19.0% doesn't convert to float)
+                            stat_result = float(result.group(1).replace('%',''))/100
                     else:
-                        # There is a different output for fantasy points
-                        stat_name = qb_stats_lookup[i] # get the stat name from lookup
-                        list_index = qb_statistics_format[stat_name] # get the list index for this stat
-                        result = re.search('<td class="center" data-sort-value="(.*)">(.*)</td>', str(stat))
-                        stat_result = float(result.group(2))
-    #                    print(i, stat_name, stat_result)
-                        qb_statistics[list_index] = stat_result
+                        continue
+                    statistics[list_index] = stat_result
                 else:
                     continue
             # Append the list to the dataframe         
-            qb_statistics_df.loc[len(qb_statistics_df)] = qb_statistics
+            fp_statistics.loc[len(fp_statistics)] = statistics
 
-
-
-
-# 1. QB Stat Tracking
-
-# Grab information from URL and format into dataframe
-qb_url = 'https://www.fantasypros.com/nfl/stats/qb.php?week={nfl_week}&range=week&scoring=HALF'
-qb_response = requests.get(qb_url)
-qb_soup = BeautifulSoup(qb_response.text, "html.parser")
-qb_stats_list = list(list(list(list(list(list(list(list(qb_soup.children)[25].children)[1])[1])[1])[13])[1])[3])
-
-# To add to the dataframe we'll need a consistent format of the lists
-qb_statistics_format = {'PLAYER': 0, 'POSITION': 1, 'TEAM': 2, 'WEEK': 3, 'CMP': 4, 
-                        'PASS_ATT': 5, 'PCT': 6, 'PASS_YDS': 7, 'Y/A': 8, 'PASS_TDS': 9, 
-                        'INTS': 10, 'SACKS': 11, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 
-                        'RUSH_TDS': 14, 'FPTS': 15, '%OWN': 16}
-
-# Create an empty dataframe to append data to (excluding Def and K)
-qb_statistics_df = pd.DataFrame(columns = ['PLAYER', 'POSITION', 'TEAM', 'WEEK', 'CMP', 
-                                        'PASS_ATT', 'PCT', 'PASS_YDS', 'Y/A', 'PASS_TDS', 'INTS', 
-                                         'SACKS', 'RUSH_ATT', 'RUSH_YDS', 'RUSH_TDS', 'FPTS'])
-
-# Create lookup for the stat columns we are collecting
-qb_stats_lookup = {1: 'CMP', 2: 'PASS_ATT', 3: 'PCT', 4: 'PASS_YDS', 5: 'Y/A',
-                  6: 'PASS_TDS', 7: 'INTS', 8: 'SACKS', 9: 'RUSH_ATT', 10: 'RUSH_ATT',
-                  11: 'RUSH_YDS', 12: 'RUSH_TDS', 14: 'FPTS'}
-
-for num, item in enumerate(qb_stats_list):
-    if item != '\n':
-        qb_list = list(item)
-        # filter out the '\n'
-        qb_list = [x for x in qb_list if x != '\n']
-        # Create an empty list to update the data for
-        qb_statistics = [0] * 16
-        # Extract the team of the player
-        team = list(qb_list[0])[1].strip().replace('(','').replace(')','')
-        qb_statistics[2] = team
-        # Extract the player name
-        player_name = str(qb_list[0]).split("fp-player-name=")[1]
-        start, stop = [m.start() for m in re.finditer('"', player_name)][0:2]
-        player_name = player_name[start+1:stop]
-        qb_statistics[0] = player_name
-        # Extract the player position
-        qb_statistics[1] = 'QB'
-        for i, stat in enumerate(qb_list):
-            if i in qb_stats_lookup.keys():
-                if i != 15:
-                    # For default format of stat results
-                    stat_name = qb_stats_lookup[i] # get the stat name from lookup
-                    list_index = qb_statistics_format[stat_name] # get the list index for this stat
-                    result = re.search('<td class="center">(.*)</td>', str(stat))
-                    stat_result = float(result.group(1))
-#                    print(i, stat_name, stat_result)
-                    qb_statistics[list_index] = stat_result
-                else:
-                    # There is a different output for fantasy points
-                    stat_name = qb_stats_lookup[i] # get the stat name from lookup
-                    list_index = qb_statistics_format[stat_name] # get the list index for this stat
-                    result = re.search('<td class="center" data-sort-value="(.*)">(.*)</td>', str(stat))
-                    stat_result = float(result.group(2))
-#                    print(i, stat_name, stat_result)
-                    qb_statistics[list_index] = stat_result
-            else:
-                continue
-        # Append the list to the dataframe         
-        qb_statistics_df.loc[len(qb_statistics_df)] = qb_statistics
-
+# Filter the fp_statistics table to just relevant players (> 0 FPTS)
+fp_statistics = fp_statistics[fp_statistics['FPTS'] > 0]
 
 
 
