@@ -62,6 +62,54 @@ CREATE TABLE player_projections(
 	fpts FLOAT
 );
 
+CREATE TABLE player_statistics(
+	nfl_week INT,
+	player TEXT,
+	position TEXT,
+	team TEXT,
+	pass_att FLOAT,
+	cmp FLOAT,
+	pass_pct FLOAT,
+	pass_yds FLOAT,
+	pass_yds_att  FLOAT,
+	pass_tds FLOAT,
+	ints FLOAT,
+	sacks FLOAT,
+	rush_att FLOAT,
+	rush_yds FLOAT,
+	rush_yds_att FLOAT,
+	lg_rush FLOAT,
+	rush_20plus FLOAT,
+	rush_tds FLOAT,
+	rec FLOAT,
+	tgt FLOAT,
+	rec_yds FLOAT,
+	lg_rec FLOAT,
+	rec_20plus FLOAT,
+	rec_yds_per FLOAT,
+	rec_tds FLOAT,
+	sack FLOAT,
+	int FLOAT,
+	fr FLOAT,
+	ff FLOAT,
+	def_td FLOAT,
+	safety FLOAT,
+	spc_td FLOAT,
+	fg FLOAT,
+	fga FLOAT,
+	fg_pct FLOAT,
+	lg_fg FLOAT,
+	fg_1_19 FLOAT,
+	fg_20_29 FLOAT,
+	fg_30_39 FLOAT,
+	fg_40_49 FLOAT,
+	fg_50plus FLOAT,
+	xpt FLOAT,
+	xpa FLOAT,
+	pct_own FLOAT,
+	fpts FLOAT
+);
+
 /* Example/test queries */
 
 SELECT * FROM nflweeks;
