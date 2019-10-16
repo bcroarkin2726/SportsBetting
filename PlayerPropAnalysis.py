@@ -436,60 +436,47 @@ nfl_week = findNFLWeek(todays_date) - 1
 
 # Create an empty dataframe to append data to (excluding Def and K)
 fp_statistics = pd.DataFrame(columns = ['NFL_WEEK', 'PLAYER', 'POSITION', 'TEAM', 'PASS_ATT', 
-                                         'CMP', 'PCT', 'PASS_YDS', 'PASS_Y/A', 'PASS_TDS', 'INTS', 
-                                         'SACKS', 'RUSH_ATT', 'RUSH_YDS', 'RUSH_Y/A', 'LG_RUSH', 
-                                         'RUSH_20+', 'RUSH_TDS', 'REC', 'TGT', 'REC_YDS', 'LG_REC', 
-                                         'REC_20+', 'Y/R', 'REC_TDS', 'SACK', 'INT', 'FR', 'FF', 
-                                         'DEF_TD', 'SAFETY', 'SPC_TD', 'FG', 'FGA', 'PCT', 
-                                         'LG_FG', '1-19', '20-29', '30-39', '40-49', '50+', 'XPT', 
-                                         'XPA', '%OWN', 'FPTS'])
+                                         'CMP', 'PASS_PCT', 'PASS_YDS', 'PASS_YDS_ATT', 'PASS_TDS', 'INTS', 
+                                         'SACKS', 'RUSH_ATT', 'RUSH_YDS', 'RUSH_YDS_ATT', 'LG_RUSH', 
+                                         'RUSH_20PLUS', 'RUSH_TDS', 'REC', 'TGT', 'REC_YDS', 'LG_REC', 
+                                         'REC_20PLUS', 'REC_YDS_PER', 'REC_TDS', 'SACK', 'INT', 'FR', 'FF', 
+                                         'DEF_TD', 'SAFETY', 'SPC_TD', 'FG', 'FGA', 'FG_PCT', 
+                                         'LG_FG', 'FG_1_19', 'FG_20_29', 'FG_30_39', 'FG_40_49', 'FG_50PLUS', 'XPT', 
+                                         'XPA', 'PCT_OWN', 'FPTS'])
 
 # Need to make an additional dictionary for the index of FPTS of each position
 position_fpts_index = {'QB': 14, 'RB': 14, 'WR': 13, 'TE': 13, 'DST': 9, 'K': 13}
 
 # To add to the dataframe we'll need a consistent format of the keys place in dataframe
-statistics_format = {'QB': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'PASS_ATT': 4, 
-                            'CMP': 5, 'PCT': 6, 'PASS_YDS': 7, 'Y/A': 8, 'PASS_TDS': 9, 
+statistics_format = {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'PASS_ATT': 4, 
+                            'CMP': 5, 'PASS_PCT': 6, 'PASS_YDS': 7, 'PASS_YDS_ATT': 8, 'PASS_TDS': 9, 
                             'INTS': 10, 'SACKS': 11, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 
-                            'RUSH_TDS': 16, '%OWN': 43, 'FPTS': 44},
-                    'RB': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'RUSH_ATT': 12,
-                           'RUSH_YDS': 13, 'RUSH_Y/A': 14, 'LG_RUSH': 15, 'RUSH_20+': 16,
-                           'RUSH_TDS': 17, 'REC': 18, 'TGT': 19, 'REC_YDS': 20, 'Y/R': 23,
-                           'REC_TDS': 24, '%OWN': 43, 'FPTS': 44},
-                    'WR': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'REC': 18,
-                           'TGT': 19, 'REC_YDS': 20, 'Y/R': 23, 'LG_REC': 21, 'REC_20+': 22,
-                           'REC_TDS': 24, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 'RUSH_TDS': 17,
-                           '%OWN': 43, 'FPTS': 44},
-                    'TE': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'REC': 18,
-                           'TGT': 19, 'REC_YDS': 20, 'Y/R': 23, 'LG_REC': 21, 'REC_20+': 22,
-                           'REC_TDS': 24, 'RUSH_ATT': 12, 'RUSH_YDS': 13, 'RUSH_TDS': 17,
-                           '%OWN': 43, 'FPTS': 44},
-                    'DST': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'SACK': 25,
-                            'INT': 26, 'FR': 27, 'FF': 28, 'DEF_TD': 29, 'SAFETY': 30, 
-                            'SPC_TD': 31, '%OWN': 43, 'FPTS': 44},
-                    'K': {'NFL_WEEK': 0, 'PLAYER': 1, 'POSITION': 2, 'TEAM': 3, 'FG': 32,
-                          'FGA': 33, 'PCT': 34, 'LG_FG': 35, '1-19': 36, '20-29': 37, '30-39': 38,
-                          '40-49': 39, '50+': 40, 'XPT': 41, 'XPA': 42, '%OWN': 43, 'FPTS': 44}
-        }
+                            'RUSH_YDS_ATT': 14, 'LG_RUSH': 15, 'RUSH_20PLUS': 16, 'RUSH_TDS': 17, 
+                            'REC': 18, 'TGT': 19, 'REC_YDS': 20, 'LG_REC': 21, 'REC_20PLUS': 22,
+                            'REC_YDS_PER': 23, 'REC_TDS': 24, 'SACK': 25, 'INT': 26, 'FR': 27, 
+                            'FF': 28, 'DEF_TD': 29, 'SAFETY': 30, 'SPC_TD': 31, 'FG': 32, 'FGA': 33, 
+                            'FG_PCT': 34, 'LG_FG': 35, 'FG_1_19': 36, 'FG_20_29': 37, 
+                            'FG_30_39': 38, 'FG_40_49': 39, 'FG_50PLUS': 40, 'XPT': 41, 'XPA': 42, 
+                            'PCT_OWN': 43, 'FPTS': 44}
 
 # Create lookup for the stat columns we are collecting from fantasy pros
 # The nested key is the loop index and the value is the stat it corresponds to
-stats_lookup = {'QB': {1: 'CMP', 2: 'PASS_ATT', 3: 'PCT', 4: 'PASS_YDS', 5: 'Y/A', 
+stats_lookup = {'QB': {1: 'CMP', 2: 'PASS_ATT', 3: 'PASS_PCT', 4: 'PASS_YDS', 5: 'PASS_YDS_ATT', 
                        6: 'PASS_TDS', 7: 'INTS', 8: 'SACKS', 9: 'RUSH_ATT', 
-                       10: 'RUSH_YDS', 11: 'RUSH_TDS', 12: '%OWN', 14: 'FPTS'},
-    'RB': {1: 'RUSH_ATT', 2: 'RUSH_YDS', 3: 'RUSH_Y/A', 4: 'LG_RUSH', 5: 'RUSH_20+',
-           6: 'RUSH_TDS', 7: 'REC', 8: 'TGT', 9: 'REC_YDS', 10: 'Y/R', 11: 'REC_TDS',
-           16: '%OWN', 14: 'FPTS'},
-    'WR': {1: 'REC', 2: 'TGT', 3: 'REC_YDS', 4: 'Y/R', 5: 'LG_REC', 6: 'REC_20+',
+                       10: 'RUSH_YDS', 11: 'RUSH_TDS', 12: 'PCT_OWN', 14: 'FPTS'},
+    'RB': {1: 'RUSH_ATT', 2: 'RUSH_YDS', 3: 'RUSH_YDS_ATT', 4: 'LG_RUSH', 5: 'RUSH_20PLUS',
+           6: 'RUSH_TDS', 7: 'REC', 8: 'TGT', 9: 'REC_YDS', 10: 'REC_YDS_PER', 11: 'REC_TDS',
+           16: 'PCT_OWN', 14: 'FPTS'},
+    'WR': {1: 'REC', 2: 'TGT', 3: 'REC_YDS', 4: 'REC_YDS_PER', 5: 'LG_REC', 6: 'REC_20PLUS',
            7: 'REC_TDS', 8: 'RUSH_ATT', 9: 'RUSH_YDS', 10: 'RUSH_TDS', 
-           15: '%OWN', 13: 'FPTS'},
-    'TE': {1: 'REC', 2: 'TGT', 3: 'REC_YDS', 4: 'Y/R', 5: 'LG_REC', 6: 'REC_20+',
+           15: 'PCT_OWN', 13: 'FPTS'},
+    'TE': {1: 'REC', 2: 'TGT', 3: 'REC_YDS', 4: 'REC_YDS_PER', 5: 'LG_REC', 6: 'REC_20PLUS',
            7: 'REC_TDS', 8: 'RUSH_ATT', 9: 'RUSH_YDS', 10: 'RUSH_TDS', 
-           15: '%OWN', 13: 'FPTS'},
-    'K': {1: 'FG', 2: 'FGA', 3: 'PCT', 4: 'LG_FG', 5: '1-19', 6: '20-29', 7: '30-39',
-          8: '40-49', 9: '50+', 10: 'XPT', 11: 'XPA', 15: '%OWN', 'FPTS': 13},
+           13: 'FPTS', 15: 'PCT_OWN'},
+    'K': {1: 'FG', 2: 'FGA', 3: 'FG_PCT', 4: 'LG_FG', 5: 'FG_1_19', 6: 'FG_20_29', 7: 'FG_30_39',
+          8: 'FG_40_49', 9: 'FG_50PLUS', 10: 'XPT', 11: 'XPA', 13: 'FPTS', 15: 'PCT_OWN'},
     'DST': {1: 'SACK', 2: 'INT', 3: 'FR', 4: 'FF', 5: 'DEF_TD', 6: 'SAFETY',
-            7: 'SPC_TD', 9: 'FPTS', 11: '%OWN'}
+            7: 'SPC_TD', 9: 'FPTS', 11: 'PCT_OWN'}
     }
 
 # A dictionary with f-string of the URL to hit for each position given the position and nfl_week
@@ -532,13 +519,13 @@ for position, url in fantasy_pros_statistic_urls.items():
             for i, stat in enumerate(stat_list):
                 if i in lookup.keys():
                     stat_name = lookup[i] # get the stat name from lookup
-                    list_index = statistics_format[position][stat_name] # get the list index for this stat
+                    list_index = statistics_format[stat_name] # get the list index for this stat
                     result = re.search('<td class="center">(.*)</td>', str(stat))
                     if result.group(1) != '':
                         try:
                             stat_result = float(result.group(1))
                         except:
-                            # for handling %OWN (ex: 19.0% doesn't convert to float)
+                            # for handling PCT_OWN (ex: 19.0% doesn't convert to float)
                             stat_result = float(result.group(1).replace('%',''))/100
                     else:
                         continue
@@ -548,10 +535,16 @@ for position, url in fantasy_pros_statistic_urls.items():
             # Append the list to the dataframe         
             fp_statistics.loc[len(fp_statistics)] = statistics
 
-# Filter the fp_statistics table to just relevant players (> 0 FPTS)
-fp_statistics = fp_statistics[fp_statistics['FPTS'] > 0]
+# Filter the fp_statistics table to just relevant players (either have a pass_att, rush_att, tgt, fga, or are a DST)
+fp_statistics = fp_statistics[(fp_statistics['PASS_ATT'] > 0) | (fp_statistics['RUSH_ATT'] > 0) | \
+                              (fp_statistics['TGT'] > 0) | (fp_statistics['FGA'] > 0) | (fp_statistics['POSITION'] == 'DST') ]
 
-
+# NOTES: 
+# 1. There appears to be a minor glitch with Fantasy Pros where it does not list fantasy point for
+#    certain low scoring players. For example, Tavon Austin is listed in Week 6 as having 5 receptions for 
+#    64 yards, yet has 0 FPTS. Could get around this by calculating FPTS from my end.
+# 2. Fantasy Pros does not list PA or yds_agn for DST. They also appear to have a different scoring system
+#    since I have seen numerous discrepancies between the FPTS listed on FP and that on ESPN.
 
 
 
