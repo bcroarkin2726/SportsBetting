@@ -7,6 +7,7 @@ Created on Tue Oct  1 10:35:39 2019
 
 import psycopg2
 import pandas as pd
+import numpy as np
 
 ############################## HELPER FUNCTIONS ###############################
 def myround(x, base = 0.5):
@@ -128,4 +129,35 @@ away_implied_points.set_index('Team', inplace = True)
 implied_points = home_implied_points.append(away_implied_points).sort_values(by = ['ImpliedPoints'],
                                            ascending = False)
 
+########################## SET UP DASH APPLICATION ##############################
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+import plotly.graph_objs as go
 
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+### Set up all needed variables
+
+# Implied Team Totals
+implied_team_totals_sorted_x = np.array([x for _,x in sorted(zip(implied_points['ImpliedPoints'],implied_points.index), reverse = False)])
+implied_team_totals_sorted_y = np.array(sorted(implied_points['ImpliedPoints'], reverse = False))
+color=np.array(['rgb(255,255,255)']*len(implied_team_totals_sorted_y))
+color[implied_team_totals_sorted_y < 20] = 'rgb(204,204, 205)'
+color[implied_team_totals_sorted_y >= 20] = 'rgb(130, 0, 0)'
+
+app.layout = html.Div(children = 
+                      [html.H1('BOFA Sports Betting Tool'),
+                       dcc.Graph(id = 'Week 6 Player Props',
+                                 figure = {
+                                         'data': [go.Bar(x = implied_team_totals_sorted_y,
+                                                         y = implied_team_totals_sorted_x,
+                                                         orientation = 'h')]
+                                    })
+                      ])
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
