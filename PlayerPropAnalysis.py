@@ -19,7 +19,7 @@ from datetime import datetime
 
 # Set working directory to the file path of this file
 abspath = os.path.abspath('PlayerPropAnalysis.py')
-dname = os.path.dirname(abspath) + '\\Documents\\GitHub\\SportsBetting'
+dname = os.path.dirname(abspath)
 os.chdir(dname)
 
 ############# HELPER FUNCTIONS ######################
@@ -293,14 +293,14 @@ bovada_props_comparison = pd.DataFrame(columns = ['NFL_WEEK', 'PLAYER', 'TEAM', 
 todays_date = datetime.now().strftime("%m/%d/%Y")
 nfl_week = findNFLWeek(todays_date)
 
-## USING THE ACTUAL API
-#bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/description/football/nfl'
-#bovada_response = requests.get(bovada_url)
-#bovada_txt = bovada_response.text
+# USING THE ACTUAL API
+bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/description/football/nfl'
+bovada_response = requests.get(bovada_url)
+bovada_txt = bovada_response.text
 
-# USING THE TXT FILE (TESTING)
-with open('BovadaAPI2.txt', 'r') as file:
-    bovada_txt = file.read()
+## USING THE TXT FILE (TESTING)
+#with open('BovadaAPI2.txt', 'r') as file:
+#    bovada_txt = file.read()
 
 # Format the json
 bovada_json = json.loads(bovada_txt)
@@ -458,7 +458,7 @@ fp_projections = fp_projections[fp_projections['FPTS'] != 0.0]
 # Upload the fantasy pros player projections to a postgres table
 for index, row in fp_projections.iterrows():
     upsertPlayerProjections(row)
-    print(row['PLAYER'] + "'s player projections have been added.")
+#    print(row['PLAYER'] + "'s player projections have been added.")
 
 ############### APPEND FP PROJECTIONS TO BOVADA PLAYER PROPS ##################
 prop_lookups = {'Total Receiving Yards': 'REC_YDS',
@@ -490,12 +490,15 @@ unused_props = ['Longest Completion', 'Longest Reception']
 bovada_props_comparison = bovada_props_comparison[(bovada_props_comparison['PROP'] != unused_props[0]) & 
     (bovada_props_comparison['PROP'] != unused_props[1])]    
     
-# Create bet grades for each row based on difference bt Bovada line and FP projection
+# Find difference bt Bovada line and FP projection
 bovada_props_comparison['BOVADA_LINE'] = pd.to_numeric(bovada_props_comparison['BOVADA_LINE'], errors = 'coerce') # convert to float for analysis
 bovada_props_comparison['FP_PROJECTION'] = pd.to_numeric(bovada_props_comparison['FP_PROJECTION'], errors = 'coerce') # convert to float for analysis
 bovada_props_comparison['DIFFERENCE'] = bovada_props_comparison['BOVADA_LINE'] - bovada_props_comparison['FP_PROJECTION']
 bovada_props_comparison['DIFFERENCE'] = abs(bovada_props_comparison['DIFFERENCE'])
 bovada_props_comparison['PCT_DIFFERENCE'] = abs(round((bovada_props_comparison['BOVADA_LINE']/bovada_props_comparison['FP_PROJECTION'] - 1) * 100, 2))
+# Drop any rows with a PCT_DIFFERENCE of inf as this is likely an error
+bovada_props_comparison = bovada_props_comparison.replace([np.inf, -np.inf], np.nan).dropna(subset=["PCT_DIFFERENCE"], how="all")
+# Create bet grades for each row based on difference bt Bovada line and FP projection
 bovada_props_comparison['DIRECTION'] = bovada_props_comparison.apply(over_under, axis = 1)
 bovada_props_comparison['BET_SCORE'] = bovada_props_comparison.apply(bet_scores, axis = 1)
 bovada_props_comparison['BET_GRADE'] = bovada_props_comparison.apply(bet_grades, axis = 1)
