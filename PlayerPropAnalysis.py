@@ -6,8 +6,6 @@ Created on Wed Oct  2 11:27:37 2019
 """
 
 import requests
-import urllib.request
-import time
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
@@ -45,29 +43,37 @@ def bet_scores(row):
     Given the difference and pct_difference between the bovada line and the 
     fp projection, we can assign grades based on how good of bets these are.
     Need to balance the weight given to difference and pct_difference since 
-    this varies across values. 
-    Scores will be created based on the difference and pct_difference. The 
-    weight to these two factors will vary based on the bovada line. The score
-    will then be used to assign a grade
+    this varies across values. Higher bovada_lines will give more weight to
+    difference, while lower bovada_lines will give more weight to 
+    pct_difference. The score will then be used to assign a grade.
+    The maximum score is 100. 
     """
     difference = row['DIFFERENCE']
     pct_difference = row['PCT_DIFFERENCE']
     bovada_line = row['BOVADA_LINE']
-    
-    if bovada_line < 10:
+
+    if bovada_line < 1:
         # in this extremely low category, nearly all weight should be given to pct difference
-        diff_weight = .1
-        pct_weight = .9
+        diff_weight = .01
+        pct_weight = .99
         diff_score = (difference / 20) * 50
-        pct_score = 50 if pct_difference > 100 else pct_difference / 50
+        pct_score = pct_difference
         score = (diff_score * diff_weight) + (pct_score * diff_weight)
         return(score)
-    if bovada_line < 25:
+    elif bovada_line < 5:
+        # in this extremely low category, nearly all weight should be given to pct difference
+        diff_weight = .5
+        pct_weight = .95
+        diff_score = (difference / 20) * 50
+        pct_score = pct_difference
+        score = (diff_score * diff_weight) + (pct_score * diff_weight)
+        return(score)
+    elif bovada_line < 25:
         # in this very low category, most weight should be given to pct difference
         diff_weight = .2
         pct_weight = .8
         diff_score = (difference / 20) * 50
-        pct_score = 50 if pct_difference > 100 else pct_difference / 50
+        pct_score = pct_difference
         score = (diff_score * diff_weight) + (pct_score * diff_weight)
         return(score)
     elif bovada_line < 50:
@@ -75,7 +81,7 @@ def bet_scores(row):
         diff_weight = .35
         pct_weight = .65
         diff_score = (difference / 20) * 50
-        pct_score = 50 if pct_difference > 100 else pct_difference / 50
+        pct_score = pct_difference
         score = (diff_score * diff_weight) + (pct_score * diff_weight)
         return(score)
     elif bovada_line < 100:
@@ -83,7 +89,7 @@ def bet_scores(row):
         diff_weight = .5
         pct_weight = .5
         diff_score = (difference / 20) * 50
-        pct_score = 50 if pct_difference > 100 else pct_difference / 50
+        pct_score = pct_difference
         score = (diff_score * diff_weight) + (pct_score * diff_weight)
         return(score)
     elif bovada_line < 200:
@@ -91,7 +97,7 @@ def bet_scores(row):
         diff_weight = .65
         pct_weight = .35
         diff_score = (difference / 20) * 50
-        pct_score = 50 if pct_difference > 100 else pct_difference / 50
+        pct_score = pct_difference
         score = (diff_score * diff_weight) + (pct_score * diff_weight)
         return(score)
     else:
@@ -99,27 +105,27 @@ def bet_scores(row):
         diff_weight = .8
         pct_weight = .2
         diff_score = (difference / 20) * 50
-        pct_score = 50 if pct_difference > 100 else pct_difference / 50
+        pct_score = pct_difference
         score = (diff_score * diff_weight) + (pct_score * pct_weight)
         return(score)
 
 def bet_grades(row):
     score = row['BET_SCORE']
-    if score > 40.0: 
+    if score >30.0: 
         return('A+')
-    elif score > 30.0:
-        return('A')
     elif score > 20.0:
-        return('B+')
+        return('A')
     elif score > 15.0:
-        return('B')
+        return('B+')
     elif score > 10.0:
-        return('C+')
+        return('B')
     elif score > 7.0:
-        return('C')
+        return('C+')
     elif score > 5.0:
-        return('D+')
+        return('C')
     elif score > 3.0:
+        return('D+')
+    elif score > 1.0:
         return('D')
     else:
         return('F')
@@ -275,6 +281,64 @@ def insertPlayerStatistics(row):
            cursor.close()
            connection.close()
 
+def upsertBovadaPropComparisons(row):
+    """
+    @@row - row from bovada_props_comparison
+    This function will go row-by-by through bovada_props_comparison and update bovada
+    prop comparisons for any players that are already in the table for the given nfl 
+    week and insert bovada prop comparisons for any players that are not already in 
+    the table for the given nfl week. 
+    """
+    try:
+        connection = psycopg2.connect(user = "postgres",
+                                      password = "RfC93TiD!ab",
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Check if row already exists
+        nfl_week = row['NFL_WEEK']
+        player = row['PLAYER']
+        team = row['TEAM']
+        prop = row['PROP']
+        sql_select_query = f"SELECT * FROM bovada_props_comparison WHERE nfl_week = {nfl_week} \
+        AND player = $${player}$$ AND team = $${team}$$ AND prop = $${prop}$$"
+        cursor.execute(sql_select_query)
+        results = cursor.fetchone()
+        if results:
+            # Format certain fields to prevent error in update
+            actual_stat_line = row['ACTUAL_STAT_LINE'] if row['ACTUAL_STAT_LINE'] != '' else 'NULL'
+            correct = row['CORRECT'] if row['CORRECT'] != '' else 'NULL'
+            # If there are results that means the row is already there and should just be updated
+            sql_update_query = f"UPDATE bovada_props_comparison SET nfl_week = {nfl_week}, \
+                player = $${player}$$, team = $${team}$$, prop = $${row['PROP']}$$, \
+                bovada_line = {row['BOVADA_LINE']}, fp_projection = {row['FP_PROJECTION']}, \
+                difference = {row['DIFFERENCE']}, pct_difference = {row['PCT_DIFFERENCE']}, \
+                direction = $${row['DIRECTION']}$$, bet_score = {row['BET_SCORE']}, \
+                bet_grade = $${row['BET_GRADE']}$$, actual_stat_line = actual_stat_line, \
+                correct = correct WHERE nfl_week = {nfl_week} AND player = \
+                $${player}$$ AND team = $${team}$$"
+            cursor.execute(sql_update_query)
+            connection.commit()
+        else:
+            # Insert single record
+            sql_insert_query = f"INSERT INTO bovada_props_comparison (nfl_week, player, team, \
+            prop, bovada_line, fp_projection, difference, pct_difference, direction, \
+            bet_score, bet_grade, actual_stat_line, correct) \
+            VALUES ({nfl_week}, $${player}$$, $${team}$$, $${row['PROP']}$$, \
+            {row['BOVADA_LINE']}, {row['FP_PROJECTION']}, $${row['DIFFERENCE']}$$, \
+            {row['PCT_DIFFERENCE']}, $${row['DIRECTION']}$$, {row['BET_SCORE']}, \
+            $${row['BET_GRADE']}$$, NULL, NULL)"
+            cursor.execute(sql_insert_query)
+            connection.commit()
+    except (Exception, psycopg2.Error) as error:
+       print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+
 ########################### ESPN API ####################
 #league_id = 28265348
 #year = 2019
@@ -323,9 +387,9 @@ for game in bovada_events:
                 # Append the list to the dataframe         
                 bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
 
-##################### FANTASY PROS PROJECTIONS ###########################
+######################### FANTASY PROS PROJECTIONS ############################
 
-### 1. Create fantasy projections in one table for QB, RB, WR, and TE
+### Create fantasy statistics in one table for QB, RB, WR, TE, DST, and K
 
 # Create lookup for the stat columns we are collecting
 stats_lookup = {'QB': {1: 'PASS_ATT', 2: 'CMP', 3: 'PASS_YDS', 4: 'PASS_TDS',
@@ -458,9 +522,13 @@ fp_projections = fp_projections[fp_projections['FPTS'] != 0.0]
 # Upload the fantasy pros player projections to a postgres table
 for index, row in fp_projections.iterrows():
     upsertPlayerProjections(row)
-#    print(row['PLAYER'] + "'s player projections have been added.")
 
 ############### APPEND FP PROJECTIONS TO BOVADA PLAYER PROPS ##################
+    
+### Now that we have FP projections, we can compare them to the Bovada player
+### props to see where there is value
+
+# Create a lookup between the Bovada prop and the equivalent FP stat    
 prop_lookups = {'Total Receiving Yards': 'REC_YDS',
                'Total Receptions': 'REC',
                'Total Passing Yards': 'PASS_YDS',
@@ -486,9 +554,10 @@ for index, row in bovada_props_comparison.iterrows():
     bovada_props_comparison.loc[index]['FP_PROJECTION'] = fp_projection
 
 # Remove Props from bovada_props_comparison that I don't use (Longest Completion and Longest Reception)
-unused_props = ['Longest Completion', 'Longest Reception']
+unused_props = ['Longest Completion', 'Longest Reception', 'Total Interceptions Thrown']
 bovada_props_comparison = bovada_props_comparison[(bovada_props_comparison['PROP'] != unused_props[0]) & 
-    (bovada_props_comparison['PROP'] != unused_props[1])]    
+    (bovada_props_comparison['PROP'] != unused_props[1]) 
+    & (bovada_props_comparison['PROP'] != unused_props[2])]    
     
 # Find difference bt Bovada line and FP projection
 bovada_props_comparison['BOVADA_LINE'] = pd.to_numeric(bovada_props_comparison['BOVADA_LINE'], errors = 'coerce') # convert to float for analysis
@@ -496,12 +565,22 @@ bovada_props_comparison['FP_PROJECTION'] = pd.to_numeric(bovada_props_comparison
 bovada_props_comparison['DIFFERENCE'] = bovada_props_comparison['BOVADA_LINE'] - bovada_props_comparison['FP_PROJECTION']
 bovada_props_comparison['DIFFERENCE'] = abs(bovada_props_comparison['DIFFERENCE'])
 bovada_props_comparison['PCT_DIFFERENCE'] = abs(round((bovada_props_comparison['BOVADA_LINE']/bovada_props_comparison['FP_PROJECTION'] - 1) * 100, 2))
+
 # Drop any rows with a PCT_DIFFERENCE of inf as this is likely an error
 bovada_props_comparison = bovada_props_comparison.replace([np.inf, -np.inf], np.nan).dropna(subset=["PCT_DIFFERENCE"], how="all")
+
 # Create bet grades for each row based on difference bt Bovada line and FP projection
 bovada_props_comparison['DIRECTION'] = bovada_props_comparison.apply(over_under, axis = 1)
 bovada_props_comparison['BET_SCORE'] = bovada_props_comparison.apply(bet_scores, axis = 1)
 bovada_props_comparison['BET_GRADE'] = bovada_props_comparison.apply(bet_grades, axis = 1)
+
+# Add empty place holder columns for comparing actual performance to the bet grades
+bovada_props_comparison['ACTUAL_STAT_LINE'] = ''
+bovada_props_comparison['CORRECT'] = ''
+
+# Upload the bovada_props_comparison to a postgres table
+for index, row in bovada_props_comparison.iterrows():
+    upsertBovadaPropComparisons(row)
 
 ##################### FANTASY PROS PLAYER STAT TRACKING ###########################
 
@@ -614,24 +693,24 @@ for position, url in fantasy_pros_statistic_urls.items():
 fp_statistics = fp_statistics[(fp_statistics['PASS_ATT'] > 0) | (fp_statistics['RUSH_ATT'] > 0) | \
                               (fp_statistics['TGT'] > 0) | (fp_statistics['FGA'] > 0) | (fp_statistics['POSITION'] == 'DST') ]
 
-# Upload the fantasy pros player projections to a postgres table
-for index, row in fp_statistics.iterrows():
-    insertPlayerStatistics(row)
-    print(row['PLAYER'] + "'s player statistics have been added.")
+# Upload the fantasy pros player projections to a postgres table if we don't have 
+# anything for the current week
+if checkPlayerStatistics(nfl_week):
+    # This means that we have player statistics for the week already, so we 
+    # can skip
+    pass
+else:
+    for index, row in fp_statistics.iterrows():
+        insertPlayerStatistics(row)
 
 # NOTES: 
-# 1. There appears to be a minor glitch with Fantasy Pros where it does not list fantasy point for
-#    certain low scoring players. For example, Tavon Austin is listed in Week 6 as having 5 receptions for 
-#    64 yards, yet has 0 FPTS. Could get around this by calculating FPTS from my end.
-# 2. Fantasy Pros does not list PA or yds_agn for DST. They also appear to have a different scoring system
-#    since I have seen numerous discrepancies between the FPTS listed on FP and that on ESPN.
-
-
-
-
-
-
-
+# 1. There appears to be a minor glitch with Fantasy Pros where it does not list 
+#    fantasy point for certain low scoring players. For example, Tavon Austin is 
+#    listed in Week 6 as having 5 receptions for 64 yards, yet has 0 FPTS. Could 
+#    get around this by calculating FPTS from my end.
+# 2. Fantasy Pros does not list PA or yds_agn for DST. They also appear to have 
+#    a different scoring system for DST since I have seen numerous discrepancies 
+#    between the FPTS listed on FP and that on ESPN.
 
 
 
