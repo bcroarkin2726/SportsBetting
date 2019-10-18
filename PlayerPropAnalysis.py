@@ -312,23 +312,23 @@ def upsertBovadaPropComparisons(row):
             # If there are results that means the row is already there and should just be updated
             sql_update_query = f"UPDATE bovada_props_comparison SET nfl_week = {nfl_week}, \
                 player = $${player}$$, team = $${team}$$, prop = $${row['PROP']}$$, \
-                bovada_line = {row['BOVADA_LINE']}, fp_projection = {row['FP_PROJECTION']}, \
+                bovada_line = {row['BOVADA_LINE']}, over_odds = $${row['OVER_ODDS']}$$, \
+                under_odds = $${row['UNDER_ODDS']}$$, fp_projection = {row['FP_PROJECTION']},\
                 difference = {row['DIFFERENCE']}, pct_difference = {row['PCT_DIFFERENCE']}, \
-                direction = $${row['DIRECTION']}$$, bet_score = {row['BET_SCORE']}, \
-                bet_grade = $${row['BET_GRADE']}$$, actual_stat_line = actual_stat_line, \
-                correct = correct WHERE nfl_week = {nfl_week} AND player = \
-                $${player}$$ AND team = $${team}$$"
+                direction = $${row['DIRECTION']}$$, bet_score = {row['BET_SCORE']}, bet_grade =\
+                $${row['BET_GRADE']}$$, actual_stat_line = actual_stat_line, correct = correct \
+                WHERE nfl_week = {nfl_week} AND player = $${player}$$ AND team = $${team}$$"
             cursor.execute(sql_update_query)
             connection.commit()
         else:
             # Insert single record
             sql_insert_query = f"INSERT INTO bovada_props_comparison (nfl_week, player, team, \
-            prop, bovada_line, fp_projection, difference, pct_difference, direction, \
-            bet_score, bet_grade, actual_stat_line, correct) \
+            prop, bovada_line, over_odds, under_odds, fp_projection, difference, pct_difference, \
+            direction, bet_score, bet_grade, actual_stat_line, correct) \
             VALUES ({nfl_week}, $${player}$$, $${team}$$, $${row['PROP']}$$, \
-            {row['BOVADA_LINE']}, {row['FP_PROJECTION']}, $${row['DIFFERENCE']}$$, \
-            {row['PCT_DIFFERENCE']}, $${row['DIRECTION']}$$, {row['BET_SCORE']}, \
-            $${row['BET_GRADE']}$$, NULL, NULL)"
+            {row['BOVADA_LINE']}, $${row['OVER_ODDS']}$$, $${row['UNDER_ODDS']}$$, \
+            {row['FP_PROJECTION']}, $${row['DIFFERENCE']}$$, {row['PCT_DIFFERENCE']}, \
+            $${row['DIRECTION']}$$, {row['BET_SCORE']}, $${row['BET_GRADE']}$$, NULL, NULL)"
             cursor.execute(sql_insert_query)
             connection.commit()
     except (Exception, psycopg2.Error) as error:
@@ -339,6 +339,29 @@ def upsertBovadaPropComparisons(row):
            cursor.close()
            connection.close()
 
+def impliedOddsConverter(odds):
+    """
+    @odds the over or under odds. 
+    Can be either positive (+105) or minus odds (-115). The goal is to convert 
+    american odds into an implied probability. 
+    Examples:
+        1. -115 is an implied probability of 53.48%
+        2. +105 is an implied probability of 48.78%
+    """
+    # The formula to use varies on whether it is a minus or positive odd
+    if odds == 'EVEN': # even odds
+        return(0.5)
+    elif odds[0] == '-': # negative odds
+        odds = int(odds[1:]) # convert to integer for calculations
+        implied_probability = (-1 * odds) / ((-1 * odds)+100)
+        implied_probability = round(implied_probability, 2)
+        return(implied_probability)
+    else: # positive odds
+        odds = int(odds[1:]) # convert to integer for calculations
+        implied_probability = 100 / (odds +100)
+        implied_probability = round(implied_probability, 2)
+        return(implied_probability)
+    
 ########################### ESPN API ####################
 #league_id = 28265348
 #year = 2019
@@ -351,7 +374,9 @@ def upsertBovadaPropComparisons(row):
 ##################### BOVADA PLAYER PROPS ################################
 
 # Create an empty dataframe to append data to (excluding Def and K)
-bovada_props_comparison = pd.DataFrame(columns = ['NFL_WEEK', 'PLAYER', 'TEAM', 'PROP', 'BOVADA_LINE', 'FP_PROJECTION'])
+bovada_props_comparison = pd.DataFrame(columns = ['NFL_WEEK', 'PLAYER', 'TEAM', \
+                            'PROP', 'BOVADA_LINE', 'OVER_ODDS', 'IMPLIED_OVER_PROBABILITY', \
+                            'UNDER_ODDS', 'IMPLIED_UNDER_PROBABILITY', 'FP_PROJECTION'])
 
 # We are getting the stats from the current week
 todays_date = datetime.now().strftime("%m/%d/%Y")
@@ -382,8 +407,13 @@ for game in bovada_events:
                 player = find_between( player_prop['description'], ' - ', '(').lstrip().rstrip()
                 prop = player_prop['description'].split('-')[0].rstrip()
                 line = player_prop['outcomes'][0]['price']['handicap']
+                over_odds = player_prop['outcomes'][0]['price']['american'] # odds for the over
+                implied_over_probability = impliedOddsConverter(over_odds)
+                under_odds = player_prop['outcomes'][1]['price']['american'] # odds for the under
+                implied_under_probability = impliedOddsConverter(under_odds)
                 team = find_between(player_prop['id'],'(', ')')
-                prop_list = [nfl_week, player, team, prop, line, '']
+                prop_list = [nfl_week, player, team, prop, line, over_odds, \
+                             implied_over_probability, under_odds, implied_under_probability, '']
                 # Append the list to the dataframe         
                 bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
 
@@ -573,6 +603,10 @@ bovada_props_comparison['DIFFERENCE'] = bovada_props_comparison['BOVADA_LINE'] -
 bovada_props_comparison['DIFFERENCE'] = abs(bovada_props_comparison['DIFFERENCE'])
 bovada_props_comparison['PCT_DIFFERENCE'] = abs(round((bovada_props_comparison['BOVADA_LINE']/bovada_props_comparison['FP_PROJECTION'] - 1) * 100, 2))
 
+# Find the implied odds for the over and under
+bovada_props_comparison['implied_over_odds'] = (-1 * Minus Money-line Odds) / ((-1 * Minus Money-line Odds)+100))
+bovada_props_comparison['implied_under_odds'] = 100 / (Plus Money-line Odds +100)
+
 # Drop any rows with a PCT_DIFFERENCE of inf as this is likely an error
 bovada_props_comparison = bovada_props_comparison.replace([np.inf, -np.inf], np.nan).dropna(subset=["PCT_DIFFERENCE"], how="all")
 
@@ -703,14 +737,20 @@ fp_statistics = fp_statistics[(fp_statistics['PASS_ATT'] > 0) | (fp_statistics['
 # Upload the fantasy pros player projections to a postgres table if we don't have 
 # anything for the current week
 if checkPlayerStatistics(nfl_week):
-    # This means that we have player statistics for the week already, so we 
-    # can skip
-    pass
+    # This means that we have player statistics for the week already, so we can skip
+    continue
 else:
     for index, row in fp_statistics.iterrows():
         insertPlayerStatistics(row)
+        
+################ APPEND FP STATISTICS TO BOVADA PLAYER PROPS ##################
+        
 
-# NOTES: 
+
+
+
+################################## NOTES ######################################
+        
 # 1. There appears to be a minor glitch with Fantasy Pros where it does not list 
 #    fantasy point for certain low scoring players. For example, Tavon Austin is 
 #    listed in Week 6 as having 5 receptions for 64 yards, yet has 0 FPTS. Could 
