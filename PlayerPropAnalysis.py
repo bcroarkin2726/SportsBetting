@@ -362,9 +362,9 @@ bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/descriptio
 bovada_response = requests.get(bovada_url)
 bovada_txt = bovada_response.text
 
-## USING THE TXT FILE (TESTING)
-#with open('BovadaAPI2.txt', 'r') as file:
-#    bovada_txt = file.read()
+# USING THE TXT FILE (TESTING)
+with open('BovadaAPI3.txt', 'r') as file:
+    bovada_txt = file.read()
 
 # Format the json
 bovada_json = json.loads(bovada_txt)
@@ -541,10 +541,17 @@ prop_lookups = {'Total Receiving Yards': 'REC_YDS',
                'Longest Reception': 'N/A',
                'Longest Completion': 'N/A'}
 
+# Create a lookup between NFL player names from Bovada and FP where there are discrepancies
+# Name on the left is from Bovada and name on the right is FP
+player_lookup = {'Patrick Mahomes II': 'Patrick Mahomes',
+                 'Dermarcus Robinson': 'Demarcus Robinson',
+                 'Desean Hamilton': 'DaeSean Hamilton'}
+
 # Iterate over bovada_props_comparison and add in fp projections where applicable
 for index, row in bovada_props_comparison.iterrows():
+    # Need to convert player names to find them in FP
     player = row['PLAYER']
-    bovada_line = row['BOVADA_LINE']
+    player = player_lookup[player] if player in player_lookup.keys() else player
     prop = row['PROP']
     prop_lookup = prop_lookups[prop]
     fp_projection = fp_projections[fp_projections['PLAYER'] == player][prop_lookup].values[0] \
