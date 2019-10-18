@@ -116,6 +116,10 @@ CREATE TABLE bovada_props_comparison(
 	team TEXT,
 	prop TEXT,
 	bovada_line FLOAT(1),
+	over_odds TEXT,
+	implied_over_probability FLOAT(1),
+	under_odds TEXT,
+	implied_under_probability FLOAT(1),
 	fp_projection FLOAT(1),
 	difference FLOAT(1),
 	pct_difference FLOAT(1),
@@ -124,7 +128,9 @@ CREATE TABLE bovada_props_comparison(
 	bet_grade TEXT,
 	actual_stat_line FLOAT(1),
 	correct TEXT
-)
+);
+
+DROP TABLE bovada_props_comparison;
 
 /* Example/test queries */
 
