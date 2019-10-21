@@ -17,7 +17,7 @@ from datetime import datetime
 
 # Set working directory to the file path of this file
 abspath = os.path.abspath('PlayerPropAnalysis.py')
-dname = os.path.dirname(abspath)
+dname = os.path.dirname(abspath) + '\\Documents\\GitHub\\SportsBetting' if 'GitHub' not in abspath else os.path.dirname(abspath)
 os.chdir(dname)
 
 ############# HELPER FUNCTIONS ######################
@@ -387,9 +387,9 @@ bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/descriptio
 bovada_response = requests.get(bovada_url)
 bovada_txt = bovada_response.text
 
-# USING THE TXT FILE (TESTING)
-with open('BovadaAPI3.txt', 'r') as file:
-    bovada_txt = file.read()
+## USING THE TXT FILE (TESTING)
+#with open('BovadaAPI3.txt', 'r') as file:
+#    bovada_txt = file.read()
 
 # Format the json
 bovada_json = json.loads(bovada_txt)
@@ -406,16 +406,19 @@ for game in bovada_events:
             for player_prop in bet_markets:
                 player = find_between( player_prop['description'], ' - ', '(').lstrip().rstrip()
                 prop = player_prop['description'].split('-')[0].rstrip()
-                line = player_prop['outcomes'][0]['price']['handicap']
-                over_odds = player_prop['outcomes'][0]['price']['american'] # odds for the over
-                implied_over_probability = impliedOddsConverter(over_odds)
-                under_odds = player_prop['outcomes'][1]['price']['american'] # odds for the under
-                implied_under_probability = impliedOddsConverter(under_odds)
-                team = find_between(player_prop['id'],'(', ')')
-                prop_list = [nfl_week, player, team, prop, line, over_odds, \
-                             implied_over_probability, under_odds, implied_under_probability, '']
-                # Append the list to the dataframe         
-                bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
+                if len(player_prop['outcomes']) > 0: # only if there are any player props available
+                    line = player_prop['outcomes'][0]['price']['handicap']
+                    over_odds = player_prop['outcomes'][0]['price']['american'] # odds for the over
+                    implied_over_probability = impliedOddsConverter(over_odds)
+                    under_odds = player_prop['outcomes'][1]['price']['american'] # odds for the under
+                    implied_under_probability = impliedOddsConverter(under_odds)
+                    team = find_between(player_prop['id'],'(', ')')
+                    prop_list = [nfl_week, player, team, prop, line, over_odds, \
+                                 implied_over_probability, under_odds, implied_under_probability, '']
+                    # Append the list to the dataframe         
+                    bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
+                else:
+                    continue
 
 ######################### FANTASY PROS PROJECTIONS ############################
 
@@ -569,7 +572,9 @@ prop_lookups = {'Total Receiving Yards': 'REC_YDS',
                'Total Rushing Yards': 'RUSH_YDS',
                'Total Rushing and Receiving Yards': ['RUSH_YDS', 'REC_YDS'],
                'Longest Reception': 'N/A',
-               'Longest Completion': 'N/A'}
+               'Longest Completion': 'N/A',
+               'Total Yards on 1st Rushing Attempt': 'N/A',
+               'Total Rushing Attempts in the game': 'N/A'}
 
 # Create a lookup between NFL player names from Bovada and FP where there are discrepancies
 # Name on the left is from Bovada and name on the right is FP
@@ -588,7 +593,7 @@ for index, row in bovada_props_comparison.iterrows():
         if (prop_lookup != 'N/A') & (len(fp_projections[fp_projections['PLAYER'] == player]) > 0) else 0
     fp_projection = fp_projection if type(fp_projection) in [int, float, np.float64] else round(fp_projection[0] + fp_projection[1],1)
     # append the fp_projection to the bovada table
-    bovada_props_comparison.loc[index]['FP_PROJECTION'] = fp_projection
+    bovada_props_comparison.loc[index, 'FP_PROJECTION'] = fp_projection
 
 # Remove Props from bovada_props_comparison that I don't use (Longest Completion and Longest Reception)
 unused_props = ['Longest Completion', 'Longest Reception', 'Total Interceptions Thrown']
@@ -602,10 +607,6 @@ bovada_props_comparison['FP_PROJECTION'] = pd.to_numeric(bovada_props_comparison
 bovada_props_comparison['DIFFERENCE'] = bovada_props_comparison['BOVADA_LINE'] - bovada_props_comparison['FP_PROJECTION']
 bovada_props_comparison['DIFFERENCE'] = abs(bovada_props_comparison['DIFFERENCE'])
 bovada_props_comparison['PCT_DIFFERENCE'] = abs(round((bovada_props_comparison['BOVADA_LINE']/bovada_props_comparison['FP_PROJECTION'] - 1) * 100, 2))
-
-# Find the implied odds for the over and under
-bovada_props_comparison['implied_over_odds'] = (-1 * Minus Money-line Odds) / ((-1 * Minus Money-line Odds)+100))
-bovada_props_comparison['implied_under_odds'] = 100 / (Plus Money-line Odds +100)
 
 # Drop any rows with a PCT_DIFFERENCE of inf as this is likely an error
 bovada_props_comparison = bovada_props_comparison.replace([np.inf, -np.inf], np.nan).dropna(subset=["PCT_DIFFERENCE"], how="all")
