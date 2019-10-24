@@ -21,7 +21,6 @@ dname = os.path.dirname(abspath) + '\\Documents\\GitHub\\SportsBetting' if 'GitH
 os.chdir(dname)
 
 ############# HELPER FUNCTIONS ######################
-def find_between( s, first, last ):
     try:
         start = s.index( first ) + len( first )
         end = s.index( last, start )
@@ -111,7 +110,7 @@ def bet_scores(row):
 
 def bet_grades(row):
     score = row['BET_SCORE']
-    if score >30.0: 
+    if score > 30.0: 
         return('A+')
     elif score > 20.0:
         return('A')
@@ -313,20 +312,25 @@ def upsertBovadaPropComparisons(row):
             sql_update_query = f"UPDATE bovada_props_comparison SET nfl_week = {nfl_week}, \
                 player = $${player}$$, team = $${team}$$, prop = $${row['PROP']}$$, \
                 bovada_line = {row['BOVADA_LINE']}, over_odds = $${row['OVER_ODDS']}$$, \
-                under_odds = $${row['UNDER_ODDS']}$$, fp_projection = {row['FP_PROJECTION']},\
+                implied_over_probability = $${row['IMPLIED_OVER_PROBABILITY']}$$, \
+                under_odds = $${row['UNDER_ODDS']}$$, implied_under_probability = \
+                $${row['IMPLIED_UNDER_PROBABILITY']}$$, fp_projection = {row['FP_PROJECTION']},\
                 difference = {row['DIFFERENCE']}, pct_difference = {row['PCT_DIFFERENCE']}, \
                 direction = $${row['DIRECTION']}$$, bet_score = {row['BET_SCORE']}, bet_grade =\
-                $${row['BET_GRADE']}$$, actual_stat_line = actual_stat_line, correct = correct \
-                WHERE nfl_week = {nfl_week} AND player = $${player}$$ AND team = $${team}$$"
+                $${row['BET_GRADE']}$$, actual_stat_line = $${row['ACTUAL_STAT_LINE']}$$, \
+                correct = $${row['CORRECT']}$$ WHERE nfl_week = {nfl_week} AND player = \
+                $${player}$$ AND team = $${team}$$"
             cursor.execute(sql_update_query)
             connection.commit()
         else:
             # Insert single record
-            sql_insert_query = f"INSERT INTO bovada_props_comparison (nfl_week, player, team, \
-            prop, bovada_line, over_odds, under_odds, fp_projection, difference, pct_difference, \
+            sql_insert_query = f"INSERT INTO bovada_props_comparison (nfl_week, player, \
+            team, prop, bovada_line, over_odds, implied_over_probability, under_odds, \
+            implied_under_probability, fp_projection, difference, pct_difference, \
             direction, bet_score, bet_grade, actual_stat_line, correct) \
             VALUES ({nfl_week}, $${player}$$, $${team}$$, $${row['PROP']}$$, \
-            {row['BOVADA_LINE']}, $${row['OVER_ODDS']}$$, $${row['UNDER_ODDS']}$$, \
+            {row['BOVADA_LINE']}, $${row['OVER_ODDS']}$$, $${row['IMPLIED_OVER_PROBABILITY']}$$, \
+            $${row['UNDER_ODDS']}$$, $${row['IMPLIED_UNDER_PROBABILITY']}$$, \
             {row['FP_PROJECTION']}, $${row['DIFFERENCE']}$$, {row['PCT_DIFFERENCE']}, \
             $${row['DIRECTION']}$$, {row['BET_SCORE']}, $${row['BET_GRADE']}$$, NULL, NULL)"
             cursor.execute(sql_insert_query)
@@ -353,7 +357,7 @@ def impliedOddsConverter(odds):
         return(0.5)
     elif odds[0] == '-': # negative odds
         odds = int(odds[1:]) # convert to integer for calculations
-        implied_probability = (-1 * odds) / ((-1 * odds)+100)
+        implied_probability = odds / (odds + 100)
         implied_probability = round(implied_probability, 2)
         return(implied_probability)
     else: # positive odds
@@ -361,7 +365,41 @@ def impliedOddsConverter(odds):
         implied_probability = 100 / (odds +100)
         implied_probability = round(implied_probability, 2)
         return(implied_probability)
-    
+        
+def assessBovadaProp(row):
+    """
+    @@row a row from the bovada props comparison table
+    The goal of this function is to look at the Bovada line and the actual value
+    and determine if the bet was correct, wrong, or a push.
+    """
+    bovada_line = row['BOVADA_LINE']
+    actual_stat_line = row['ACTUAL_STAT_LINE']
+    direction = row['DIRECTION']
+    # If nan, we can't determine so we'll set it to NA
+    # Comparing the value to itself to check if it is nan
+    if actual_stat_line != actual_stat_line:
+        return(None)
+    else:
+        if direction == 'Push':
+            # if direction is push, we aren't taking a side in the bet
+            return(None)
+        elif direction == 'Under':
+            if bovada_line == actual_stat_line:
+                # if there is no difference we push on the bet and won't count it
+                return(None)
+            elif bovada_line > actual_stat_line: 
+                return(True)
+            else: 
+                return(False)
+        else: # the direction is Over
+            if bovada_line == actual_stat_line:
+                # if there is no difference we push on the bet and won't count it
+                return(None)
+            elif bovada_line > actual_stat_line: 
+                return(False)
+            else: 
+                return(True)
+                
 ########################### ESPN API ####################
 #league_id = 28265348
 #year = 2019
@@ -739,16 +777,114 @@ fp_statistics = fp_statistics[(fp_statistics['PASS_ATT'] > 0) | (fp_statistics['
 # anything for the current week
 if checkPlayerStatistics(nfl_week):
     # This means that we have player statistics for the week already, so we can skip
-    continue
+    pass
 else:
     for index, row in fp_statistics.iterrows():
         insertPlayerStatistics(row)
         
 ################ APPEND FP STATISTICS TO BOVADA PLAYER PROPS ##################
-        
 
+# Read the previous week's bovada props into a dataframe
+try:
+    connection = psycopg2.connect(user = "postgres",
+                                  password = "RfC93TiD!ab",
+                                  host = "127.0.0.1",
+                                  port = "5432",
+                                  database = "SportsBetting")
+    cursor = connection.cursor()
+    sql_select_query = f"SELECT * FROM bovada_props_comparison WHERE nfl_week = {nfl_week}"
+    cursor.execute(sql_select_query)
+    bovada_props_comparison_previous_week = pd.DataFrame(cursor.fetchall(), 
+            columns = ['NFL_WEEK', 'PLAYER', 'TEAM', 'PROP', 'BOVADA_LINE', 
+                       'OVER_ODDS', 'IMPLIED_OVER_PROBABILITY', 
+                       'UNDER_ODDS', 'IMPLIED_UNDER_PROBABILITY', 'FP_PROJECTION',
+                       'DIFFERENCE', 'PCT_DIFFERENCE', 'DIRECTION', 'BET_SCORE',
+                       'BET_GRADE', 'ACTUAL_STAT_LINE', 'CORRECT'])
+except (Exception, psycopg2.Error) as error:
+   print("Error in operation", error)
+finally:
+   # closing database connection.
+   if (connection):
+       cursor.close()
+       connection.close()
+       
+# Read the previous week's fantasy stats into a dataframe
+try:
+    connection = psycopg2.connect(user = "postgres",
+                                  password = "RfC93TiD!ab",
+                                  host = "127.0.0.1",
+                                  port = "5432",
+                                  database = "SportsBetting")
+    cursor = connection.cursor()
+    sql_select_query = f"SELECT * FROM player_statistics WHERE nfl_week = {nfl_week}"
+    cursor.execute(sql_select_query)
+    fp_stats_prev_week = pd.DataFrame(cursor.fetchall(), 
+            columns = ['NFL_WEEK', 'PLAYER', 'POSITION', 'TEAM', 'PASS_ATT',
+                       'CMP', 'PASS_PCT', 'PASS_YDS', 'PASS_YDS_ATT', 'PASS_TDS', 
+                       'INTS', 'SACKS', 'RUSH_ATT', 'RUSH_YDS', 'RUSH_YARDS_ATT', 
+                       'LG_RUSH', 'RUSH_20plus', 'RUSH_TDS', 'REC', 'TGT', 
+                       'REC_YDS', 'LG_REC', 'REC_2OPLUS', 'REC_YDS_PER', 
+                       'REC_TDS', 'SACK', 'INT', 'FR', 'FF', 'DEF_TD', 'SAFETY', 
+                       'SPC_TD', 'FG', 'FGA', 'FG_PCT', 'LG_FG', 'FG_1_19',
+                       'FG_20_29', 'FG_30_39', 'FG_40_49', 'FG_50PLUS', 'XPT', 
+                       'XPA', 'PCT_OWN', 'FPTS'])
+except (Exception, psycopg2.Error) as error:
+   print("Error in operation", error)
+finally:
+   # closing database connection.
+   if (connection):
+       cursor.close()
+       connection.close()
 
+# Append the fantasy statistics to the bovada props comparison
+for index, row in bovada_props_comparison.iterrows():
+    player = row['PLAYER']
+    team = row['TEAM'] if row['TEAM'] != 'LA' else 'LAR'
+    # Link the bovada prop to the fantasy statistic
+    prop = row['PROP']
+    fp_stat = prop_lookups[prop]
+    if type(fp_stat) != list:
+        # Get the value for the prop for the player during the given nfl week
+        try:
+            fp_stat_value = fp_stats_prev_week[(fp_stats_prev_week['PLAYER'] == player) \
+                                    & (fp_stats_prev_week['TEAM'] == team) \
+                                    & (fp_stats_prev_week['NFL_WEEK'] == nfl_week)][fp_stat].values[0]
+            # Set the 'ACTUAL_STAT_LINE' column in bovada_props_comparison using fp_stat_value
+            bovada_props_comparison.loc[(bovada_props_comparison['PLAYER'] == player) & \
+                                    (bovada_props_comparison['TEAM'] == team) & \
+                                    (bovada_props_comparison['PROP'] == prop), 'ACTUAL_STAT_LINE'] = fp_stat_value
+        except IndexError:
+            continue
+    else:
+        try:
+            # Get the value for the prop for the player during the given nfl week
+            fp_stat_value1 = fp_stats_prev_week[(fp_stats_prev_week['PLAYER'] == player) \
+                                    & (fp_stats_prev_week['TEAM'] == team) \
+                                    & (fp_stats_prev_week['NFL_WEEK'] == nfl_week)][fp_stat[0]].values[0]
+            # Get the value for the prop for the player during the given nfl week
+            fp_stat_value2 = fp_stats_prev_week[(fp_stats_prev_week['PLAYER'] == player) \
+                                    & (fp_stats_prev_week['TEAM'] == team) \
+                                    & (fp_stats_prev_week['NFL_WEEK'] == nfl_week)][fp_stat[1]].values[0]
+            # Combine these values for the total
+            fp_stat_value = fp_stat_value1 + fp_stat_value2
+            # Set the 'ACTUAL_STAT_LINE' column in bovada_props_comparison using fp_stat_value
+            bovada_props_comparison.loc[(bovada_props_comparison['PLAYER'] == player) & \
+                                    (bovada_props_comparison['TEAM'] == team) & \
+                                    (bovada_props_comparison['PROP'] == prop), 'ACTUAL_STAT_LINE'] = fp_stat_value
+        except:
+            continue
 
+# Convert ACTUAL_STAT_LINE to float for analysis
+bovada_props_comparison['ACTUAL_STAT_LINE'] = pd.to_numeric(bovada_props_comparison['ACTUAL_STAT_LINE'], errors = 'coerce') 
+
+# Compare the fp statistic to the BOVADA_LINE to find if projection correct side of line
+bovada_props_comparison['CORRECT'] = bovada_props_comparison.apply(assessBovadaProp, axis = 1)
+bovada_props_comparison['IMPLIED_OVER_PROBABILITY'] = bovada_props_comparison.apply(impliedOddsConverter, axis = 1)
+bovada_props_comparison['CORRECT'] = bovada_props_comparison.apply(impliedOddsConverter, axis = 1)
+
+# Update the bovada_props_comparison in postgres
+for index, row in bovada_props_comparison.iterrows():
+    upsertBovadaPropComparisons(row)
 
 ################################## NOTES ######################################
         
