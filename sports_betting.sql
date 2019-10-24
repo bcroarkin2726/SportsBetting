@@ -71,13 +71,13 @@ CREATE TABLE player_statistics(
 	cmp FLOAT,
 	pass_pct FLOAT,
 	pass_yds FLOAT,
-	pass_yds_att  FLOAT,
+	pass_yds_att  FLOAT, -- pass yards per attempt
 	pass_tds FLOAT,
 	ints FLOAT,
 	sacks FLOAT,
 	rush_att FLOAT,
 	rush_yds FLOAT,
-	rush_yds_att FLOAT,
+	rush_yds_att FLOAT, -- rush yards per attempt
 	lg_rush FLOAT,
 	rush_20plus FLOAT,
 	rush_tds FLOAT,
