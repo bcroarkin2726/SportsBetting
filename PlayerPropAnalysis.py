@@ -426,7 +426,7 @@ bovada_response = requests.get(bovada_url)
 bovada_txt = bovada_response.text
 
 ## USING THE TXT FILE (TESTING)
-#with open('BovadaAPI3.txt', 'r') as file:
+#with open('BovadaAPI.txt', 'r') as file:
 #    bovada_txt = file.read()
 
 # Format the json
