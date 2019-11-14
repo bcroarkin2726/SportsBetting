@@ -15,8 +15,8 @@ CREATE TABLE nflgames (
 	commencetimelong TEXT, 
 	commencetimeshort TEXT,
 	nfl_week INT, 
-	hometeam TEXT,
-	awayteam TEXT
+	awayteam TEXT,
+	hometeam TEXT
 );
 
 CREATE TABLE nflodds(
