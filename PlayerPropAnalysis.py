@@ -21,6 +21,7 @@ dname = os.path.dirname(abspath) + '\\Documents\\GitHub\\SportsBetting' if 'GitH
 os.chdir(dname)
 
 ############# HELPER FUNCTIONS ######################
+def find_between( s, first, last ):
     try:
         start = s.index( first ) + len( first )
         end = s.index( last, start )
