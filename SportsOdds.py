@@ -246,7 +246,48 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
        if (connection):
            cursor.close()
            connection.close()
-           
+
+def findHour(currenttime):
+    """
+    @currenttime the time of an API pull (ex: '14:54:12')
+    This function takes the current time and output the hour.
+    Example: '14:54:12' --> 14
+    """
+    return(currenttime.split(':')[0])
+
+def fetchNFLOdds(NFL_Week):
+    """
+    @NFL_Week the NFL gameweek we are pulling the odds for.
+    This function pulls all the NFL odds for a given NFL week. 
+    Since the NFL week is not already in the nfl odds table, we first need to 
+    get all the gameid's for a given NFL week. 
+    """
+    try:
+        connection = psycopg2.connect(user = "postgres",
+                                      password = "RfC93TiD!ab",
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Pull all game ids for the NFL week
+        sql_select_query = f"SELECT * FROM nflodds WHERE gameid IN (SELECT gameid FROM nflgames WHERE nfl_week = {NFL_Week}) ORDER BY gameid;"
+        cursor.execute(sql_select_query)
+        nflodds = cursor.fetchall()
+        if nflodds:
+            return(pd.DataFrame(nflodds, columns = ['nfloddsid', 'gameid', 'currentdate', 
+                                                            'currenttime', 'website', 'bet_type',
+                                                            'home_odds', 'away_odds', 'home_points',
+                                                            'away_points']))
+        else:
+            return('No NFL Odds for the week yet.')
+    except (Exception, psycopg2.Error) as error:
+       print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+
 ############################## API Pull #######################################
 
 # To get odds for a sepcific sport, use the sport key from the last request
@@ -329,14 +370,37 @@ if performAPIPull(): #only pull if last request was outside of hour gap
     # Send download log to data_download_logs
     data_download_logging("nflodds", CurrentDate, CurrentTime, requests_remaining)
     
-    message = client.messages.create(
-                         body=f"NFL odds were downloaded on {CurrentDate} at {CurrentTime}. You have {requests_remaining} requests remaining.",
-                         from_='+12562911093',
-                         to='+15712718265')
-    
-    
-    
-    
-
-
-
+#    message = client.messages.create(
+#                         body=f"NFL odds were downloaded on {CurrentDate} at {CurrentTime}. You have {requests_remaining} requests remaining.",
+#                         from_='+12562911093',
+#                         to='+15712718265')
+#    
+############################### Line Tracking ##################################
+#    
+## Pull in the NFL odds for the current week
+#nflodds = fetchNFLOdds(NFL_Week)  
+#
+## Find all the game ids for the week and add to a list
+#nflgames = nflodds.gameid.unique() 
+#
+## Loop over the game ids and see how much they have changed
+#for game in nflgames:
+#    nflodds_sub = nflodds[nflodds['gameid'] == game]
+#    # Only care about the spread and O/U since spread and ML move in parallel
+#    for bet_type in ['O/U', 'Spread']:
+#        nflodds_sub2 = nflodds_sub[nflodds_sub['bet_type'] == bet_type]
+#        # Sort by currentdate and current time
+#        nflodds_sub2.sort_values(by = ['currentdate', 'currenttime'], ascending = False, inplace = True)
+#        # Create a column with the hour of the pull
+#        nflodds_sub2['currenthour'] = nflodds_sub2.loc[:,'currenttime'].apply(findHour)
+#        # Break out logic based on whether this is O/U or Spread
+#        if bet_type == 'O/U':
+#            # Filter the df to just the columns I need
+#            nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_points']]
+#            # Ensure the home_points column is numeric
+#            nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3['home_points'])
+#            # Group the data by website and hour of currenttime
+#            nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
+#        else: # Spread
+#            
+#
