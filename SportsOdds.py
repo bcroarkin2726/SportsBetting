@@ -218,6 +218,34 @@ def performAPIPull():
     else:
         return(False)
         
+def data_download_logging(table_name, current_date, current_time):
+    """
+    @table_name what data table has been updated
+    @current_date the current date in a text string (ex: '11/20/2019')
+    @current_time the current time in a text string (ex: '11:13:42')
+    This function is meant for logging data pulls so they can be tracked 
+    historically. This will help give daily logs of what was pulled and how
+    often. 
+    """
+    try:
+        connection = psycopg2.connect(user = "postgres",
+                                      password = "RfC93TiD!ab",
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Insert single record
+        sql_insert_query = f"INSERT INTO data_download_logs (data_table_name, curr_date, curr_time) \
+        VALUES ({table_name}, $${current_date}$$, $${current_time}$$)"
+        cursor.execute(sql_insert_query)
+    except (Exception, psycopg2.Error) as error:
+        print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+           
 ############################## API Pull #######################################
 
 # To get odds for a sepcific sport, use the sport key from the last request
@@ -297,7 +325,9 @@ if performAPIPull(): #only pull if last request was outside of hour gap
     # Check how many requests I have left in the month
     requests_remaining = odds_response.headers['x-requests-remaining']
     
-    # Send a message about successful download of NFL odds
+    # Send download log to data_download_logs
+    data_download_logging('nflodds', CurrentDate, CurrentTime)
+    
     message = client.messages.create(
                          body=f"NFL odds were downloaded on {CurrentDate} at {CurrentTime}. You have {requests_remaining} requests remaining.",
                          from_='+12562911093',
