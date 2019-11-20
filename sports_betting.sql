@@ -140,6 +140,7 @@ CREATE TABLE data_download_logs(
 SELECT * FROM data_download_logs;
 INSERT INTO data_download_logs (data_table_name, curr_date, curr_time, requests_remaining) VALUES ('nflodds', '11/20/2019', '13:02:58', 310);
 
+SELECT * FROM nflodds WHERE gameid IN (SELECT gameid FROM nflgames WHERE nfl_week = 13) ORDER BY gameid;
 /* Example/test queries */
 
 SELECT * FROM nflweeks;
@@ -149,7 +150,7 @@ SELECT COUNT(*) FROM nflodds;
 INSERT INTO nflodds (gameid, currentdate, currenttime, website, bet_type, home_odds, away_odds, home_points, away_points) 
 VALUES (16, $$09/18/2019$$, $$11:16:44$$, $$GTbets$$, $$Moneyline$$, 1.5, 2.7, 0, 0)
 
-SELECT * FROM nflgames WHERE nfl_week = 5 ORDER BY gameid;
+SELECT * FROM nflgames WHERE nfl_week = 12 ORDER BY gameid;
 INSERT INTO nflgames (commencetimelong, commencetimeshort, nfl_week, hometeam, awayteam)
 VALUES ('Monday, September 23, 2019 08:15:00', '09/23/2019', 3, 'Chicago Bears', 'Washington Redskins')
 
