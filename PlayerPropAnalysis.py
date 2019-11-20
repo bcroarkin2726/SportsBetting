@@ -407,6 +407,35 @@ def assessBovadaProp(row):
                 return(False)
             else: 
                 return(True)
+
+def data_download_logging(table_name, current_date, current_time, requests_remaining = 0):
+    """
+    @table_name what data table has been updated
+    @current_date the current date in a text string (ex: '11/20/2019')
+    @current_time the current time in a text string (ex: '11:13:42')
+    This function is meant for logging data pulls so they can be tracked 
+    historically. This will help give daily logs of what was pulled and how
+    often. 
+    """
+    try:
+        connection = psycopg2.connect(user = "postgres",
+                                      password = "RfC93TiD!ab",
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Insert single record
+        sql_insert_query = f"INSERT INTO data_download_logs (data_table_name, curr_date, curr_time, requests_remaining) \
+        VALUES ($${table_name}$$, $${current_date}$$, $${current_time}$$, {requests_remaining})"
+        cursor.execute(sql_insert_query)
+        connection.commit()
+    except (Exception, psycopg2.Error) as error:
+        print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
                 
 ########################### ESPN API ####################
 #league_id = 28265348
@@ -681,14 +710,11 @@ if (day in possible_days) & (hour in possible_hours):
     for index, row in bovada_props_comparison.iterrows():
         upsertBovadaPropComparisons(row)
     
-    # Send a message about successful Bovada Player Prop download
+    # Log the Bovada Player Prop download
     d = datetime.today()
     CurrentDate = d.strftime('%m/%d/%Y')
     CurrentTime = d.strftime('%H:%M:%S')
-    message = client.messages.create(
-                         body=f"Bovada player props were downloaded on {CurrentDate} at {CurrentTime}.",
-                         from_='+12562911093',
-                         to='+15712718265')
+    data_download_logging('bovada_props_comparison', CurrentDate, CurrentTime)
 
 else:
     # If we are not in the possible days or hours for this script, then there
