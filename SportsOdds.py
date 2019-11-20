@@ -236,8 +236,9 @@ def data_download_logging(table_name, current_date, current_time):
         cursor = connection.cursor()
         # Insert single record
         sql_insert_query = f"INSERT INTO data_download_logs (data_table_name, curr_date, curr_time) \
-        VALUES ({table_name}, $${current_date}$$, $${current_time}$$)"
+        VALUES ($${table_name}$$, $${current_date}$$, $${current_time}$$)"
         cursor.execute(sql_insert_query)
+        connection.commit()
     except (Exception, psycopg2.Error) as error:
         print("Error in operation", error)
     finally:
@@ -326,7 +327,7 @@ if performAPIPull(): #only pull if last request was outside of hour gap
     requests_remaining = odds_response.headers['x-requests-remaining']
     
     # Send download log to data_download_logs
-    data_download_logging('nflodds', CurrentDate, CurrentTime)
+    data_download_logging("nflodds", CurrentDate, CurrentTime)
     
     message = client.messages.create(
                          body=f"NFL odds were downloaded on {CurrentDate} at {CurrentTime}. You have {requests_remaining} requests remaining.",
