@@ -130,7 +130,15 @@ CREATE TABLE bovada_props_comparison(
 	correct TEXT
 );
 
-DROP TABLE bovada_props_comparison;
+CREATE TABLE data_download_logs(
+	data_table_name TEXT,
+	curr_date TEXT,
+	curr_time TEXT,
+	requests_remaining INT
+);
+
+SELECT * FROM data_download_logs;
+INSERT INTO data_download_logs (data_table_name, curr_date, curr_time, requests_remaining) VALUES ('nflodds', '11/20/2019', '13:02:58', 310);
 
 /* Example/test queries */
 
