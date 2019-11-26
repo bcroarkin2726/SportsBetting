@@ -41,8 +41,8 @@ def myround(number):
 
 def findNFLWeek(Date):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -62,12 +62,12 @@ def findNFLWeek(Date):
 
 def findGameID(HomeTeam, CommenceTimeShort):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
-#        connection = psycopg2.connect(user = "postgres",
+#        connection = psycopg2.connect(user = config.psycopg2_username,
 #                                      password = "bofa",
 #                                      database = "BOFABET")
         cursor = connection.cursor()
@@ -87,8 +87,8 @@ def findGameID(HomeTeam, CommenceTimeShort):
 
 def upsertNFLGames(CommenceTimeLong, CommencetimeShort, NFL_Week, HomeTeam, AwayTeam):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -120,8 +120,8 @@ def upsertNFLGames(CommenceTimeLong, CommencetimeShort, NFL_Week, HomeTeam, Away
 
 def insertNFLOdds(GameID, CurrentDate, CurrentTime, Website, BetType, HomeOdds, AwayOdds, HomePoints, AwayPoints):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -178,8 +178,8 @@ def performAPIPull():
             2. Only run during certain hours (between 6am and 8pm)
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -244,8 +244,8 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
     often. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -279,8 +279,8 @@ def fetchNFLOdds(NFL_Week):
     get all the gameid's for a given NFL week. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -311,8 +311,8 @@ def fetchGameInfo(game_id):
     including: home team, away team, and the commence time
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")

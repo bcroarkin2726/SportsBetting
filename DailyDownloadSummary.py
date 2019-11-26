@@ -25,8 +25,8 @@ client = Client(config.account_sid, config.auth_token)
 
 def pullDailyDownloads(CurrentDate):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
