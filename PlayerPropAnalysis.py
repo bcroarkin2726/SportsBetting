@@ -451,7 +451,7 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
 # I want to ensure that this script only runs at the proper times
 # This would be Sunday, Monday, and Thursday starting at 10AM and stopping at 8PM
 d = datetime.today()
-day = d.weekday # Monday is 0 and Sunday is 6
+day = d.weekday() # Monday is 0 and Sunday is 6
 possible_days = [0, 3, 6]
 hour = d.hour
 possible_hours = [8,9,10,11,12,13,14,15,16,17,18,19,20]
