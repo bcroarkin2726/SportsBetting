@@ -5,3 +5,5 @@ An additional idea I have is to scrape all of the individual player bet odds fro
 
 Useful Links
 - https://www.bovada.lv/services/sports/event/v2/events/A/description/football/nfl -> Gives all odds for NFL, including individual player level bets
+
+* Server setup using postgresql
