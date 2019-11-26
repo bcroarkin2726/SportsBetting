@@ -472,11 +472,7 @@ if (day in possible_days) & (hour in possible_hours):
     bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/description/football/nfl'
     bovada_response = requests.get(bovada_url)
     bovada_txt = bovada_response.text
-    
-    ## USING THE TXT FILE (TESTING)
-    #with open('BovadaAPI.txt', 'r') as file:
-    #    bovada_txt = file.read()
-    
+        
     # Format the json
     bovada_json = json.loads(bovada_txt)
     bovada_events = bovada_json[0]['events']
