@@ -126,7 +126,7 @@ CREATE TABLE bovada_props_comparison(
 	direction TEXT,
 	bet_score FLOAT(1),
 	bet_grade TEXT,
-	actual_stat_line FLOAT(1),
+	actual_stat_line FLOAT(1) DEFAULT(-1),
 	correct TEXT
 );
 
