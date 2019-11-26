@@ -41,11 +41,9 @@ def myround(number):
 
 def findNFLWeek(Date):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT nfl_week FROM nflweeks WHERE currentdate = $${Date}$$"
@@ -62,11 +60,9 @@ def findNFLWeek(Date):
 
 def findGameID(HomeTeam, CommenceTimeShort):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT gameid FROM nflgames WHERE hometeam = $${HomeTeam}$$ \
@@ -84,11 +80,9 @@ def findGameID(HomeTeam, CommenceTimeShort):
 
 def upsertNFLGames(CommenceTimeLong, CommencetimeShort, NFL_Week, HomeTeam, AwayTeam):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT * FROM nflgames WHERE commencetimeshort = $${CommenceTimeShort}$$ AND hometeam = $${HomeTeam}$$"
@@ -117,11 +111,9 @@ def upsertNFLGames(CommenceTimeLong, CommencetimeShort, NFL_Week, HomeTeam, Away
 
 def insertNFLOdds(GameID, CurrentDate, CurrentTime, Website, BetType, HomeOdds, AwayOdds, HomePoints, AwayPoints):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
         sql_insert_query = f"INSERT INTO nflodds (gameid, currentdate, currenttime, website, bet_type, home_odds, away_odds, home_points, away_points) \
@@ -175,11 +167,9 @@ def performAPIPull():
             2. Only run during certain hours (between 6am and 8pm)
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT currentdate, currenttime FROM nflodds"
@@ -241,11 +231,9 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
     often. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
         sql_insert_query = f"INSERT INTO data_download_logs (data_table_name, curr_date, curr_time, requests_remaining) \
@@ -276,11 +264,9 @@ def fetchNFLOdds(NFL_Week):
     get all the gameid's for a given NFL week. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Pull all game ids for the NFL week
         sql_select_query = f"SELECT * FROM nflodds WHERE gameid IN (SELECT gameid FROM nflgames WHERE nfl_week = {NFL_Week}) ORDER BY gameid;"
@@ -308,11 +294,9 @@ def fetchGameInfo(game_id):
     including: home team, away team, and the commence time
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET") 
         cursor = connection.cursor()
         # Pull all home team, away team, and commence time
         sql_select_query = f"SELECT hometeam, awayteam, commencetimelong FROM nflgames WHERE gameid = {game_id}"

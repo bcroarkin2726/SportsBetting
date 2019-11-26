@@ -139,11 +139,9 @@ def bet_grades(row):
 
 def findNFLWeek(Date):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT nfl_week FROM nflweeks WHERE currentdate = $${Date}$$"
@@ -167,11 +165,9 @@ def upsertPlayerProjections(row):
     nfl week. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         nfl_week = row['NFL_WEEK']
@@ -224,11 +220,9 @@ def checkPlayerStatistics(nfl_week):
     run the insertPlayerStatistics function on each row of fp_statistics df. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT * FROM player_statistics WHERE nfl_week = {nfl_week}"
@@ -254,11 +248,9 @@ def insertPlayerStatistics(row):
     inserted.
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
         sql_insert_query = f"INSERT INTO player_statistics (nfl_week, player, position, \
@@ -297,11 +289,9 @@ def upsertBovadaPropComparisons(row):
     the table for the given nfl week. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         nfl_week = row['NFL_WEEK']
@@ -418,11 +408,9 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
     often. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
         sql_insert_query = f"INSERT INTO data_download_logs (data_table_name, curr_date, curr_time, requests_remaining) \

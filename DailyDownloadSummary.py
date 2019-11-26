@@ -25,11 +25,9 @@ client = Client(config.account_sid, config.auth_token)
 
 def pullDailyDownloads(CurrentDate):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
+        connection = psycopg2.connect(user = "ardi",
+                                      password = "bofa",
+                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT * FROM data_download_logs WHERE curr_date = $${CurrentDate}$$"       
