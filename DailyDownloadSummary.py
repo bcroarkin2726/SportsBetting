@@ -59,14 +59,18 @@ requests_remaining = daily_downloads.sort_values(by = ['Current_Time'], ascendin
 # Get the number of pulls for Bovada prop comparisons (this encompasses player statistics and player projections)
 bovada_props_downloads = len(daily_downloads[daily_downloads['Data_Table_Name'] == 'bovada_props'])
 
-# Send out a text message with the daily download summary.
-message = client.messages.create(
-             body=f"Today is {CurrentDate}. \
-             NFL odds were downloaded {nfl_odds_downloads} times today.\
-             You have {requests_remaining} requests remaining.\
-             Bovada player props were downloaded {bovada_props_downloads} times",
-             from_='+12562911093',
-             to='+15712718265')
+# List of phone numbers to send the updates to
+phone_contact_list = ['+15712718265', '+15719195300']
 
-
+for number in phone_contact_list:
+    # Send out a text message with the daily download summary.
+    message = client.messages.create(
+                 body = f"Today is {CurrentDate}. \
+                 NFL odds were downloaded {nfl_odds_downloads} times today.\
+                 You have {requests_remaining} requests remaining.\
+                 Bovada player props were downloaded {bovada_props_downloads} times",
+                 from_ = '+12562911093',
+                 to = number)
+    
+    
 
