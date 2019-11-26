@@ -25,8 +25,8 @@ client = Client(config.account_sid, config.auth_token)
 
 def pullDailyDownloads(CurrentDate):
    try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists

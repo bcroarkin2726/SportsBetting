@@ -41,8 +41,8 @@ def myround(number):
 
 def findNFLWeek(Date):
    try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -60,8 +60,8 @@ def findNFLWeek(Date):
 
 def findGameID(HomeTeam, CommenceTimeShort):
    try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -80,8 +80,8 @@ def findGameID(HomeTeam, CommenceTimeShort):
 
 def upsertNFLGames(CommenceTimeLong, CommencetimeShort, NFL_Week, HomeTeam, AwayTeam):
    try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -111,8 +111,8 @@ def upsertNFLGames(CommenceTimeLong, CommencetimeShort, NFL_Week, HomeTeam, Away
 
 def insertNFLOdds(GameID, CurrentDate, CurrentTime, Website, BetType, HomeOdds, AwayOdds, HomePoints, AwayPoints):
    try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
@@ -167,8 +167,8 @@ def performAPIPull():
             2. Only run during certain hours (between 6am and 8pm)
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -231,8 +231,8 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
     often. 
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
@@ -264,8 +264,8 @@ def fetchNFLOdds(NFL_Week):
     get all the gameid's for a given NFL week. 
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Pull all game ids for the NFL week
@@ -294,8 +294,8 @@ def fetchGameInfo(game_id):
     including: home team, away team, and the commence time
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET") 
         cursor = connection.cursor()
         # Pull all home team, away team, and commence time

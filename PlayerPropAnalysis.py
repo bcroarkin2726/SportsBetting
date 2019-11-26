@@ -139,8 +139,8 @@ def bet_grades(row):
 
 def findNFLWeek(Date):
    try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -165,8 +165,8 @@ def upsertPlayerProjections(row):
     nfl week. 
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -220,8 +220,8 @@ def checkPlayerStatistics(nfl_week):
     run the insertPlayerStatistics function on each row of fp_statistics df. 
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -248,8 +248,8 @@ def insertPlayerStatistics(row):
     inserted.
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
@@ -289,8 +289,8 @@ def upsertBovadaPropComparisons(row):
     the table for the given nfl week. 
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password =  config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
@@ -408,8 +408,8 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
     often. 
     """
     try:
-        connection = psycopg2.connect(user = "ardi",
-                                      password = "bofa",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password =  config.psycopg2_password,
                                       database = "BOFABET")
         cursor = connection.cursor()
         # Insert single record
