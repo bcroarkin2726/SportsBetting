@@ -67,6 +67,9 @@ def findGameID(HomeTeam, CommenceTimeShort):
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
+#        connection = psycopg2.connect(user = "postgres",
+#                                      password = "bofa",
+#                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT gameid FROM nflgames WHERE hometeam = $${HomeTeam}$$ \
@@ -430,7 +433,7 @@ nflodds = fetchNFLOdds(NFL_Week)
 nflgames = nflodds.gameid.unique() 
 
 # Create a variable to hold all the line movements so we only need to send one message
-message = ''
+text_message = ''
 
 # Loop over the game ids and see how much they have changed
 for game in nflgames:
@@ -467,7 +470,7 @@ for game in nflgames:
             line_difference = current_line - previous_line
             # If the consenus line has moved by .5, we should add this to the message
             if abs(current_line - previous_line) > 0:
-                message += f"The O/U for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. Current line is {current_line}. Previous line was {previous_line}. Opening line was {opening_line}.\n"
+                text_message += f"The O/U for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. Current line is {current_line}. Previous line was {previous_line}. Opening line was {opening_line}.\n"
         else: # Spread
             # Filter the df to just the columns I need
             nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_odds', 'away_odds', 'home_points']]
@@ -505,9 +508,16 @@ for game in nflgames:
             # If the consenus line has moved by .5, we should add this to the message
             if (abs(current_line - previous_line) > 0) or (abs(current_home_prob - previous_home_prob) > 0) or (abs(current_away_prob - previous_away_prob) > 0):
                 # Add the movement to the message if the line moves by .5 points or the home/away odds move by .5 probability
-                message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n"
+                text_message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}.\
+                Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
+                Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
+                Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n"
 
-message = client.messages.create(
-                     body=f"{message}",
-                     from_='+12562911093',
-                     to='+15712718265')
+# List of phone numbers to send the updates to
+phone_contact_list = ['+15712718265', '+15719195300']
+
+for number in phone_contact_list:
+    text_message = client.messages.create(
+                         body = text_message,
+                         from_ = '+12562911093',
+                         to = number)
