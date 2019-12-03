@@ -157,7 +157,7 @@ def findNFLWeek(Date):
        if (connection):
            cursor.close()
            connection.close()
-
+        
 def upsertPlayerProjections(row):
     """
     @@row - row from fp_projections with projections for a player in a given nfl week

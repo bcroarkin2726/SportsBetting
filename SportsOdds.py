@@ -67,9 +67,6 @@ def findGameID(HomeTeam, CommenceTimeShort):
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
-#        connection = psycopg2.connect(user = config.psycopg2_username,
-#                                      password = "bofa",
-#                                      database = "BOFABET")
         cursor = connection.cursor()
         # Check if row already exists
         sql_select_query = f"SELECT gameid FROM nflgames WHERE hometeam = $${HomeTeam}$$ \
