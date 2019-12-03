@@ -339,6 +339,19 @@ def probabilityConverter(nfl_odds):
     """
     return(round((1/ nfl_odds) * 100,1))
     
+def multipleDataPulls(nfl_odds_df):
+    """
+    @nfl_odds_df the nflodds dataframe downloaded from PostgreSQL
+    This function checks to see if there is more than one data pull for a given
+    NFL week. If it does, the function returns True and will look for line
+    movements. If it doesn't, the function returns False and stops.
+    """
+    # Find the first GameID
+    gameid = nflodds['gameid'].sort_values().values[0]
+    # Check if there are multiple spread bets for Bovada for that gameid
+    df = nflodds[(nflodds['gameid'] == gameid) & (nflodds['website'] == 'Bovada') & (nflodds['bet_type'] == 'Spread')].drop_duplicates(subset = ['gameid', 'currentdate', 'currenttime', 'website', 'bet_type'])
+    return(len(df) > 1)
+    
 ############################## API Pull #######################################
 
 # To get odds for a sepcific sport, use the sport key from the last request
@@ -422,99 +435,102 @@ if performAPIPull(): #only pull if last request was outside of hour gap
     data_download_logging("nflodds", CurrentDate, CurrentTime, requests_remaining)
         
 ############################## Line Tracking ##################################
-    
+
 # Pull in the NFL odds for the current week
-nflodds = fetchNFLOdds(NFL_Week)  
+nflodds = fetchNFLOdds(NFL_Week)
 
-# Find all the game ids for the week and add to a list
-nflgames = nflodds.gameid.unique() 
-
-# Create a variable to hold all the line movements so we only need to send one message
-text_message = ''
-
-# Loop over the game ids and see how much they have changed
-for game in nflgames:
-    # subset the dataset to just the single game
-    nflodds_sub = nflodds[nflodds['gameid'] == game]
-    # find what teams are involved in this game and when the game is
-    home_team, away_team, commencetimelong = fetchGameInfo(game)
-    # Only care about the spread and O/U since spread and ML move in parallel
-    for bet_type in ['O/U', 'Spread']:
-        nflodds_sub2 = nflodds_sub[nflodds_sub['bet_type'] == bet_type]
-        # Sort by currentdate and current time
-        nflodds_sub2.sort_values(by = ['currentdate', 'currenttime'], ascending = False, inplace = True)
-        # Create a column with the hour of the pull
-        nflodds_sub2['currenthour'] = nflodds_sub2.loc[:,'currenttime'].apply(findHour)
-        # Break out logic based on whether this is O/U or Spread
-        if bet_type == 'O/U':
-            # Filter the df to just the columns I need
-            nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_points']]
-            # Ensure the home_points column is numeric
-            nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3['home_points'])
-            # Group the data by website and hour of currenttime
-            nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
-            # Reset the index and sort nflodds_grouped
-            nflodds_grouped.reset_index(inplace = True)
-            nflodds_grouped.sort_values(by = ['currentdate', 'currenthour'], 
-                                        ascending = False, inplace = True)
-            nflodds_grouped.reset_index(drop = True, inplace = True)
-            # Round all points to nearest .5 or whole number
-            nflodds_grouped['home_points'] = nflodds_grouped['home_points'].apply(myround)
-            # Compare the two most recent lines and the opening line
-            opening_line = nflodds_grouped['home_points'][len(nflodds_grouped)-1]
-            current_line = nflodds_grouped['home_points'][0]
-            previous_line = nflodds_grouped['home_points'][1]
-            line_difference = current_line - previous_line
-            # If the consenus line has moved by .5, we should add this to the message
-            if abs(current_line - previous_line) > 0:
-                text_message += f"The O/U for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. Current line is {current_line}. Previous line was {previous_line}. Opening line was {opening_line}.\n"
-        else: # Spread
-            # Filter the df to just the columns I need
-            nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_odds', 'away_odds', 'home_points']]
-            # Ensure the home_odds, away_odds, and home_points columns are numeric
-            nflodds_sub3['home_odds'] = pd.to_numeric(nflodds_sub3['home_odds'])
-            nflodds_sub3['away_odds'] = pd.to_numeric(nflodds_sub3['away_odds'])
-            nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3['home_points'])    
-            # Convert all the odds columns to probabilities and then drop odds
-            nflodds_sub3['home_prob'] = nflodds_sub3['home_odds'].apply(probabilityConverter)
-            del nflodds_sub3['home_odds']
-            nflodds_sub3['away_prob'] = nflodds_sub3['away_odds'].apply(probabilityConverter)
-            del nflodds_sub3['away_odds']
-            # Group the data by website and hour of currenttime
-            nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
-            # Reset the index and sort nflodds_grouped
-            nflodds_grouped.reset_index(inplace = True)
-            nflodds_grouped.sort_values(by = ['currentdate', 'currenthour'], 
-                                        ascending = False, inplace = True)
-            nflodds_grouped.reset_index(drop = True, inplace = True)
-            # Round all points and probabilities to nearest .5 or whole number
-            nflodds_grouped['home_prob'] = nflodds_grouped['home_prob'].apply(myround)
-            nflodds_grouped['away_prob'] = nflodds_grouped['away_prob'].apply(myround)
-            nflodds_grouped['home_points'] = nflodds_grouped['home_points'].apply(myround)            
-            # Compare the two most recent lines and the opening line
-            opening_line = nflodds_grouped['home_points'][len(nflodds_grouped)-1]
-            current_line = nflodds_grouped['home_points'][0]
-            previous_line = nflodds_grouped['home_points'][1]
-            line_difference = current_line - previous_line
-            opening_home_prob = nflodds_grouped['home_prob'][len(nflodds_grouped)-1]
-            previous_home_prob = nflodds_grouped['home_prob'][1]
-            current_home_prob = nflodds_grouped['home_prob'][0]
-            opening_away_prob = nflodds_grouped['away_prob'][len(nflodds_grouped)-1]
-            previous_away_prob = nflodds_grouped['away_prob'][1]
-            current_away_prob = nflodds_grouped['away_prob'][0]
-            # If the consenus line has moved by .5, we should add this to the message
-            if (abs(current_line - previous_line) > 0) or (abs(current_home_prob - previous_home_prob) > 0) or (abs(current_away_prob - previous_away_prob) > 0):
-                # Add the movement to the message if the line moves by .5 points or the home/away odds move by .5 probability
-                text_message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}.\
-                Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
-                Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
-                Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n"
-
-# List of phone numbers to send the updates to
-phone_contact_list = ['+15712718265', '+15719195300']
-
-for number in phone_contact_list:
-    text_message = client.messages.create(
-                         body = text_message,
-                         from_ = '+12562911093',
-                         to = number)
+# Only can track line changes after more than one value, need to check this first
+if multipleDataPulls(nflodds):
+    
+    # Find all the game ids for the week and add to a list
+    nflgames = nflodds.gameid.unique() 
+    
+    # Create a variable to hold all the line movements so we only need to send one message
+    text_message = ''
+    
+    # Loop over the game ids and see how much they have changed
+    for game in nflgames:
+        # subset the dataset to just the single game
+        nflodds_sub = nflodds[nflodds['gameid'] == game]
+        # find what teams are involved in this game and when the game is
+        home_team, away_team, commencetimelong = fetchGameInfo(game)
+        # Only care about the spread and O/U since spread and ML move in parallel
+        for bet_type in ['O/U', 'Spread']:
+            nflodds_sub2 = nflodds_sub[nflodds_sub['bet_type'] == bet_type]
+            # Sort by currentdate and current time
+            nflodds_sub2.sort_values(by = ['currentdate', 'currenttime'], ascending = False, inplace = True)
+            # Create a column with the hour of the pull
+            nflodds_sub2['currenthour'] = nflodds_sub2.loc[:,'currenttime'].apply(findHour)
+            # Break out logic based on whether this is O/U or Spread
+            if bet_type == 'O/U':
+                # Filter the df to just the columns I need
+                nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_points']]
+                # Ensure the home_points column is numeric
+                nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3['home_points'])
+                # Group the data by website and hour of currenttime
+                nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
+                # Reset the index and sort nflodds_grouped
+                nflodds_grouped.reset_index(inplace = True)
+                nflodds_grouped.sort_values(by = ['currentdate', 'currenthour'], 
+                                            ascending = False, inplace = True)
+                nflodds_grouped.reset_index(drop = True, inplace = True)
+                # Round all points to nearest .5 or whole number
+                nflodds_grouped['home_points'] = nflodds_grouped['home_points'].apply(myround)
+                # Compare the two most recent lines and the opening line
+                opening_line = nflodds_grouped['home_points'][len(nflodds_grouped)-1]
+                current_line = nflodds_grouped['home_points'][0]
+                previous_line = nflodds_grouped['home_points'][1]
+                line_difference = current_line - previous_line
+                # If the consenus line has moved by .5, we should add this to the message
+                if abs(current_line - previous_line) > 0:
+                    text_message += f"The O/U for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. Current line is {current_line}. Previous line was {previous_line}. Opening line was {opening_line}.\n"
+            else: # Spread
+                # Filter the df to just the columns I need
+                nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_odds', 'away_odds', 'home_points']]
+                # Ensure the home_odds, away_odds, and home_points columns are numeric
+                nflodds_sub3['home_odds'] = pd.to_numeric(nflodds_sub3['home_odds'])
+                nflodds_sub3['away_odds'] = pd.to_numeric(nflodds_sub3['away_odds'])
+                nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3['home_points'])    
+                # Convert all the odds columns to probabilities and then drop odds
+                nflodds_sub3['home_prob'] = nflodds_sub3['home_odds'].apply(probabilityConverter)
+                del nflodds_sub3['home_odds']
+                nflodds_sub3['away_prob'] = nflodds_sub3['away_odds'].apply(probabilityConverter)
+                del nflodds_sub3['away_odds']
+                # Group the data by website and hour of currenttime
+                nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
+                # Reset the index and sort nflodds_grouped
+                nflodds_grouped.reset_index(inplace = True)
+                nflodds_grouped.sort_values(by = ['currentdate', 'currenthour'], 
+                                            ascending = False, inplace = True)
+                nflodds_grouped.reset_index(drop = True, inplace = True)
+                # Round all points and probabilities to nearest .5 or whole number
+                nflodds_grouped['home_prob'] = nflodds_grouped['home_prob'].apply(myround)
+                nflodds_grouped['away_prob'] = nflodds_grouped['away_prob'].apply(myround)
+                nflodds_grouped['home_points'] = nflodds_grouped['home_points'].apply(myround)            
+                # Compare the two most recent lines and the opening line
+                opening_line = nflodds_grouped['home_points'][len(nflodds_grouped)-1]
+                current_line = nflodds_grouped['home_points'][0]
+                previous_line = nflodds_grouped['home_points'][1]
+                line_difference = current_line - previous_line
+                opening_home_prob = nflodds_grouped['home_prob'][len(nflodds_grouped)-1]
+                previous_home_prob = nflodds_grouped['home_prob'][1]
+                current_home_prob = nflodds_grouped['home_prob'][0]
+                opening_away_prob = nflodds_grouped['away_prob'][len(nflodds_grouped)-1]
+                previous_away_prob = nflodds_grouped['away_prob'][1]
+                current_away_prob = nflodds_grouped['away_prob'][0]
+                # If the consenus line has moved by .5, we should add this to the message
+                if (abs(current_line - previous_line) > 0) or (abs(current_home_prob - previous_home_prob) > 0) or (abs(current_away_prob - previous_away_prob) > 0):
+                    # Add the movement to the message if the line moves by .5 points or the home/away odds move by .5 probability
+                    text_message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}.\
+                    Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
+                    Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
+                    Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n"
+    
+    # List of phone numbers to send the updates to
+    phone_contact_list = ['+15712718265', '+15719195300']
+    
+    for number in phone_contact_list:
+        text_message = client.messages.create(
+                             body = text_message,
+                             from_ = '+12562911093',
+                             to = number)
