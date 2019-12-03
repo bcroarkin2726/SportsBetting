@@ -62,7 +62,7 @@ requests_remaining = requests_remaining.values[0] # extract the first value from
 # Get the number of pulls for Bovada prop comparisons (this encompasses player statistics and player projections)
 bovada_props_downloads = len(daily_downloads[daily_downloads['Data_Table_Name'] == 'bovada_props'])
 
-# Send out a text message with the daily download summary.
+# Send out a text message with the daily download summary
 message = client.messages.create(
              body = f"Today is {CurrentDate}. \
              NFL odds were downloaded {nfl_odds_downloads} times today. \
