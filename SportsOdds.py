@@ -352,6 +352,43 @@ def multipleDataPulls(nfl_odds_df):
     df = nflodds[(nflodds['gameid'] == gameid) & (nflodds['website'] == 'Bovada') & (nflodds['bet_type'] == 'Spread')].drop_duplicates(subset = ['gameid', 'currentdate', 'currenttime', 'website', 'bet_type'])
     return(len(df) > 1)
     
+def newNFLWeek(NFL_Week):
+    """
+    @NFL_Week the NFL week of the game being pulled
+    Takes the NFL week of the game pulled and checks the nfl_games table to see 
+    if this is the first instance of a game from that NFL week. If it is, then
+    this will trigger a text message that will alert that the lines have been
+    posted. 
+    """
+    try:
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Pull all home team, away team, and commence time
+        sql_select_query = f"SELECT MAX(nfl_week) FROM nflgames;"
+        cursor.execute(sql_select_query)
+        most_recent_week = cursor.fetchone()[0]
+    except (Exception, psycopg2.Error) as error:
+       print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+         
+    if NFL_Week > most_recent_week:
+        # List of phone numbers to send the updates to
+        phone_contact_list = ['+15712718265', '+15719195300']
+        
+        for number in phone_contact_list:
+            message = client.messages.create(
+                                 body = f"Bovada lines have been posted for NFL Week {NFL_Week}.",
+                                 from_ = '+12562911093',
+                                 to = number)
+    
 ############################## API Pull #######################################
 
 # To get odds for a sepcific sport, use the sport key from the last request
@@ -402,6 +439,7 @@ if performAPIPull(): #only pull if last request was outside of hour gap
             HomeTeam = x['teams'][1]
             AwayTeam = x['teams'][0]
             NFL_Week = findNFLWeek(CommenceTimeShort)
+            newNFLWeek(NFL_Week) # send a text message if this is for a new NFL Week
             upsertNFLGames(CommenceTimeLong, CommenceTimeShort, NFL_Week, HomeTeam, AwayTeam)
             for y in x['sites']:
                 GameID = findGameID(HomeTeam, CommenceTimeShort)
