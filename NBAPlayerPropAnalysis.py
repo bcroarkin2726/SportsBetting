@@ -113,28 +113,26 @@ bovada_events = bovada_json[0]['events']
 
 # Iterate over bovada_events to extract the different player props
 for game in bovada_events:
-    away_team, home_team = game['description'].split(' @ ')
-    game_props = game['displayGroups']
-    for value in game_props:
-        prop_type = value['description']
-        bet_markets = value['markets']
-        if prop_type in ['Receiving Props', 'Rushing Props', 'Quarterback Props']:
-            for player_prop in bet_markets:
-                player = find_between( player_prop['description'], ' - ', '(').lstrip().rstrip()
-                prop = player_prop['description'].split('-')[0].rstrip()
-                if len(player_prop['outcomes']) > 0: # only if there are any player props available
-                    line = player_prop['outcomes'][0]['price']['handicap']
-                    over_odds = player_prop['outcomes'][0]['price']['american'] # odds for the over
-                    implied_over_probability = impliedOddsConverter(over_odds)
-                    under_odds = player_prop['outcomes'][1]['price']['american'] # odds for the under
-                    implied_under_probability = impliedOddsConverter(under_odds)
-                    team = find_between(player_prop['id'],'(', ')')
-                    prop_list = [nfl_week, player, team, prop, line, over_odds, \
-                                 implied_over_probability, under_odds, implied_under_probability, '']
-                    # Append the list to the dataframe         
-                    bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
-                else:
-                    continue
+    if '@' not in game['description']:
+        # Bovada lists futures here, we can skip this...for now
+        continue
+    else:
+        away_team, home_team = game['description'].split(' @ ')
+        bet_groups = game['displayGroups']
+        for bet_group in bet_groups:
+            if bet_group['description'] == 'Player Props':
+                bet_markets = bet_group['markets']
+                for item in bet_markets:
+                    prop_type = item['description'].split(sep = '-')[0].split(sep = '(')[0].lstrip().rstrip() if '-' in item['description'] else 'N/A'
+                    if prop_type in ['Total Points', 'Total Rebounds', 'Total Points and Rebounds',
+                                     'Total Rebounds and Assists', 'Total Points, Rebounds and Assists']:
+                        team = item['description'].split(sep = '-')[1].split(sep = '(')[1].lstrip().rstrip().replace(')','')
+                        player = item['description'].split(sep = '-')[1].split(sep = '(')[0].lstrip().rstrip()
+                        prop = item['outcomes'][0]['price']['handicap']
+                        over_odds = item['outcomes'][0]['price']['american']
+                        under_odds = item['outcomes'][1]['price']['american']
+            else:
+                continue
                     
 ######################### NUMBER FIRE PROJECTIONS #############################
 
