@@ -436,7 +436,48 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
        if (connection):
            cursor.close()
            connection.close()
-                
+
+def newTeamProps(NFL_week, team):
+    """
+    @NFL_Week the NFL week of the game being pulled
+    @team the NFL team 
+    Takes the NFL week and Team of the game pulled and checks the 
+    bovada_props_comparison table to see if this is the first instance of a 
+    player prop for that team in the given NFL week. If so, this trigger a text
+    notification. If not, the script continues normally. 
+    """
+    try:
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Insert single record
+        sql_select_query = f"SELECT * FROM bovada_props_comparison \
+        WHERE nfl_week = {NFL_week} and team = {team}"
+        cursor.execute(sql_select_query)
+        results = cursor.fetchone()[0]
+    except (Exception, psycopg2.Error) as error:
+        print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+           
+    if len(results) == 0: 
+        # this means that there is no current data for the given team on the given NFL week
+        
+        # List of phone numbers to send the updates to
+        phone_contact_list = ['+15712718265', '+15719195300']
+        
+        for number in phone_contact_list:
+            message = client.messages.create(
+                                 body = f"Bovada player props have been posted for {team} for NFL Week {NFL_Week}.",
+                                 from_ = '+12562911093',
+                                 to = number)
+
 ########################### ESPN API ####################
 #league_id = 28265348
 #year = 2019
@@ -495,6 +536,7 @@ if (day in possible_days) & (hour in possible_hours):
                         under_odds = player_prop['outcomes'][1]['price']['american'] # odds for the under
                         implied_under_probability = impliedOddsConverter(under_odds)
                         team = find_between(player_prop['id'],'(', ')')
+                        newTeamProps(nfl_week, team) # send a text alert if these lines were just posted
                         prop_list = [nfl_week, player, team, prop, line, over_odds, \
                                      implied_over_probability, under_odds, implied_under_probability, '']
                         # Append the list to the dataframe         
@@ -705,7 +747,13 @@ if (day in possible_days) & (hour in possible_hours):
     # Upload the bovada_props_comparison to a postgres table
     for index, row in bovada_props_comparison.iterrows():
         upsertBovadaPropComparisons(row)
-    
+
+    # Send a message about successful download of Bovada player props
+    message = client.messages.create(
+                         body=f"Bovada player props were downloaded on {CurrentDate} at {CurrentTime}.",
+                         from_='+12562911093',
+                         to='+15712718265')
+
     # Log the Bovada Player Prop download
     d = datetime.today()
     CurrentDate = d.strftime('%m/%d/%Y')
