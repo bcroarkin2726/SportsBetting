@@ -7,8 +7,50 @@ Created on Tue Dec  3 18:29:12 2019
 
 import requests
 from bs4 import BeautifulSoup
+import re
+import pandas as pd
+import numpy as np
+import json
+import psycopg2
+import os
+import sys
+from datetime import datetime
+from twilio.rest import Client
+sys.path.append(os.path.dirname(os.path.abspath('config.py')) + '\\Documents\\GitHub\\SportsBetting')
+import config
 
 ########################### Custom Functions ##################################
+
+def find_between( s, first, last ):
+    try:
+        start = s.index( first ) + len( first )
+        end = s.index( last, start )
+        return s[start:end]
+    except ValueError:
+        return ""
+
+def impliedOddsConverter(odds):
+    """
+    @odds the over or under odds. 
+    Can be either positive (+105) or minus odds (-115). The goal is to convert 
+    american odds into an implied probability. 
+    Examples:
+        1. -115 is an implied probability of 53.48%
+        2. +105 is an implied probability of 48.78%
+    """
+    # The formula to use varies on whether it is a minus or positive odd
+    if odds == 'EVEN': # even odds
+        return(0.5)
+    elif odds[0] == '-': # negative odds
+        odds = int(odds[1:]) # convert to integer for calculations
+        implied_probability = odds / (odds + 100)
+        implied_probability = round(implied_probability, 2)
+        return(implied_probability)
+    else: # positive odds
+        odds = int(odds[1:]) # convert to integer for calculations
+        implied_probability = 100 / (odds +100)
+        implied_probability = round(implied_probability, 2)
+        return(implied_probability)
 
 def extractNameTeamTime(bs4_item):
     """
@@ -49,8 +91,54 @@ def extractNameTeamTime(bs4_item):
                             
     return(player, position, team, opponent, time)
                             
-###############################################################################
-           
+
+######################## BOVADA NBA PLAYER PROPS ##############################
+
+# Create an empty dataframe to append data to (excluding Def and K)
+bovada_props_comparison = pd.DataFrame(columns = ['CURRENT_DATE', 'PLAYER', 'POSITION', 'TEAM', \
+                            'PROP', 'BOVADA_LINE', 'OVER_ODDS', 'IMPLIED_OVER_PROBABILITY', \
+                            'UNDER_ODDS', 'IMPLIED_UNDER_PROBABILITY', 'FP_PROJECTION'])
+
+# We are getting the stats from the current week
+todays_date = datetime.now().strftime("%m/%d/%Y")
+
+# USING THE ACTUAL API
+bovada_url = 'https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba'
+bovada_response = requests.get(bovada_url)
+bovada_txt = bovada_response.text
+    
+# Format the json
+bovada_json = json.loads(bovada_txt)
+bovada_events = bovada_json[0]['events']
+
+# Iterate over bovada_events to extract the different player props
+for game in bovada_events:
+    away_team, home_team = game['description'].split(' @ ')
+    game_props = game['displayGroups']
+    for value in game_props:
+        prop_type = value['description']
+        bet_markets = value['markets']
+        if prop_type in ['Receiving Props', 'Rushing Props', 'Quarterback Props']:
+            for player_prop in bet_markets:
+                player = find_between( player_prop['description'], ' - ', '(').lstrip().rstrip()
+                prop = player_prop['description'].split('-')[0].rstrip()
+                if len(player_prop['outcomes']) > 0: # only if there are any player props available
+                    line = player_prop['outcomes'][0]['price']['handicap']
+                    over_odds = player_prop['outcomes'][0]['price']['american'] # odds for the over
+                    implied_over_probability = impliedOddsConverter(over_odds)
+                    under_odds = player_prop['outcomes'][1]['price']['american'] # odds for the under
+                    implied_under_probability = impliedOddsConverter(under_odds)
+                    team = find_between(player_prop['id'],'(', ')')
+                    prop_list = [nfl_week, player, team, prop, line, over_odds, \
+                                 implied_over_probability, under_odds, implied_under_probability, '']
+                    # Append the list to the dataframe         
+                    bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
+                else:
+                    continue
+                    
+######################### NUMBER FIRE PROJECTIONS #############################
+
+         
 number_fire_url = 'https://www.numberfire.com/nba/daily-fantasy/daily-basketball-projections#_=_'
 
 # Web scrape Fantasy Pros for relevant information
