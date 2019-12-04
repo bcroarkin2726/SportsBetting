@@ -8,8 +8,9 @@ Created on Tue Dec  3 18:29:12 2019
 import requests
 from bs4 import BeautifulSoup
 
-############### Custom Functions #######################
-def findNameTeamTime(bs4_item):
+########################### Custom Functions ##################################
+
+def extractNameTeamTime(bs4_item):
     """
     @bs4_item the BeautifulSoup item that contains the player name, team, 
     opponent, and gametime
@@ -48,7 +49,8 @@ def findNameTeamTime(bs4_item):
                             
     return(player, position, team, opponent, time)
                             
-            
+###############################################################################
+           
 number_fire_url = 'https://www.numberfire.com/nba/daily-fantasy/daily-basketball-projections#_=_'
 
 # Web scrape Fantasy Pros for relevant information
@@ -69,14 +71,37 @@ projection_lookup = {1: 'Player',
                      19: 'Blk',
                      21: 'TO'}
 
-for item in projections:
-    if str(item) == '\n':
+for num, item in enumerate(projections):
+    if num != 1:
+        # this just to test that the loop works properly
         continue
+#    if str(item) == '\n':
+#        continue
     else:
+        # This item contains the projecitons for a specific NBA player
         player_data = list(item)
+        # Iterate over the list to extract the relevant data
         for num, item in enumerate(player_data):
-            if str(item) == '\n':
-                continue
-            else:
-                
-
+            if num in projection_lookup.keys():
+                if projection_lookup[num] == 'Player':
+                    Player, Position, Team, Opponent, Time = extractNameTeamTime(list(player_data[num]))
+                elif projection_lookup[num] == 'FP':
+                    FP = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'FanDuelCost':
+                    FanDuelCost = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'Value':
+                    Value = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'Min':
+                    Min = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'Pts':
+                    Pts = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'Reb':
+                    Reb = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'Ast':
+                    Ast = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'Stl':
+                    Stl = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'Blk':
+                    Blk = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
+                elif projection_lookup[num] == 'TO':
+                    TO = list(player_data[num])[0].replace('\n','').lstrip().rstrip()
