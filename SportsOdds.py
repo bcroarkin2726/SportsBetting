@@ -469,6 +469,12 @@ if performAPIPull(): #only pull if last request was outside of hour gap
     # Check how many requests I have left in the month
     requests_remaining = odds_response.headers['x-requests-remaining']
     
+    # Send a message about successful download of NFL odds
+    message = client.messages.create(
+                         body=f"NFL odds were downloaded on {CurrentDate} at {CurrentTime}. You have {requests_remaining} requests remaining.",
+                         from_='+12562911093',
+                         to='+15712718265')
+    
     # Send download log to data_download_logs
     data_download_logging("nflodds", CurrentDate, CurrentTime, requests_remaining)
         
