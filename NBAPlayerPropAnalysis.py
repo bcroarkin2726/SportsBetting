@@ -95,9 +95,7 @@ def extractNameTeamTime(bs4_item):
 ######################## BOVADA NBA PLAYER PROPS ##############################
 
 # Create an empty dataframe to append data to (excluding Def and K)
-bovada_props_comparison = pd.DataFrame(columns = ['CURRENT_DATE', 'PLAYER', 'POSITION', 'TEAM', \
-                            'PROP', 'BOVADA_LINE', 'OVER_ODDS', 'IMPLIED_OVER_PROBABILITY', \
-                            'UNDER_ODDS', 'IMPLIED_UNDER_PROBABILITY', 'FP_PROJECTION'])
+nba_bovada_props_comparison = pd.DataFrame(columns = ['DATE', 'PLAYER', 'TEAM', 'PROP', 'LINE', 'OVER_ODDS', 'UNDER_ODDS'])
 
 # We are getting the stats from the current week
 todays_date = datetime.now().strftime("%m/%d/%Y")
@@ -131,6 +129,10 @@ for game in bovada_events:
                         prop = item['outcomes'][0]['price']['handicap']
                         over_odds = item['outcomes'][0]['price']['american']
                         under_odds = item['outcomes'][1]['price']['american']
+                        # Add all these items to list
+                        prop_list = [todays_date, player, team, prop_type, prop, over_odds, under_odds]
+                        # Append the list to the dataframe         
+                        bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
             else:
                 continue
                     
