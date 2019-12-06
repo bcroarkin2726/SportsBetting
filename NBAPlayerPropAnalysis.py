@@ -124,15 +124,15 @@ for game in bovada_events:
                     prop_type = item['description'].split(sep = '-')[0].split(sep = '(')[0].lstrip().rstrip() if '-' in item['description'] else 'N/A'
                     if prop_type in ['Total Points', 'Total Rebounds', 'Total Points and Rebounds',
                                      'Total Rebounds and Assists', 'Total Points, Rebounds and Assists']:
-                        team = item['description'].split(sep = '-')[1].split(sep = '(')[1].lstrip().rstrip().replace(')','')
-                        player = item['description'].split(sep = '-')[1].split(sep = '(')[0].lstrip().rstrip()
+                        team = item['description'].split(sep = ' - ')[1].split(sep = '(')[1].lstrip().rstrip().replace(')','')
+                        player = item['description'].split(sep = ' - ')[1].split(sep = '(')[0].lstrip().rstrip()
                         prop = item['outcomes'][0]['price']['handicap']
                         over_odds = item['outcomes'][0]['price']['american']
                         under_odds = item['outcomes'][1]['price']['american']
                         # Add all these items to list
                         prop_list = [todays_date, player, team, prop_type, prop, over_odds, under_odds]
                         # Append the list to the dataframe         
-                        bovada_props_comparison.loc[len(bovada_props_comparison)] = prop_list
+                        nba_bovada_props_comparison.loc[len(nba_bovada_props_comparison)] = prop_list
             else:
                 continue
                     
