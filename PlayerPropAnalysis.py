@@ -455,9 +455,21 @@ def newTeamProps(NFL_week, team):
         cursor = connection.cursor()
         # Insert single record
         sql_select_query = f"SELECT * FROM bovada_props_comparison \
-        WHERE nfl_week = {NFL_week} and team = {team}"
+        WHERE nfl_week = {NFL_week} and team = $${team}$$"
         cursor.execute(sql_select_query)
         results = cursor.fetchone()[0]
+        if len(results) == 0: 
+            # this means that there is no current data for the given team on the given NFL week
+            
+            # List of phone numbers to send the updates to
+            phone_contact_list = ['+15712718265']
+            
+            for number in phone_contact_list:
+                message = client.messages.create(
+                                     body = f"Bovada player props have been posted for {team} for NFL Week {NFL_Week}.",
+                                     from_ = '+12562911093',
+                                     to = number)
+
     except (Exception, psycopg2.Error) as error:
         print("Error in operation", error)
     finally:
@@ -466,18 +478,6 @@ def newTeamProps(NFL_week, team):
            cursor.close()
            connection.close()
            
-    if len(results) == 0: 
-        # this means that there is no current data for the given team on the given NFL week
-        
-        # List of phone numbers to send the updates to
-        phone_contact_list = ['+15712718265', '+15719195300']
-        
-        for number in phone_contact_list:
-            message = client.messages.create(
-                                 body = f"Bovada player props have been posted for {team} for NFL Week {NFL_Week}.",
-                                 from_ = '+12562911093',
-                                 to = number)
-
 ########################### ESPN API ####################
 #league_id = 28265348
 #year = 2019
