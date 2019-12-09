@@ -24,6 +24,20 @@ from twilio.rest import Client
 # Connect to Twilio
 client = Client(config.account_sid, config.auth_token)
 
+############################ Email Connection ################################
+
+import smtplib, ssl
+
+port = 465  # For SSL
+password = config.gmail_password
+
+# Create a secure SSL context
+context = ssl.create_default_context()
+
+# Email here
+sender_email = "bofabet677@gmail.com"
+receiver_email = "loudoun5@yahoo.com"
+
 ########################### Custom Functions ##################################
 
 def myround(number):
@@ -567,16 +581,11 @@ if multipleDataPulls(nflodds):
                 # If the consenus line has moved by .5, we should add this to the message
                 if (abs(current_line - previous_line) > 0) or (abs(current_home_prob - previous_home_prob) > 0) or (abs(current_away_prob - previous_away_prob) > 0):
                     # Add the movement to the message if the line moves by .5 points or the home/away odds move by .5 probability
-                    text_message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}.\
+                    email_message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}.\
                     Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
                     Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
                     Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n"
     
-    # List of phone numbers to send the updates to
-    phone_contact_list = ['+15712718265', '+15719195300']
-    
-    for number in phone_contact_list:
-        text_message = client.messages.create(
-                             body = text_message,
-                             from_ = '+12562911093',
-                             to = number)
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        server.login("bofabet677@gmail.com", password)
+        server.sendmail(sender_email, receiver_email, email_message)
