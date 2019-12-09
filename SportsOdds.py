@@ -506,7 +506,10 @@ if multipleDataPulls(nflodds):
     nflgames = nflodds.gameid.unique() 
     
     # Create a variable to hold all the line movements so we only need to send one message
-    text_message = ''
+    email_message = """\
+    Subject: NFL Odds Movements
+    
+    """
     
     # Loop over the game ids and see how much they have changed
     for game in nflgames:
@@ -586,6 +589,9 @@ if multipleDataPulls(nflodds):
                     Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
                     Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n"
     
-    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-        server.login("bofabet677@gmail.com", password)
-        server.sendmail(sender_email, receiver_email, email_message)
+    email_list = ["loudoun5@yahoo.com", "dangeloreategui@gmail.com" ]
+    
+    for receiver_email in email_list:
+        with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+            server.login("bofabet677@gmail.com", password)
+            server.sendmail(sender_email, receiver_email, email_message)
