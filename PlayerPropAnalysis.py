@@ -437,10 +437,10 @@ def data_download_logging(table_name, current_date, current_time, requests_remai
            cursor.close()
            connection.close()
 
-def newTeamProps(NFL_week, team):
+def newTeamProps(NFL_Week, Team):
     """
     @NFL_Week the NFL week of the game being pulled
-    @team the NFL team 
+    @Team the NFL team 
     Takes the NFL week and Team of the game pulled and checks the 
     bovada_props_comparison table to see if this is the first instance of a 
     player prop for that team in the given NFL week. If so, this trigger a text
@@ -455,10 +455,12 @@ def newTeamProps(NFL_week, team):
         cursor = connection.cursor()
         # Insert single record
         sql_select_query = f"SELECT * FROM bovada_props_comparison \
-        WHERE nfl_week = {NFL_week} and team = $${team}$$"
+        WHERE nfl_week = {NFL_Week} and team = $${Team}$$"
         cursor.execute(sql_select_query)
         results = cursor.fetchone()[0]
-        if len(results) == 0: 
+        if results: 
+            pass
+        else:
             # this means that there is no current data for the given team on the given NFL week
             
             # List of phone numbers to send the updates to
@@ -490,7 +492,7 @@ def newTeamProps(NFL_week, team):
 ##########################################################################
                 
 # I want to ensure that this script only runs at the proper times
-# This would be Sunday, Monday, and Thursday starting at 10AM and stopping at 8PM
+# This would be Sunday, Monday, and Thursday starting at 9AM and stopping at 8PM
 d = datetime.today()
 day = d.weekday() # Monday is 0 and Sunday is 6
 possible_days = [0, 3, 6]
@@ -748,17 +750,17 @@ if (day in possible_days) & (hour in possible_hours):
     for index, row in bovada_props_comparison.iterrows():
         upsertBovadaPropComparisons(row)
 
-    # Send a message about successful download of Bovada player props
-    message = client.messages.create(
-                         body=f"Bovada player props were downloaded on {CurrentDate} at {CurrentTime}.",
-                         from_='+12562911093',
-                         to='+15712718265')
-
     # Log the Bovada Player Prop download
     d = datetime.today()
     CurrentDate = d.strftime('%m/%d/%Y')
     CurrentTime = d.strftime('%H:%M:%S')
     data_download_logging('bovada_props_comparison', CurrentDate, CurrentTime)
+    
+    # Send a message about successful download of Bovada player props
+    message = client.messages.create(
+                         body=f"Bovada player props were downloaded on {CurrentDate} at {CurrentTime}.",
+                         from_='+12562911093',
+                         to='+15712718265')
 
 else:
     # If we are not in the possible days or hours for this script, then there
