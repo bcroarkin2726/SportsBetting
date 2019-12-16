@@ -16,7 +16,6 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath('config.py')) + '\\Documents\\GitHub\\SportsBetting')
 import config
 
-
 # Set working directory to the file path of this file
 abspath = os.path.abspath('PlayerPropEvaluation.py')
 dname = os.path.dirname(abspath) + '\\Documents\\GitHub\\SportsBetting' if 'GitHub' not in abspath else os.path.dirname(abspath)
@@ -186,8 +185,6 @@ def upsertBovadaPropComparisons(row):
        if (connection):
            cursor.close()
            connection.close()
-
-
         
 def assessBovadaProp(row):
     """

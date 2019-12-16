@@ -36,7 +36,6 @@ context = ssl.create_default_context()
 
 # Email here
 sender_email = "bofabet677@gmail.com"
-receiver_email = "loudoun5@yahoo.com"
 
 ########################### Custom Functions ##################################
 
@@ -353,19 +352,37 @@ def probabilityConverter(nfl_odds):
     """
     return(round((1/ nfl_odds) * 100,1))
     
-def multipleDataPulls(nfl_odds_df):
+def multipleDataPulls(nfl_odds_df, nfl_week):
     """
     @nfl_odds_df the nflodds dataframe downloaded from PostgreSQL
+    @ nfl_week the current NFL week
     This function checks to see if there is more than one data pull for a given
     NFL week. If it does, the function returns True and will look for line
     movements. If it doesn't, the function returns False and stops.
     """
-    # Find the first GameID
-    gameid = nflodds['gameid'].sort_values().values[0]
-    # Check if there are multiple spread bets for Bovada for that gameid
-    df = nflodds[(nflodds['gameid'] == gameid) & (nflodds['website'] == 'Bovada') & (nflodds['bet_type'] == 'Spread')].drop_duplicates(subset = ['gameid', 'currentdate', 'currenttime', 'website', 'bet_type'])
-    return(len(df) > 1)
-    
+    # Find the most recent game from Bovada pulled into nflodds
+    try:
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
+                                      host = "127.0.0.1",
+                                      port = "5432",
+                                      database = "SportsBetting")
+        cursor = connection.cursor()
+        # Pull the most recent gameid pulled from Bovada
+        sql_select_query = f"SELECT * FROM nflodds \
+        WHERE gameid = (select max(gameid) from nflgames WHERE nfl_week = $${nfl_week}$$) AND bet_type = 'Spread' AND website = 'Bovada' \
+        ORDER BY currentdate DESC, currenttime DESC;"
+        cursor.execute(sql_select_query)
+        results = cursor.fetchall()
+        return(len(results) > 1)
+    except (Exception, psycopg2.Error) as error:
+       print("Error in operation", error)
+    finally:
+       # closing database connection.
+       if (connection):
+           cursor.close()
+           connection.close()
+
 def newNFLWeek():
     """
     The goal of the function is to send a text update when Bovada posts lines
@@ -390,7 +407,7 @@ def newNFLWeek():
         results = cursor.fetchall()
         if len(results) == 1:
             # List of phone numbers to send the updates to
-            phone_contact_list = ['+15712718265', '+15719195300']
+            phone_contact_list = ['+15712718265']
             
             for number in phone_contact_list:
                 message = client.messages.create(
@@ -455,7 +472,7 @@ if performAPIPull(): #only pull if last request was outside of hour gap
             HomeTeam = x['teams'][1]
             AwayTeam = x['teams'][0]
             NFL_Week = findNFLWeek(CommenceTimeShort)
-            newNFLWeek(NFL_Week) # send a text message if this is for a new NFL Week
+            newNFLWeek() # send a text message if this is for a new NFL Week
             upsertNFLGames(CommenceTimeLong, CommenceTimeShort, NFL_Week, HomeTeam, AwayTeam)
             for y in x['sites']:
                 GameID = findGameID(HomeTeam, CommenceTimeShort)
@@ -496,11 +513,16 @@ if performAPIPull(): #only pull if last request was outside of hour gap
         
 ############################## Line Tracking ##################################
 
+# Find the current NFL week
+d = datetime.today()
+CurrentDate = d.strftime('%m/%d/%Y')
+NFL_Week = findNFLWeek(CurrentDate)
+    
 # Pull in the NFL odds for the current week
 nflodds = fetchNFLOdds(NFL_Week)
 
 # Only can track line changes after more than one value, need to check this first
-if multipleDataPulls(nflodds):
+if multipleDataPulls(nflodds, NFL_Week):
     
     # Find all the game ids for the week and add to a list
     nflgames = nflodds.gameid.unique() 
@@ -527,9 +549,10 @@ if multipleDataPulls(nflodds):
             # Break out logic based on whether this is O/U or Spread
             if bet_type == 'O/U':
                 # Filter the df to just the columns I need
-                nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_points']]
-                # Ensure the home_points column is numeric
-                nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3['home_points'])
+                nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_odds', 'away_odds', 'home_points']]
+                # Ensure the home_odds, away_odds, and home_points columns are numeric
+                nflodds_sub3['home_odds'] = pd.to_numeric(nflodds_sub3['home_odds'])
+                nflodds_sub3['away_odds'] = pd.to_numeric(nflodds_sub3['away_odds'])
                 # Group the data by website and hour of currenttime
                 nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
                 # Reset the index and sort nflodds_grouped
@@ -539,14 +562,25 @@ if multipleDataPulls(nflodds):
                 nflodds_grouped.reset_index(drop = True, inplace = True)
                 # Round all points to nearest .5 or whole number
                 nflodds_grouped['home_points'] = nflodds_grouped['home_points'].apply(myround)
+                nflodds_grouped['home_prob'] = nflodds_grouped['home_prob'].apply(myround)
+                nflodds_grouped['away_prob'] = nflodds_grouped['away_prob'].apply(myround)
                 # Compare the two most recent lines and the opening line
                 opening_line = nflodds_grouped['home_points'][len(nflodds_grouped)-1]
                 current_line = nflodds_grouped['home_points'][0]
                 previous_line = nflodds_grouped['home_points'][1]
                 line_difference = current_line - previous_line
+                opening_home_prob = nflodds_grouped['home_prob'][len(nflodds_grouped)-1]
+                previous_home_prob = nflodds_grouped['home_prob'][1]
+                current_home_prob = nflodds_grouped['home_prob'][0]
+                opening_away_prob = nflodds_grouped['away_prob'][len(nflodds_grouped)-1]
+                previous_away_prob = nflodds_grouped['away_prob'][1]
+                current_away_prob = nflodds_grouped['away_prob'][0]                
                 # If the consenus line has moved by .5, we should add this to the message
                 if abs(current_line - previous_line) > 0:
-                    text_message += f"The O/U for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. Current line is {current_line}. Previous line was {previous_line}. Opening line was {opening_line}.\n"
+                    email_message += f"The O/U for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. \
+                    \nCurrent line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
+                    \nPrevious line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
+                    \nOpening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n\n"
             else: # Spread
                 # Filter the df to just the columns I need
                 nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_odds', 'away_odds', 'home_points']]
@@ -585,11 +619,11 @@ if multipleDataPulls(nflodds):
                 if (abs(current_line - previous_line) > 0) or (abs(current_home_prob - previous_home_prob) > 0) or (abs(current_away_prob - previous_away_prob) > 0):
                     # Add the movement to the message if the line moves by .5 points or the home/away odds move by .5 probability
                     email_message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}.\
-                    Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
-                    Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
-                    Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n"
+                    \nCurrent line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
+                    \nPrevious line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
+                    \nOpening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n\n"
     
-    email_list = ["loudoun5@yahoo.com", "dangeloreategui@gmail.com" ]
+    email_list = ["loudoun5@yahoo.com", "dangeloreategui@gmail.com"]
     
     for receiver_email in email_list:
         with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
