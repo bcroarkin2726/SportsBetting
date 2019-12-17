@@ -16,6 +16,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath('config.py')) + '\\Documents\\GitHub\\SportsBetting')
 import config
 
+pd.set_option('mode.chained_assignment', None)
+
 ############################ Twilio Connection ################################
 
 # Download the helper library from https://www.twilio.com/docs/python/install
@@ -27,6 +29,8 @@ client = Client(config.account_sid, config.auth_token)
 ############################ Email Connection ################################
 
 import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 port = 465  # For SSL
 password = config.gmail_password
@@ -39,18 +43,32 @@ sender_email = "bofabet677@gmail.com"
 
 ########################### Custom Functions ##################################
 
-def myround(number):
-    """Round a number to the closest half integer.
-    >>> round_of_rating(1.3)
+def myround(number, decimal = 0.5, precision = 2):
+    """
+    @number the number given to the function to round
+    @decimal the decimal figure you want to round to the nearest
+    @precision the number of places after the decimal to return
+    Round a number to the closest half integer.
+    >>> round_of_rating(1.3, .5)
     1.5
-    >>> round_of_rating(2.6)
-    2.5
-    >>> round_of_rating(3.0)
+    >>> round_of_rating(3.0, .25)
     3.0
-    >>> round_of_rating(4.1)
-    4.0"""
-
-    return round(number * 2) / 2
+    >>> round_of_rating(4.15, .25)
+    4.25
+    """
+    # Set the acceptable decimals to allow
+    acceptable_decimals = [.25, .50]
+    
+    if decimal in acceptable_decimals:
+        # Round the decimal given to 2 signicant figures
+        decimal_round = round(decimal, precision)
+        # Create a lookup dictionary to alter the precion level
+        decimal_lookup = {.50: 2,
+                          .25: 4}
+        
+        return round(number * decimal_lookup[decimal_round]) / decimal_lookup[decimal_round]
+    else:
+        return(number)
 
 def findNFLWeek(Date):
    try:
@@ -343,7 +361,7 @@ def fetchGameInfo(game_id):
            cursor.close()
            connection.close()
 
-def probabilityConverter(nfl_odds):
+def decimal2ProbabilityConverter(nfl_odds):
     """
     @nfl_odds the decimal odds for a given NFL game (ex. 1.909)
     This function takes in decimal odds and converts it to the implied
@@ -352,6 +370,40 @@ def probabilityConverter(nfl_odds):
     """
     return(round((1/ nfl_odds) * 100,1))
     
+def decimal2AmericanConverter(nfl_odds):
+    """
+    @nfl_odds the decimal odds for a given NFL game (ex. 1.909)
+    This function takes in decimal odds and converts it to the American
+    line.
+    Ex: 1.9091 --> -110
+    """
+    if nfl_odds < 2:
+        return(str(round((-100)/(nfl_odds - 1))))
+        
+    else:
+        return('+' + str(round((nfl_odds - 1) * 100)))
+
+def probability2AmericanConverter(win_probability):
+    """
+    @win_probability the percent odds for a team to win a game in decimal
+    format (ex. .652 )
+    This function takes in win probability and converts it to the American odds
+    Ex: .65 --> -185.7
+    """
+    # Need to convert the win probabilty to a 0-1 scale if not already
+    if (win_probability >= 1) & (win_probability < 100):
+        win_probability = win_probability / 100
+    elif (win_probability > 0) & (win_probability < 1):
+        pass
+    else:
+        print("bad win probability")
+        
+    # Convert the win probability to the American odd    
+    if win_probability < .5:
+        return('+' + str(round((100 - (100 * win_probability)) / win_probability)))
+    else:
+        return(str(round((-100 * win_probability)/(1 - win_probability))))
+        
 def multipleDataPulls(nfl_odds_df, nfl_week):
     """
     @nfl_odds_df the nflodds dataframe downloaded from PostgreSQL
@@ -407,8 +459,8 @@ def newNFLWeek():
         results = cursor.fetchall()
         if len(results) == 1:
             # List of phone numbers to send the updates to
+#            phone_contact_list = ['+15712718265', '+15719195300']
             phone_contact_list = ['+15712718265']
-            
             for number in phone_contact_list:
                 message = client.messages.create(
                                      body = f"Bovada lines have been posted for NFL Week {NFL_Week}.",
@@ -463,7 +515,7 @@ if performAPIPull(): #only pull if last request was outside of hour gap
     bet_type_dict = {0: 'Moneyline',
                      1: 'Spread',
                      2: 'O/U'}
-    
+
     # Iterate over JSONs, extract needed data, and add to PostgreSQL tables
     for num, json_dict in enumerate([odds_json, spreads_json, totals_json]):
         for x in json_dict:
@@ -472,7 +524,6 @@ if performAPIPull(): #only pull if last request was outside of hour gap
             HomeTeam = x['teams'][1]
             AwayTeam = x['teams'][0]
             NFL_Week = findNFLWeek(CommenceTimeShort)
-            newNFLWeek() # send a text message if this is for a new NFL Week
             upsertNFLGames(CommenceTimeLong, CommenceTimeShort, NFL_Week, HomeTeam, AwayTeam)
             for y in x['sites']:
                 GameID = findGameID(HomeTeam, CommenceTimeShort)
@@ -508,6 +559,9 @@ if performAPIPull(): #only pull if last request was outside of hour gap
                          from_='+12562911093',
                          to='+15712718265')
     
+    # Send a text message if this is for a new NFL Week
+    newNFLWeek() 
+
     # Send download log to data_download_logs
     data_download_logging("nflodds", CurrentDate, CurrentTime, requests_remaining)
         
@@ -527,12 +581,17 @@ if multipleDataPulls(nflodds, NFL_Week):
     # Find all the game ids for the week and add to a list
     nflgames = nflodds.gameid.unique() 
     
-    # Create a variable to hold all the line movements so we only need to send one message
-    email_message = """\
-    Subject: NFL Odds Movements
-    
-    """
-    
+    # Set needed variables
+    receiver_email = "loudoun5@yahoo.com"
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "NFL Odds Movements - Test"
+    message["From"] = "bofabet677@gmail.com"
+    message["To"] = "loudoun5@yahoo.com"
+        
+    # Initialize the spread and o/u message
+    spread_message = ""
+    ou_message = ""
+        
     # Loop over the game ids and see how much they have changed
     for game in nflgames:
         # subset the dataset to just the single game
@@ -551,8 +610,14 @@ if multipleDataPulls(nflodds, NFL_Week):
                 # Filter the df to just the columns I need
                 nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_odds', 'away_odds', 'home_points']]
                 # Ensure the home_odds, away_odds, and home_points columns are numeric
-                nflodds_sub3['home_odds'] = pd.to_numeric(nflodds_sub3['home_odds'])
-                nflodds_sub3['away_odds'] = pd.to_numeric(nflodds_sub3['away_odds'])
+                nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3.loc[:,'home_points'])
+                nflodds_sub3['home_odds'] = pd.to_numeric(nflodds_sub3.loc[:,'home_odds'])
+                nflodds_sub3['away_odds'] = pd.to_numeric(nflodds_sub3.loc[:,'away_odds'])
+                # Convert all the odds columns to probabilities and then drop odds
+                nflodds_sub3['home_prob'] = nflodds_sub3['home_odds'].apply(decimal2ProbabilityConverter)
+                del nflodds_sub3['home_odds']
+                nflodds_sub3['away_prob'] = nflodds_sub3['away_odds'].apply(decimal2ProbabilityConverter)
+                del nflodds_sub3['away_odds']
                 # Group the data by website and hour of currenttime
                 nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
                 # Reset the index and sort nflodds_grouped
@@ -560,10 +625,6 @@ if multipleDataPulls(nflodds, NFL_Week):
                 nflodds_grouped.sort_values(by = ['currentdate', 'currenthour'], 
                                             ascending = False, inplace = True)
                 nflodds_grouped.reset_index(drop = True, inplace = True)
-                # Round all points to nearest .5 or whole number
-                nflodds_grouped['home_points'] = nflodds_grouped['home_points'].apply(myround)
-                nflodds_grouped['home_prob'] = nflodds_grouped['home_prob'].apply(myround)
-                nflodds_grouped['away_prob'] = nflodds_grouped['away_prob'].apply(myround)
                 # Compare the two most recent lines and the opening line
                 opening_line = nflodds_grouped['home_points'][len(nflodds_grouped)-1]
                 current_line = nflodds_grouped['home_points'][0]
@@ -574,13 +635,26 @@ if multipleDataPulls(nflodds, NFL_Week):
                 current_home_prob = nflodds_grouped['home_prob'][0]
                 opening_away_prob = nflodds_grouped['away_prob'][len(nflodds_grouped)-1]
                 previous_away_prob = nflodds_grouped['away_prob'][1]
-                current_away_prob = nflodds_grouped['away_prob'][0]                
+                current_away_prob = nflodds_grouped['away_prob'][0]   
+                # Convert all the prob columns to American odds
+                opening_home_prob = probability2AmericanConverter(opening_home_prob)
+                previous_home_prob = probability2AmericanConverter(previous_home_prob)
+                current_home_prob = probability2AmericanConverter(current_home_prob)
+                opening_away_prob = probability2AmericanConverter(opening_away_prob)
+                previous_away_prob = probability2AmericanConverter(previous_away_prob)
+                current_away_prob = probability2AmericanConverter(current_away_prob)
+                # Round all points and probabilities to nearest .5 or whole number
+                opening_line = myround(opening_line, decimal = .25)
+                current_line = myround(current_line, decimal = .25)
+                previous_line = myround(previous_line, decimal = .25)
+                line_difference = myround(line_difference, decimal = .25)
                 # If the consenus line has moved by .5, we should add this to the message
-                if abs(current_line - previous_line) > 0:
-                    email_message += f"The O/U for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}. \
-                    \nCurrent line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
-                    \nPrevious line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
-                    \nOpening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n\n"
+                if abs(current_line - previous_line) >= 0.25:
+                    ou_message += f"<p>The O/U for <b>{home_team}</b> vs. <b>{away_team}</b> on {commencetimelong} has moved by {line_difference}.<br>\
+                    Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}.<br>\
+                    Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}.<br>\
+                    Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.<br>\
+                    </p>"
             else: # Spread
                 # Filter the df to just the columns I need
                 nflodds_sub3 = nflodds_sub2[['currentdate', 'currenthour', 'home_odds', 'away_odds', 'home_points']]
@@ -588,11 +662,9 @@ if multipleDataPulls(nflodds, NFL_Week):
                 nflodds_sub3['home_odds'] = pd.to_numeric(nflodds_sub3['home_odds'])
                 nflodds_sub3['away_odds'] = pd.to_numeric(nflodds_sub3['away_odds'])
                 nflodds_sub3['home_points'] = pd.to_numeric(nflodds_sub3['home_points'])    
-                # Convert all the odds columns to probabilities and then drop odds
-                nflodds_sub3['home_prob'] = nflodds_sub3['home_odds'].apply(probabilityConverter)
-                del nflodds_sub3['home_odds']
-                nflodds_sub3['away_prob'] = nflodds_sub3['away_odds'].apply(probabilityConverter)
-                del nflodds_sub3['away_odds']
+                # Convert all the odds columns to probabilities
+                nflodds_sub3['home_prob'] = nflodds_sub3['home_odds'].apply(decimal2ProbabilityConverter)
+                nflodds_sub3['away_prob'] = nflodds_sub3['away_odds'].apply(decimal2ProbabilityConverter)
                 # Group the data by website and hour of currenttime
                 nflodds_grouped = nflodds_sub3.groupby(['currentdate', 'currenthour']).mean()
                 # Reset the index and sort nflodds_grouped
@@ -600,10 +672,6 @@ if multipleDataPulls(nflodds, NFL_Week):
                 nflodds_grouped.sort_values(by = ['currentdate', 'currenthour'], 
                                             ascending = False, inplace = True)
                 nflodds_grouped.reset_index(drop = True, inplace = True)
-                # Round all points and probabilities to nearest .5 or whole number
-                nflodds_grouped['home_prob'] = nflodds_grouped['home_prob'].apply(myround)
-                nflodds_grouped['away_prob'] = nflodds_grouped['away_prob'].apply(myround)
-                nflodds_grouped['home_points'] = nflodds_grouped['home_points'].apply(myround)            
                 # Compare the two most recent lines and the opening line
                 opening_line = nflodds_grouped['home_points'][len(nflodds_grouped)-1]
                 current_line = nflodds_grouped['home_points'][0]
@@ -615,17 +683,55 @@ if multipleDataPulls(nflodds, NFL_Week):
                 opening_away_prob = nflodds_grouped['away_prob'][len(nflodds_grouped)-1]
                 previous_away_prob = nflodds_grouped['away_prob'][1]
                 current_away_prob = nflodds_grouped['away_prob'][0]
+                # Convert all the prob columns to American odds
+                opening_home_prob = probability2AmericanConverter(opening_home_prob)
+                previous_home_prob = probability2AmericanConverter(previous_home_prob)
+                current_home_prob = probability2AmericanConverter(current_home_prob)
+                opening_away_prob = probability2AmericanConverter(opening_away_prob)
+                previous_away_prob = probability2AmericanConverter(previous_away_prob)
+                current_away_prob = probability2AmericanConverter(current_away_prob)
+                # Round all points and probabilities to nearest .5 or whole number
+                opening_line = myround(opening_line, decimal = .25)
+                current_line = myround(current_line, decimal = .25)
+                previous_line = myround(previous_line, decimal = .25)
+                line_difference = myround(line_difference, decimal = .25)
                 # If the consenus line has moved by .5, we should add this to the message
-                if (abs(current_line - previous_line) > 0) or (abs(current_home_prob - previous_home_prob) > 0) or (abs(current_away_prob - previous_away_prob) > 0):
+                if abs(current_line - previous_line) >= 0.25:
                     # Add the movement to the message if the line moves by .5 points or the home/away odds move by .5 probability
-                    email_message += f"The Spread for {home_team} vs. {away_team} on {commencetimelong} has moved by {line_difference}.\
-                    \nCurrent line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}. \
-                    \nPrevious line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}. \
-                    \nOpening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.\n\n"
+                    spread_message += f"<p>The Spread for <b>{home_team}</b> vs. <b>{away_team}</b> on {commencetimelong} has moved by {line_difference}.<br>\
+                    Current line is {current_line} with home/away probabilities of {current_home_prob}/{current_away_prob}.<br>\
+                    Previous line was {previous_line} with home/away probabilities of {previous_home_prob}/{previous_away_prob}.<br>\
+                    Opening line was {opening_line} with home/away probabilities of {opening_home_prob}/{opening_away_prob}.<br>\
+                    </p>"
+
+    # Format the spread and ou message if they are empty
+    spread_message = "There have been no significant movements since last pull." if len(spread_message) == 0 else spread_message
+    ou_message = "There have been no significant movements since last pull." if len(ou_message) == 0 else ou_message
     
-    email_list = ["loudoun5@yahoo.com", "dangeloreategui@gmail.com"]
+    # Start the HTML version of your message
+    html_email_message = f"""\
+    <html>
+      <body>
+        <h2>NFL Week {NFL_Week}</h2>
+        <h3>Spread Movements</h3>
+        <p>{spread_message}</p>
+        <h3>O/U Movements</h3>
+        <p>{ou_message}</p>
+      </body>
+    </html>
+    """
     
-    for receiver_email in email_list:
-        with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-            server.login("bofabet677@gmail.com", password)
-            server.sendmail(sender_email, receiver_email, email_message)
+    # Turn these into plain/html MIMEText objects
+    part1 = MIMEText(html_email_message, "html")
+    
+    # Add HTML/plain-text parts to MIMEMultipart message
+    # The email client will try to render the last part first
+    message.attach(part1)
+    
+    # Create secure connection with server and send email
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(
+            sender_email, receiver_email, message.as_string()
+        )
