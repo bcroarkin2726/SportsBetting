@@ -91,27 +91,68 @@ def findNFLWeek(Date):
            cursor.close()
            connection.close()
 
-def findGameID(HomeTeam, CommenceTimeShort):
-   try:
-        connection = psycopg2.connect(user = config.psycopg2_username,
-                                      password = config.psycopg2_password,
-                                      host = "127.0.0.1",
-                                      port = "5432",
-                                      database = "SportsBetting")
-        cursor = connection.cursor()
-        # Check if row already exists
-        sql_select_query = f"SELECT gameid FROM nflgames WHERE hometeam = $${HomeTeam}$$ \
-        AND commencetimeshort = $${CommenceTimeShort}$$"
-        cursor.execute(sql_select_query)
-        results = cursor.fetchone()[0]
-        return(results)
-   except (Exception, psycopg2.Error) as error:
-       print("Error in update operation", error)
-   finally:
-       # closing database connection.
-       if (connection):
-           cursor.close()
-           connection.close()
+def findGameID(Home_Team, NFL_Week = 0, CommenceTimeShort = 0):
+    """
+    @Home_Team the home team in the game (the only truly required field)
+    @NFL_Week the NFL week of the game being played (e.g. 15)
+    @CommenceTimeShort the date of the game (e.g. 11/21/2019)
+    If the CommenceTimeShort is provided, we can use the name of the home team
+    and the CommenceTimeShort to find the GameID. Otherwise, we need to use 
+    the NFL_Week of the game and the names of the teams involved to 
+    find the GameID in the nflgames table.
+    """
+    # If CommenceTimeShort is provided, we can use that and Home_Team to
+    # find the GameID
+    if CommenceTimeShort != 0:
+        try:
+            connection = psycopg2.connect(user = config.psycopg2_username,
+                                              password = config.psycopg2_password,
+                                              host = "127.0.0.1",
+                                              port = "5432",
+                                              database = "SportsBetting")
+            cursor = connection.cursor()
+            # Check if row already exists
+            sql_select_query = f"SELECT gameid FROM nflgames WHERE hometeam = $${HomeTeam}$$ \
+            AND commencetimeshort = $${CommenceTimeShort}$$"
+            cursor.execute(sql_select_query)
+            results = cursor.fetchone()[0]
+            return(results)
+        except (Exception, psycopg2.Error) as error:
+            print("Error in update operation", error)
+        finally:
+            # closing database connection.
+            if (connection):
+                cursor.close()
+                connection.close()
+    
+    # Without the CommenceTimeShort, we need to use the NFL Week and Home_Team
+    # to find the GameID
+    elif NFL_Week != 0:
+        try:
+            connection = psycopg2.connect(user = config.psycopg2_username,
+                                          password = config.psycopg2_password,
+                                          host = "127.0.0.1",
+                                          port = "5432",
+                                          database = "SportsBetting")
+            cursor = connection.cursor()
+            # Search for game id using fields input
+            sql_select_query = f"SELECT gameid FROM nflgames WHERE nfl_week = {NFL_Week} \
+            AND hometeam = $${Home_Team}$$"
+            cursor.execute(sql_select_query)
+            results = cursor.fetchone()[0]
+            return(results)
+        except (Exception, psycopg2.Error) as error:
+           print("Error in operation", error)
+        finally:
+           # closing database connection.
+           if (connection):
+               cursor.close()
+               connection.close()
+    
+    # Without either the CommenceTimeShort or Home_Team, we do not have enough
+    # information to return a GameID
+    else:
+        return('Not enough information provided.')
 
 def upsertNFLGames(CommenceTimeLong, CommencetimeShort, NFL_Week, HomeTeam, AwayTeam):
    try:
@@ -386,9 +427,9 @@ def decimal2AmericanConverter(nfl_odds):
 def probability2AmericanConverter(win_probability):
     """
     @win_probability the percent odds for a team to win a game in decimal
-    format (ex. .652 )
+    format (ex. .652)
     This function takes in win probability and converts it to the American odds
-    Ex: .65 --> -185.7
+    Ex: .65 --> -186
     """
     # Need to convert the win probabilty to a 0-1 scale if not already
     if (win_probability >= 1) & (win_probability < 100):
@@ -403,6 +444,29 @@ def probability2AmericanConverter(win_probability):
         return('+' + str(round((100 - (100 * win_probability)) / win_probability)))
     else:
         return(str(round((-100 * win_probability)/(1 - win_probability))))
+
+def probability2DecimalConverter(win_probability):
+    """
+    @win_probability the percent odds for a team to win a game in decimal
+    format (ex. .652)
+    This function takes in win probability and converts it to the American odds
+    Ex: .65 --> 1.54
+    """
+    # Remove any percentage symbols if there and convert to float if not already
+    if type(win_probability) == str:
+        win_probability = win_probability.replace('%','')
+        win_probability = float(win_probability)
+        
+    # Need to convert the win probabilty to a 0-1 scale if not already
+    if (win_probability >= 1) & (win_probability < 100):
+        win_probability = win_probability / 100
+    elif (win_probability > 0) & (win_probability < 1):
+        pass
+    else:
+        print("bad win probability")
+        
+    # Convert the win probability to the decimal odd   
+    return(round(1/win_probability,2))
         
 def multipleDataPulls(nfl_odds_df, nfl_week):
     """
@@ -526,7 +590,7 @@ if performAPIPull(): #only pull if last request was outside of hour gap
             NFL_Week = findNFLWeek(CommenceTimeShort)
             upsertNFLGames(CommenceTimeLong, CommenceTimeShort, NFL_Week, HomeTeam, AwayTeam)
             for y in x['sites']:
-                GameID = findGameID(HomeTeam, CommenceTimeShort)
+                GameID = findGameID(HomeTeam, CommenceTimeShort = CommenceTimeShort)
                 CurrentDate = datetime.fromtimestamp(y['last_update']).strftime("%m/%d/%Y")
                 CurrentTime = datetime.fromtimestamp(y['last_update']).strftime("%H:%M:%S")
                 Website = y['site_nice']
@@ -559,7 +623,7 @@ if performAPIPull(): #only pull if last request was outside of hour gap
                          from_='+12562911093',
                          to='+15712718265')
     
-    # Send a text message if this is for a new NFL Week
+    # Send a text message if this includes Bovada odds for a new NFL week
     newNFLWeek() 
 
     # Send download log to data_download_logs
@@ -713,25 +777,27 @@ if multipleDataPulls(nflodds, NFL_Week):
       </body>
     </html>
     """
-    
-    # Add HTML/plain-text parts to MIMEMultipart message
-    message.attach(MIMEText(html_email_message, "html"))
-    
-    # Email recipient list
-    email_list = ["loudoun5@yahoo.com", "dangeloreategui@gmail.com"]
-            
-    # Create secure connection with server and send email
-    context = ssl.create_default_context()
-    
+        
     # Loop over email recipient list and send to them
     for receiver_email in email_list:
-        
+
         # Set needed variables
         message = MIMEMultipart("alternative")
         message["Subject"] = "NFL Odds Movements - Test"
         message["From"] = "bofabet677@gmail.com"
         message["To"] = receiver_email
-    
+
+        # Turn the message into html MIMEText objects
+        part_html = MIMEText(html_email_message, "html")
+        
+        # Add HTML/plain-text parts to MIMEMultipart message
+        message.attach(part_html)
+        
+        # Email recipient list
+        email_list = ["loudoun5@yahoo.com", "dangeloreategui@gmail.com"]
+
+        # Create secure connection with server and send email
+        context = ssl.create_default_context()
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
