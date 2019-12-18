@@ -580,14 +580,7 @@ if multipleDataPulls(nflodds, NFL_Week):
     
     # Find all the game ids for the week and add to a list
     nflgames = nflodds.gameid.unique() 
-    
-    # Set needed variables
-    receiver_email = "loudoun5@yahoo.com"
-    message = MIMEMultipart("alternative")
-    message["Subject"] = "NFL Odds Movements - Test"
-    message["From"] = "bofabet677@gmail.com"
-    message["To"] = "loudoun5@yahoo.com"
-        
+            
     # Initialize the spread and o/u message
     spread_message = ""
     ou_message = ""
@@ -730,7 +723,15 @@ if multipleDataPulls(nflodds, NFL_Week):
     # Create secure connection with server and send email
     context = ssl.create_default_context()
     
-    for receivier_email in email_list:
+    # Loop over email recipient list and send to them
+    for receiver_email in email_list:
+        
+        # Set needed variables
+        message = MIMEMultipart("alternative")
+        message["Subject"] = "NFL Odds Movements - Test"
+        message["From"] = "bofabet677@gmail.com"
+        message["To"] = receiver_email
+    
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
