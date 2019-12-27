@@ -585,8 +585,8 @@ if performAPIPull(): #only pull if last request was outside of hour gap
         for x in json_dict:
             CommenceTimeShort = datetime.fromtimestamp(x['commence_time']).strftime("%m/%d/%Y")
             CommenceTimeLong = datetime.fromtimestamp(x['commence_time']).strftime("%A, %B %d, %Y %I:%M:%S")
-            HomeTeam = x['teams'][1]
-            AwayTeam = x['teams'][0]
+            HomeTeam = x['home_team']
+            AwayTeam = [x for x in x['teams'] if x != HomeTeam][0]
             NFL_Week = findNFLWeek(CommenceTimeShort)
             upsertNFLGames(CommenceTimeLong, CommenceTimeShort, NFL_Week, HomeTeam, AwayTeam)
             for y in x['sites']:
