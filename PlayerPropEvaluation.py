@@ -9,11 +9,12 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
-import numpy as np
-import json
 import psycopg2
 import os
 from datetime import datetime
+import sys
+sys.path.append(os.path.dirname(os.path.abspath('config.py')) + '\\Documents\\GitHub\\SportsBetting')
+import config
 
 # Set working directory to the file path of this file
 abspath = os.path.abspath('PlayerPropEvaluation.py')
@@ -31,8 +32,8 @@ def find_between( s, first, last ):
     
 def findNFLWeek(Date):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -58,8 +59,8 @@ def checkPlayerStatistics(nfl_week):
     run the insertPlayerStatistics function on each row of fp_statistics df. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -88,8 +89,8 @@ def insertPlayerStatistics(row):
     inserted.
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -131,8 +132,8 @@ def upsertBovadaPropComparisons(row):
     the table for the given nfl week. 
     """
     try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -184,8 +185,6 @@ def upsertBovadaPropComparisons(row):
        if (connection):
            cursor.close()
            connection.close()
-
-
         
 def assessBovadaProp(row):
     """
@@ -345,8 +344,8 @@ else:
 
 # Read the previous week's bovada props into a dataframe
 try:
-    connection = psycopg2.connect(user = "postgres",
-                                  password = "RfC93TiD!ab",
+    connection = psycopg2.connect(user = config.psycopg2_username,
+                                  password = config.psycopg2_password,
                                   host = "127.0.0.1",
                                   port = "5432",
                                   database = "SportsBetting")
@@ -369,8 +368,8 @@ finally:
        
 # Read the previous week's fantasy stats into a dataframe
 try:
-    connection = psycopg2.connect(user = "postgres",
-                                  password = "RfC93TiD!ab",
+    connection = psycopg2.connect(user = config.psycopg2_username,
+                                  password = config.psycopg2_password,
                                   host = "127.0.0.1",
                                   port = "5432",
                                   database = "SportsBetting")

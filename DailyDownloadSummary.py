@@ -25,8 +25,8 @@ client = Client(config.account_sid, config.auth_token)
 
 def pullDailyDownloads(CurrentDate):
    try:
-        connection = psycopg2.connect(user = "postgres",
-                                      password = "RfC93TiD!ab",
+        connection = psycopg2.connect(user = config.psycopg2_username,
+                                      password = config.psycopg2_password,
                                       host = "127.0.0.1",
                                       port = "5432",
                                       database = "SportsBetting")
@@ -43,7 +43,9 @@ def pullDailyDownloads(CurrentDate):
        if (connection):
            cursor.close()
            connection.close()
-
+           
+###############################################################################
+           
 # We are getting the stats for today
 CurrentDate = datetime.now().strftime("%m/%d/%Y")
 CurrentTime = datetime.now().strftime('%H:%M:%S')
@@ -54,19 +56,20 @@ daily_downloads = pd.DataFrame(pullDailyDownloads(CurrentDate),
 
 # Get the number of pulls and requests remaining for nfl_odds
 nfl_odds_downloads = len(daily_downloads[daily_downloads['Data_Table_Name'] == 'nflodds'])
-requests_remaining = daily_downloads.sort_values(by = ['Current_Time'], ascending = False).head(1)['Requests_Remaining']
+requests_remaining = daily_downloads[daily_downloads['Data_Table_Name'] == 'nflodds'].sort_values(by = ['Current_Time'], ascending = False).head(1)['Requests_Remaining']
+requests_remaining = requests_remaining.values[0] # extract the first value from series
 
 # Get the number of pulls for Bovada prop comparisons (this encompasses player statistics and player projections)
 bovada_props_downloads = len(daily_downloads[daily_downloads['Data_Table_Name'] == 'bovada_props'])
 
-# Send out a text message with the daily download summary.
+# Send out a text message with the daily download summary
 message = client.messages.create(
-             body=f"Today is {CurrentDate}. \
-             NFL odds were downloaded {nfl_odds_downloads} times today.\
-             You have {requests_remaining} requests remaining.\
-             Bovada player props were downloaded {bovada_props_downloads} times",
-             from_='+12562911093',
-             to='+15712718265')
-
-
+             body = f"Today is {CurrentDate}. \
+             NFL odds were downloaded {nfl_odds_downloads} times today. \
+             You have {requests_remaining} requests remaining. \
+             Bovada player props were downloaded {bovada_props_downloads} times.",
+             from_ = '+12562911093',
+             to = '+15712718265')
+    
+    
 
