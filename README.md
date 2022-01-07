@@ -1,7 +1,11 @@
 # SportsBetting
-I want to pull NFL betting odds from an API and use it to track how betting lines differ between different websites and across the week to view potential good betting opportunities.
+This repository will house all my scripts and work related to sports betting. The two main projects related to this currently are:
 
-An additional idea I have is to scrape all of the individual player bet odds from Bovada and compare them to fantasy projections for a player to find values. 
+## Hedge Calculater
 
-Useful Links
-- https://www.bovada.lv/services/sports/event/v2/events/A/description/football/nfl -> Gives all odds for NFL, including individual player level bets
+I've created a script that allows me to easily plug in bet details and check to see if a profitable hedge can be made by betting on both sides of a bet. This requires a profit boost or a free bet to overcome the "juice" of the house, but can guarantee a profit if the boost/free bet is large enough. Additionally, the script gives bet sizes to place on each side and the payout received by both bet outcomes. It tries to equalize the profit in either scenario, but also has options to view different bet size options and their payouts. 
+
+## Player Prop Analysis
+
+I want to scrape NBA and NFL player prop betting odds from DraftKings and compare the odds to projections from SportsLine to find profitable bet opportunities. 
+
