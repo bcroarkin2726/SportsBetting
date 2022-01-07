@@ -8,11 +8,9 @@ Created on Fri Dec 13 10:21:03 2019
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import psycopg2
 import os
 import sys
 from datetime import datetime
-from twilio.rest import Client
 sys.path.append(os.path.dirname(os.path.abspath('config.py')) + '\\Documents\\GitHub\\SportsBetting')
 import config
 
@@ -169,11 +167,15 @@ def insertNFLOdds(GameID, CurrentDate, CurrentTime, Website, BetType, HomeOdds, 
 
 ############################ 538 Web Scrape ###################################
 
+# Set year variable
+Year = 2021
+
 # Scrape the 538 website
-five38_url = 'https://projects.fivethirtyeight.com/2019-nfl-predictions/games/?ex_cid=rrpromo'
+five38_url = f'https://projects.fivethirtyeight.com/{Year}-nfl-predictions/games/?ex_cid=rrpromo'
 # Web scrape FiveThirtyEight for relevant information
 response = requests.get(five38_url)
 soup = BeautifulSoup(response.text, "html.parser")
+print(soup)
 
 games = list(list(list(list(list(list(soup)[1])[1])[4])[2])[1])
 upcoming = list(games[0])
@@ -227,9 +229,6 @@ team_dictionary = {'Atlanta': 'Atlanta Falcons',
                    'Tennessee': 'Tennessee Titans',
                    'Washington': 'Washington Redskins',                   
         }
-
-# Set year variable
-Year = 2019
 
 for num, item in enumerate(upcoming_list[:81]):
     print(num)
