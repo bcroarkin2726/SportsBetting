@@ -1,4 +1,0 @@
-venv
-.idea
-.ipynb_checkpoints
-.gitignore
