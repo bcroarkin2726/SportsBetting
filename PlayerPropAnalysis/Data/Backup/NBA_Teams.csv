@@ -1,0 +1,32 @@
+index,teamId,shortName,City,Nickname,fullName,Conference,Division
+0,1,ATL,Atlanta,Hawks,Atlanta Hawks,East,Southeast
+1,2,BOS,Boston,Celtics,Boston Celtics,East,Atlantic
+2,4,BKN,Brooklyn,Nets,Brooklyn Nets,East,Atlantic
+3,5,CHA,Charlotte,Hornets,Charlotte Hornets,East,Southeast
+4,6,CHI,Chicago,Bulls,Chicago Bulls,East,Central
+5,7,CLE,Cleveland,Cavaliers,Cleveland Cavaliers,East,Central
+6,8,DAL,Dallas,Mavericks,Dallas Mavericks,West,Southwest
+7,9,DEN,Denver,Nuggets,Denver Nuggets,West,Northwest
+8,10,DET,Detroit,Pistons,Detroit Pistons,East,Central
+9,11,GSW,Golden State,Warriors,Golden State Warriors,West,Pacific
+10,14,HOU,Houston,Rockets,Houston Rockets,West,Southwest
+11,15,IND,Indiana,Pacers,Indiana Pacers,East,Central
+12,16,LAC,LA,Clippers,LA Clippers,West,Pacific
+13,17,LAL,Los Angeles,Lakers,Los Angeles Lakers,West,Pacific
+14,19,MEM,Memphis,Grizzlies,Memphis Grizzlies,West,Southwest
+15,20,MIA,Miami,Heat,Miami Heat,East,Southeast
+16,21,MIL,Milwaukee,Bucks,Milwaukee Bucks,East,Central
+17,22,MIN,Minnesota,Timberwolves,Minnesota Timberwolves,West,Northwest
+18,23,NOP,New Orleans,Pelicans,New Orleans Pelicans,West,Southwest
+19,24,NYK,New York,Knicks,New York Knicks,East,Atlantic
+20,25,OKC,Oklahoma City,Thunder,Oklahoma City Thunder,West,Northwest
+21,26,ORL,Orlando,Magic,Orlando Magic,East,Southeast
+22,27,PHI,Philadelphia,76ers,Philadelphia 76ers,East,Atlantic
+23,28,PHX,Phoenix,Suns,Phoenix Suns,West,Pacific
+24,29,POR,Portland,Trail Blazers,Portland Trail Blazers,West,Northwest
+25,30,SAC,Sacramento,Kings,Sacramento Kings,West,Pacific
+26,31,SAS,San Antonio,Spurs,San Antonio Spurs,West,Southwest
+27,37,SAS,Home,Team Stephen A,Home Team Stephen A,East,East
+28,38,TOR,Toronto,Raptors,Toronto Raptors,East,Atlantic
+29,40,UTA,Utah,Jazz,Utah Jazz,West,Northwest
+30,41,WAS,Washington,Wizards,Washington Wizards,East,Southeast

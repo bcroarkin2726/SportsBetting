@@ -1,0 +1,1055 @@
+index,playerId,teamId,fullName,firstName,lastName,Position,yearsPro,startNBA,College,Country,DateOfBirth,Height,Weight
+0,2,28,Quincy Acy,Quincy,Acy,F,6,2012,Baylor,USA,1990-10-06,2.01,108.9
+1,4,19,Steven Adams,Steven,Adams,C,8,2013,Pittsburgh,New Zealand,1993-07-20,2.11,120.2
+2,5,26,Arron Afflalo,Arron,Afflalo,G,0,0,,,,,
+3,8,4,LaMarcus Aldridge,LaMarcus,Aldridge,C-F,15,2006,Texas-Austin,USA,1985-07-19,2.11,113.4
+4,17,15,Justin Anderson,Justin,Anderson,F-G,5,2015,Virginia,USA,1993-11-19,1.96,104.8
+5,18,19,Kyle Anderson,Kyle,Anderson,F-G,7,2014,UCLA,USA,1993-09-20,2.06,104.3
+6,20,21,Giannis Antetokounmpo,Giannis,Antetokounmpo,F,8,2013,Filathlitikos,Greece,1994-12-06,2.11,109.8
+7,21,17,Carmelo Anthony,Carmelo,Anthony,F,18,2003,Syracuse,USA,1984-05-29,2.01,108.0
+8,23,17,Trevor Ariza,Trevor,Ariza,F,17,2004,UCLA,USA,1985-06-30,2.03,97.5
+9,26,,Netanel Artzi,Netanel,Artzi,F,0,0,,,,,
+10,28,14,D.J. Augustin,D.J.,Augustin,G,13,2008,Texas-Austin,USA,1987-11-10,1.8,83.0
+11,30,20,Luke Babbitt,Luke,Babbitt,F,0,0,,,,,
+12,33,15,Wade Baldwin IV,Wade,Baldwin IV,G,2,2016,Vanderbilt,USA,1996-03-29,1.93,90.7
+13,35,8,J.J. Barea,J.J.,Barea,G,14,2006,Northeastern,Puerto Rico,1984-06-26,1.78,81.6
+14,36,30,Harrison Barnes,Harrison,Barnes,F,9,2012,North Carolina,USA,1992-05-30,2.03,102.1
+15,37,11,Matt Barnes,Matt,Barnes,F,0,0,,,,,
+16,38,9,Will Barton,Will,Barton,G,9,2012,Memphis,USA,1991-01-06,1.96,82.1
+17,40,16,Nicolas Batum,Nicolas,Batum,G-F,13,2008,Le Mans,France,1988-12-14,2.03,104.3
+18,41,22,Jerryd Bayless,Jerryd,Bayless,G,0,0,,,,,
+19,42,38,Aron Baynes,Aron,Baynes,C-F,8,2012,Washington State,Australia,1986-12-09,2.08,117.9
+20,44,17,Kent Bazemore,Kent,Bazemore,G-F,9,2012,Old Dominion,USA,1989-07-01,1.93,88.5
+21,45,41,Bradley Beal,Bradley,Beal,G,9,2012,Florida,USA,1993-06-28,1.93,93.9
+22,46,22,Malik Beasley,Malik,Beasley,G,5,2016,Florida State,USA,1996-11-26,1.93,84.8
+23,47,4,Michael Beasley,Michael,Beasley,F,11,2008,Kansas State,USA,1989-01-09,2.06,104.3
+24,48,31,Marco Belinelli,Marco,Belinelli,G,13,2007,Fortitudo Bologna,Italy,1986-03-25,1.96,99.8
+25,49,4,DeAndre' Bembry,DeAndre',Bembry,G-F,5,2016,St. Joseph's (PA),USA,1994-07-04,1.96,95.3
+26,52,41,Davis Bertans,Davis,Bertans,F,5,2016,Baskonia,Latvia,1992-11-12,2.08,102.1
+27,53,22,Patrick Beverley,Patrick,Beverley,G,9,2012,Arkansas,USA,1988-07-12,1.85,81.6
+28,54,28,Bismack Biyombo,Bismack,Biyombo,C,10,2011,Baloncesto Fuenlabrada,DRC,1992-08-28,2.03,115.7
+29,55,11,Nemanja Bjelica,Nemanja,Bjelica,F,6,2015,Fenerbahce,Serbia,1988-05-09,2.06,106.1
+30,56,9,Tarik Black,Tarik,Black,F,4,2014,Kansas,USA,1991-11-22,2.06,117.9
+31,58,,Oz Blayzer,Oz,Blayzer,F,0,0,,,,,
+32,59,16,Eric Bledsoe,Eric,Bledsoe,G,11,2010,Kentucky,USA,1989-12-09,1.85,97.1
+33,60,40,Bojan Bogdanovic,Bojan,Bogdanovic,F,7,2014,Fenerbahce,Croatia,1989-04-18,2.01,102.5
+34,61,11,Andrew Bogut,Andrew,Bogut,C,0,0,,,,,
+35,64,28,Devin Booker,Devin,Booker,G,6,2015,Kentucky,USA,1996-10-30,1.96,93.4
+36,65,15,Trevor Booker,Trevor,Booker,F,8,2010,Clemson,USA,1987-11-25,2.03,103.4
+37,68,17,Avery Bradley,Avery,Bradley,G,11,2010,Texas-Austin,USA,1990-11-26,1.9,81.6
+38,70,30,Corey Brewer,Corey,Brewer,G-F,13,2007,Florida,USA,1986-03-05,2.06,85.3
+39,71,15,Malcolm Brogdon,Malcolm,Brogdon,G,5,2016,Virginia,USA,1992-12-11,1.96,103.9
+40,72,22,Aaron Brooks,Aaron,Brooks,G,0,0,,,,,
+41,75,2,Jaylen Brown,Jaylen,Brown,G-F,5,2016,California,USA,1996-10-24,1.98,101.2
+42,76,38,Lorenzo Brown,Lorenzo,Brown,G,4,2013,North Carolina State,USA,1990-08-26,1.96,85.7
+43,77,25,Markel Brown,Markel,Brown,G,3,2014,Oklahoma State,USA,1992-01-29,1.9,86.2
+44,82,8,Reggie Bullock,Reggie,Bullock,G-F,8,2013,North Carolina,USA,1991-03-16,1.98,93.0
+45,83,8,Trey Burke,Trey,Burke,G,8,2013,Michigan,USA,1992-11-12,1.83,83.9
+46,84,24,Alec Burks,Alec,Burks,G,10,2011,Colorado,USA,1991-07-20,1.98,97.1
+47,86,20,Jimmy Butler,Jimmy,Butler,F,10,2011,Marquette,USA,1989-09-14,2.01,104.3
+48,88,10,Jose Calderon,Jose,Calderon,G,0,0,,,,,
+49,89,41,Kentavious Caldwell-Pope,Kentavious,Caldwell-Pope,G,8,2013,Georgia,USA,1993-02-18,1.96,92.5
+50,92,1,Clint Capela,Clint,Capela,C,7,2014,Elan Chalon,Switzerland,1994-05-18,2.08,116.1
+51,93,14,DeMarre Carroll,DeMarre,Carroll,F,11,2009,Missouri,USA,1986-07-27,1.98,97.5
+52,94,1,Vince Carter,Vince,Carter,G-F,0,0,,,,,
+53,95,26,Michael Carter-Williams,Michael,Carter-Williams,G,8,2013,Syracuse,USA,1991-10-10,1.96,86.2
+54,97,8,Willie Cauley-Stein,Willie,Cauley-Stein,C,6,2015,Kentucky,USA,1993-08-18,2.13,108.9
+55,101,14,Tyson Chandler,Tyson,Chandler,C,19,2001,Dominguez HS (CA),USA,1982-10-02,2.13,106.6
+56,102,4,Wilson Chandler,Wilson,Chandler,F,12,2007,DePaul,USA,1987-05-10,2.03,106.6
+57,104,8,Marquese Chriss,Marquese,Chriss,F,5,2016,Washington,USA,1997-07-02,2.06,108.9
+58,108,23,Ian Clark,Ian,Clark,G,6,2013,Belmont,USA,1991-03-07,1.9,79.4
+59,109,40,Jordan Clarkson,Jordan,Clarkson,G,7,2014,Missouri,USA,1992-06-07,1.93,88.0
+60,112,25,Nick Collison,Nick,Collison,F,0,0,,,,,
+61,114,40,Mike Conley,Mike,Conley,G,14,2007,Ohio State,USA,1987-10-11,1.85,79.4
+62,115,21,Pat Connaughton,Pat,Connaughton,G,6,2015,Notre Dame,USA,1993-01-06,1.96,94.8
+63,118,29,Robert Covington,Robert,Covington,F,8,2013,Tennessee State,USA,1990-12-14,2.01,94.8
+64,120,4,Jamal Crawford,Jamal,Crawford,G,0,0,,,,,
+65,121,28,Jae Crowder,Jae,Crowder,F,9,2012,Marquette,USA,1990-07-06,1.98,106.6
+66,122,31,Dante Cunningham,Dante,Cunningham,F,0,0,,,,,
+67,123,27,Seth Curry,Seth,Curry,G,7,2013,Duke,USA,1990-08-23,1.88,83.9
+68,124,11,Stephen Curry,Stephen,Curry,G,12,2009,Davidson,USA,1988-03-14,1.88,83.9
+69,125,9,Troy Daniels,Troy,Daniels,G,7,2013,Virginia Commonwealth,USA,1991-07-15,1.93,90.7
+70,126,17,Anthony Davis,Anthony,Davis,F-C,9,2012,Kentucky,USA,1993-03-11,2.08,114.8
+71,127,14,Deyonta Davis,Deyonta,Davis,G,3,2016,Michigan State,USA,1996-12-02,2.11,107.5
+72,128,7,Ed Davis,Ed,Davis,C-F,11,2010,North Carolina,USA,1989-06-05,2.06,98.9
+73,131,20,Dewayne Dedmon,Dewayne,Dedmon,C,8,2013,Southern California,USA,1989-08-12,2.13,111.1
+74,133,1,Malcolm Delaney,Malcolm,Delaney,G,2,2016,Virginia Tech,USA,1989-03-11,1.9,86.2
+75,134,7,Matthew Dellavedova,Matthew,Dellavedova,G,8,2013,St.Mary's College of California,Australia,1990-09-08,1.9,90.7
+76,136,6,DeMar DeRozan,DeMar,DeRozan,G-F,12,2009,Southern California,USA,1989-08-07,1.98,99.8
+77,141,1,Gorgui Dieng,Gorgui,Dieng,C,8,2013,Louisville,Senegal,1990-01-18,2.08,112.5
+78,142,41,Spencer Dinwiddie,Spencer,Dinwiddie,G,7,2014,Colorado,USA,1993-04-06,1.98,97.5
+79,146,38,Goran Dragic,Goran,Dragic,G,13,2008,Union Olimpija,Slovenia,1986-05-06,1.9,86.2
+80,147,27,Andre Drummond,Andre,Drummond,C,9,2012,Connecticut,USA,1993-08-10,2.08,126.6
+81,148,17,Jared Dudley,Jared,Dudley,F,14,2007,Boston College,USA,1985-07-10,1.98,107.5
+82,153,4,Kevin Durant,Kevin,Durant,F,13,2007,Texas-Austin,USA,1988-09-29,2.08,108.9
+83,155,6,Jarell Eddie,Jarell,Eddie,G-F,4,2015,Virginia Tech,USA,1991-10-30,2.01,98.9
+84,157,17,Wayne Ellington,Wayne,Ellington,G,12,2009,North Carolina,USA,1987-11-29,1.93,93.9
+85,159,27,Joel Embiid,Joel,Embiid,C-F,5,2016,Kansas,Cameroon,1994-03-16,2.13,127.0
+86,160,9,James Ennis III,James,Ennis III,F,7,2014,California State-Long Beach,USA,1990-07-01,1.98,97.5
+87,161,17,Tyler Ennis,Tyler,Ennis,G,4,2014,Syracuse,Canada,1994-08-24,1.9,88.0
+88,162,1,Jeremy Evans,Jeremy,Evans,F,7,2010,Western Kentucky,USA,1987-10-24,2.06,90.7
+89,167,14,Kenneth Faried,Kenneth,Faried,F,0,0,,,,,
+90,169,25,Derrick Favors,Derrick,Favors,F,11,2010,Georgia Tech,USA,1991-07-15,2.06,120.2
+91,171,6,Cristiano Felicio,Cristiano,Felicio,F-C,5,2015,Flamengo,Brazil,1992-07-07,2.11,122.5
+92,172,25,Raymond Felton,Raymond,Felton,G,0,0,,,,,
+93,175,8,Dorian Finney-Smith,Dorian,Finney-Smith,F,5,2016,Florida,USA,1993-05-04,2.01,99.8
+94,176,31,Bryn Forbes,Bryn,Forbes,G,5,2016,Michigan State,USA,1993-07-23,1.88,93.0
+95,177,24,Evan Fournier,Evan,Fournier,G-F,9,2012,Poitiers Basket 86,France,1992-10-29,1.98,93.0
+96,180,7,Channing Frye,Channing,Frye,C,0,0,,,,,
+97,181,1,Danilo Gallinari,Danilo,Gallinari,F,12,2008,Olimpia Milano,Italy,1988-08-08,2.08,107.0
+98,182,21,Langston Galloway,Langston,Galloway,G,7,2014,St. Joseph's (PA),USA,1991-12-09,1.85,90.7
+99,184,19,Marc Gasol,Marc,Gasol,C,13,2008,FC Barcelona,Spain,1985-01-29,2.11,115.7
+100,186,40,Rudy Gay,Rudy,Gay,F-G,15,2006,Connecticut,USA,1986-08-17,2.03,113.4
+101,189,16,Paul George,Paul,George,F,11,2010,Fresno State,USA,1990-05-02,2.03,99.8
+102,190,24,Taj Gibson,Taj,Gibson,F,12,2009,Southern California,USA,1985-06-24,2.06,105.2
+103,191,31,Manu Ginobili,Manu,Ginobili,G,16,2002,"Bahia Blanca, Argentina",Argentina,1977-07-28,1.98,93.0
+104,192,40,Rudy Gobert,Rudy,Gobert,C,8,2013,Cholet,France,1992-06-26,2.16,117.0
+105,195,9,Aaron Gordon,Aaron,Gordon,F,7,2014,Arizona,USA,1995-09-16,2.03,106.6
+106,196,14,Eric Gordon,Eric,Gordon,G,13,2008,Indiana,USA,1988-12-25,1.9,97.5
+107,200,10,Jerami Grant,Jerami,Grant,F,7,2014,Syracuse,USA,1994-03-12,2.03,95.3
+108,202,,WILL GRAVES,WILL,GRAVES,F,0,0,,,,,
+109,203,27,Danny Green,Danny,Green,G,12,2009,North Carolina,USA,1987-06-22,1.98,97.5
+110,204,11,Draymond Green,Draymond,Green,F,9,2012,Michigan State,USA,1990-03-04,1.98,104.3
+111,206,9,JaMychal Green,JaMychal,Green,F-C,7,2014,Alabama,USA,1990-06-21,2.03,103.0
+112,207,9,Jeff Green,Jeff,Green,F,13,2007,Georgetown,USA,1986-08-28,2.03,106.6
+113,208,4,Blake Griffin,Blake,Griffin,F,11,2010,Oklahoma,USA,1989-03-16,2.06,113.4
+114,214,12,Tyler Hansbrough,Tyler,Hansbrough,F,0,0,,,,,
+115,215,8,Tim Hardaway Jr.,Tim,Hardaway Jr.,G-F,8,2013,Michigan,USA,1992-03-16,1.96,93.0
+116,216,4,James Harden,James,Harden,G,12,2009,Arizona State,USA,1989-08-26,1.96,99.8
+117,217,30,Maurice Harkless,Maurice,Harkless,F-G,9,2012,St. John's,USA,1993-05-11,2.01,99.8
+118,218,41,Montrezl Harrell,Montrezl,Harrell,F-C,6,2015,Louisville,USA,1994-01-26,2.01,108.9
+119,219,8,Devin Harris,Devin,Harris,G,0,0,,,,,
+120,220,26,Gary Harris,Gary,Harris,G,7,2014,Michigan State,USA,1994-09-14,1.93,95.3
+121,221,4,Joe Harris,Joe,Harris,G-F,7,2014,Virginia,USA,1991-09-06,1.98,99.8
+122,222,27,Tobias Harris,Tobias,Harris,F,10,2011,Tennessee,USA,1992-07-15,2.01,102.5
+123,223,8,Aaron Harrison,Aaron,Harrison,G,3,2015,Kentucky,USA,1994-10-28,1.98,95.3
+124,225,20,Udonis Haslem,Udonis,Haslem,F,18,2003,Florida,USA,1980-06-09,2.03,106.6
+125,227,5,Gordon Hayward,Gordon,Hayward,F,11,2010,Butler,USA,1990-03-23,2.01,102.1
+126,230,2,Juancho Hernangomez,Juancho,Hernangomez,F,5,2016,Estudiantes,Spain,1995-09-28,2.06,97.1
+127,231,23,Willy Hernangomez,Willy,Hernangomez,C-F,5,2016,Cajasol Sevilla,Spain,1994-05-27,2.11,113.4
+128,232,19,Mario Hezonja,Mario,Hezonja,F-G,5,2015, ,Croatia,1995-02-25,2.03,99.8
+129,236,30,Buddy Hield,Buddy,Hield,G,5,2016,Oklahoma,Bahamas,1992-12-17,1.93,99.8
+130,237,21,George Hill,George,Hill,G,13,2008,Indiana-Purdue Indianapolis,USA,1986-05-04,1.93,85.3
+131,239,24,Solomon Hill,Solomon,Hill,F,8,2013,Arizona,USA,1991-03-18,1.98,102.5
+132,240,31,Darrun Hilliard,Darrun,Hilliard,F,0,0,,,,,
+133,242,21,Jrue Holiday,Jrue,Holiday,G,12,2009,UCLA,USA,1990-06-12,1.9,93.0
+134,243,15,Justin Holiday,Justin,Holiday,F-G,8,2012,Washington,USA,1989-04-05,1.98,81.6
+135,244,7,John Holland,John,Holland,G,1,2017,Boston U.,USA,1988-11-06,1.96,93.0
+136,245,29,Rondae Hollis-Jefferson,Rondae,Hollis-Jefferson,F,6,2015,Arizona,USA,1995-01-03,1.98,98.4
+137,246,30,Richaun Holmes,Richaun,Holmes,F,6,2015,Bowling Green,USA,1993-10-15,2.08,106.6
+138,247,21,Rodney Hood,Rodney,Hood,G-F,7,2014,Duke,USA,1992-10-20,2.03,94.3
+139,248,2,Al Horford,Al,Horford,C-F,14,2007,Florida,Dominican Republic,1986-06-03,2.06,108.9
+140,249,40,Danuel House Jr.,Danuel,House Jr.,F-G,5,2016,Texas A&M,USA,1993-06-07,1.98,99.8
+141,250,17,Dwight Howard,Dwight,Howard,C-F,17,2004,SW Atlanta Christian Academy (GA),USA,1985-12-08,2.08,120.2
+142,254,2,RJ Hunter,RJ,Hunter,G,4,2015,Georgia State,USA,1993-10-24,1.96,83.9
+143,255,16,Serge Ibaka,Serge,Ibaka,F,12,2009,Ricoh Manresa,Republic of the Congo,1989-09-18,2.08,106.6
+144,256,11,Andre Iguodala,Andre,Iguodala,G-F,17,2004,Arizona,USA,1984-01-28,1.98,97.5
+145,258,40,Joe Ingles,Joe,Ingles,F-G,7,2014,Maccabi Tel Aviv,Australia,1987-10-02,2.03,99.8
+146,260,23,Brandon Ingram,Brandon,Ingram,F,5,2016,Duke,USA,1997-09-02,2.03,86.2
+147,261,4,Kyrie Irving,Kyrie,Irving,G,10,2011,Duke,Australia,1992-03-23,1.88,88.5
+148,264,16,Reggie Jackson,Reggie,Jackson,G,10,2011,Boston College,USA,1990-04-16,1.88,94.3
+149,265,17,LeBron James,LeBron,James,F,18,2003,St. Vincent-St. Mary HS (OH),USA,1984-12-30,2.06,113.4
+150,266,15,Al Jefferson,Al,Jefferson,C,14,2004,Prentiss HS (MS),USA,1985-01-04,2.08,127.0
+151,267,9,Richard Jefferson,Richard,Jefferson,F,0,0,,,,,
+152,268,24,John Jenkins,John,Jenkins,G,6,2012,Vanderbilt,USA,1991-03-06,1.93,97.5
+153,269,21,Brandon Jennings,Brandon,Jennings,G,9,2009,Oak Hill Academy (VA),USA,1989-09-23,1.85,77.1
+154,270,11,Jonas Jerebko,Jonas,Jerebko,F,0,0,,,,,
+155,271,27,Amir Johnson,Amir,Johnson,C-F,14,2005,No College,USA,1987-05-01,2.06,108.9
+156,274,4,James Johnson,James,Johnson,F,12,2009,Wake Forest,USA,1987-02-20,2.01,108.9
+157,276,17,Stanley Johnson,Stanley,Johnson,F-G,6,2015,Arizona,USA,1996-05-29,1.98,109.8
+158,277,31,Tyler Johnson,Tyler,Johnson,G,7,2014,Fresno State,USA,1992-05-07,1.9,84.4
+159,278,41,Wesley Johnson,Wesley,Johnson,F-G,9,2010,Syracuse,USA,1987-07-11,2.01,97.5
+160,279,9,Nikola Jokic,Nikola,Jokic,C,6,2015,Mega Basket,Serbia,1995-02-19,2.11,128.8
+161,281,30,Damian Jones,Damian,Jones,C,5,2016,Vanderbilt,USA,1995-06-30,2.11,111.1
+162,283,6,Derrick Jones Jr.,Derrick,Jones Jr.,F,5,2016,UNLV,USA,1997-02-15,1.98,95.3
+163,285,19,Tyus Jones,Tyus,Jones,G,6,2015,Duke,USA,1996-05-10,1.83,88.9
+164,286,17,DeAndre Jordan,DeAndre,Jordan,C,13,2008,Texas A&M,USA,1988-07-21,2.11,120.2
+165,287,10,Cory Joseph,Cory,Joseph,G,10,2011,Texas-Austin,Canada,1991-08-20,1.9,90.7
+166,290,28,Frank Kaminsky,Frank,Kaminsky,F-C,6,2015,Wisconsin,USA,1993-04-04,2.13,108.9
+167,291,2,Enes Freedom,Enes,Freedom,C,10,2011,Fenerbahce,Turkey,1992-05-20,2.08,113.4
+168,296,6,Sean Kilpatrick,Sean,Kilpatrick,G,4,2014,Cincinnati,USA,1990-01-06,1.93,96.2
+169,297,8,Brandon Knight,Brandon,Knight,G,8,2011,Kentucky,USA,1991-12-02,1.88,82.6
+170,298,,DANIEL KOPERBERG,DANIEL,KOPERBERG,C,0,0,,,,,
+171,299,21,Kyle Korver,Kyle,Korver,G-F,17,2003,Creighton,USA,1981-03-17,2.01,96.2
+172,300,30,Kosta Koufos,Kosta,Koufos,C,11,2008,Ohio State,USA,1989-02-24,2.13,111.1
+173,303,15,Jeremy Lamb,Jeremy,Lamb,G-F,9,2012,Connecticut,USA,1992-05-30,1.96,81.6
+174,306,2,Shane Larkin,Shane,Larkin,G,4,2013,Miami (FL),USA,1992-10-02,1.8,79.4
+175,307,31,Joffrey Lauvergne,Joffrey,Lauvergne,C,0,0,,,,,
+176,308,6,Zach LaVine,Zach,LaVine,G-F,7,2014,UCLA,USA,1995-03-10,1.96,90.7
+177,309,41,Ty Lawson,Ty,Lawson,G,0,0,,,,,
+178,310,22,Jake Layman,Jake,Layman,F,5,2016,Maryland,USA,1994-03-07,2.03,94.8
+179,312,31,David Lee,David,Lee,F,0,0,,,,,
+180,313,30,Alex Len,Alex,Len,C,8,2013,Maryland,Ukraine,1993-06-16,2.13,113.4
+181,314,16,Kawhi Leonard,Kawhi,Leonard,F,10,2011,San Diego State,USA,1991-06-29,2.01,102.1
+182,316,21,Jon Leuer,Jon,Leuer,F,8,2011,Wisconsin,USA,1989-05-14,2.08,103.4
+183,317,15,Caris LeVert,Caris,LeVert,G,5,2016,Michigan,USA,1994-08-25,1.98,93.0
+184,319,29,Damian Lillard,Damian,Lillard,G,9,2012,Weber State,USA,1990-07-15,1.88,88.5
+185,320,38,Jeremy Lin,Jeremy,Lin,G,0,0,,,,,
+186,321,11,Shaun Livingston,Shaun,Livingston,G,15,2004,No College,USA,1985-09-11,2.01,87.1
+187,322,11,Kevon Looney,Kevon,Looney,F,6,2015,UCLA,USA,1996-02-06,2.06,100.7
+188,323,21,Brook Lopez,Brook,Lopez,C,13,2008,Stanford,USA,1988-04-01,2.13,127.9
+189,325,26,Robin Lopez,Robin,Lopez,C,13,2008,Stanford,USA,1988-04-01,2.13,127.5
+190,326,7,Kevin Love,Kevin,Love,F-C,13,2008,UCLA,USA,1988-09-07,2.03,113.9
+191,327,20,Kyle Lowry,Kyle,Lowry,G,15,2006,Villanova,USA,1986-03-25,1.83,88.9
+192,329,1,Timothe Luwawu-Cabarrot,Timothe,Luwawu-Cabarrot,G-F,5,2016,Mega Basket,France,1995-05-09,2.01,97.5
+193,331,10,Trey Lyles,Trey,Lyles,F,6,2015,Kentucky,Canada,1995-11-05,2.06,106.1
+194,332,5,Shelvin Mack,Shelvin,Mack,G,0,0,,,,,
+195,334,41,Ian Mahinmi,Ian,Mahinmi,C,12,2007,Pau Orthez,France,1986-11-05,2.11,118.8
+196,337,8,Boban Marjanovic,Boban,Marjanovic,C,6,2015,Crvena zvezda,Serbia,1988-08-15,2.21,131.5
+197,341,21,Wesley Matthews,Wesley,Matthews,G,12,2009,Marquette,USA,1986-10-14,1.93,99.8
+198,343,14,Luc Mbah a Moute,Luc,Mbah a Moute,F,0,0,,,,,
+199,347,29,CJ McCollum,CJ,McCollum,G,8,2013,Lehigh,USA,1991-09-19,1.9,86.2
+200,348,15,T.J. McConnell,T.J.,McConnell,G,6,2015,Arizona,USA,1992-03-25,1.85,86.2
+201,351,31,Doug McDermott,Doug,McDermott,F,7,2014,Creighton,USA,1992-01-03,2.01,102.1
+202,353,28,JaVale McGee,JaVale,McGee,C-F,13,2008,Nevada-Reno,USA,1988-01-19,2.13,122.5
+203,354,10,Rodney McGruder,Rodney,McGruder,G,5,2016,Kansas State,USA,1991-07-29,1.93,93.0
+204,355,29,Ben McLemore,Ben,McLemore,G,8,2013,Kansas,USA,1993-02-11,1.9,88.5
+205,356,10,Jordan McRae,Jordan,McRae,G,0,0,,,,,
+206,358,38,Jodie Meeks,Jodie,Meeks,G,0,0,,,,,
+207,359,8,Salah Mejri,Salah,Mejri,C,0,0,,,,,
+208,360,20,Jordan Mickey,Jordan,Mickey,F,0,0,,,,,
+209,361,21,Khris Middleton,Khris,Middleton,F,9,2012,Texas A&M,USA,1991-08-12,2.01,100.7
+210,365,4,Patty Mills,Patty,Mills,G,12,2009,St.Mary's College of California,Australia,1988-08-11,1.83,81.6
+211,366,4,Paul Millsap,Paul,Millsap,F,15,2006,Louisiana Tech,USA,1985-02-10,2.01,116.6
+212,367,21,Nikola Mirotic,Nikola,Mirotic,F,5,2014, ,Montenegro,1991-02-11,2.08,113.4
+213,369,41,Greg Monroe,Greg,Monroe,F-C,9,2010,Georgetown,USA,1990-06-04,2.08,113.4
+214,371,26,E'Twaun Moore,E'Twaun,Moore,G,10,2011,Purdue,USA,1989-02-25,1.9,86.6
+215,373,16,Marcus Morris Sr.,Marcus,Morris Sr.,F,10,2011,Kansas,USA,1989-09-02,2.03,98.9
+216,374,20,Markieff Morris,Markieff,Morris,F,10,2011,Kansas,USA,1989-09-02,2.06,111.1
+217,377,26,Timofey Mozgov,Timofey,Mozgov,C,9,2010, ,Russia,1986-07-16,2.16,124.7
+218,378,30,Emmanuel Mudiay,Emmanuel,Mudiay,G,5,2015,Guangdong,DRC,1996-03-05,1.9,90.7
+219,381,11,Xavier Munford,Xavier,Munford,G,2,2015,Rhode Island,USA,1992-06-01,1.93,78.5
+220,382,31,Dejounte Murray,Dejounte,Murray,G,4,2016,Washington,USA,1996-09-19,1.93,81.6
+221,383,9,Jamal Murray,Jamal,Murray,G,5,2016,Kentucky,Canada,1997-02-23,1.9,97.5
+222,384,25,Mike Muscala,Mike,Muscala,F-C,8,2013,Bucknell,USA,1991-07-01,2.08,108.9
+223,385,29,Larry Nance Jr.,Larry,Nance Jr.,F-C,6,2015,Wyoming,USA,1993-01-01,2.01,111.1
+224,386,41,Shabazz Napier,Shabazz,Napier,G,6,2014,Connecticut,USA,1991-07-14,1.83,79.4
+225,388,10,Jameer Nelson,Jameer,Nelson,G,0,0,,,,,
+226,390,41,Raul Neto,Raul,Neto,G,6,2015,Murcia,Brazil,1992-05-19,1.88,81.6
+227,391,27,Georges Niang,Georges,Niang,F,5,2016,Iowa State,USA,1993-06-17,2.01,104.3
+228,393,16,Joakim Noah,Joakim,Noah,F-C,0,0,,,,,
+229,394,24,Nerlens Noel,Nerlens,Noel,C-F,7,2014,Kentucky,USA,1994-04-10,2.11,99.8
+230,395,38,Lucas Nogueira,Lucas,Nogueira,C,0,0,,,,,
+231,397,8,Dirk Nowitzki,Dirk,Nowitzki,F,0,0,,,,,
+232,398,29,Jusuf Nurkic,Jusuf,Nurkic,C,7,2014,Cedevita,Bosnia and Herzegovina,1994-08-23,2.11,131.5
+233,400,27,Kyle O'Quinn,Kyle,O'Quinn,C-F,8,2012,Norfolk State,USA,1990-03-26,2.06,113.4
+234,403,20,Victor Oladipo,Victor,Oladipo,G,8,2013,Indiana,USA,1992-05-04,1.93,96.6
+235,404,10,Kelly Olynyk,Kelly,Olynyk,F-C,8,2013,Gonzaga,Canada,1991-04-19,2.11,108.9
+236,407,5,Kelly Oubre Jr.,Kelly,Oubre Jr.,F-G,6,2015,Kansas,USA,1995-12-09,1.98,92.1
+237,408,10,Zaza Pachulia,Zaza,Pachulia,C,0,0,,,,,
+238,409,29,Georgios Papagiannis,Georgios,Papagiannis,C,2,2016,,Greece,1997-07-03,2.16,108.9
+239,411,5,Tony Parker,Tony,Parker,G,17,2001,,France,1982-05-17,1.88,83.9
+240,415,28,Chris Paul,Chris,Paul,G,16,2005,Wake Forest,USA,1985-05-06,1.83,79.4
+241,417,28,Cameron Payne,Cameron,Payne,G,6,2015,Murray State,USA,1994-08-08,1.85,83.0
+242,418,28,Elfrid Payton,Elfrid,Payton,G,7,2014,Louisana-Lafayette,USA,1994-02-22,1.9,88.5
+243,422,7,Kendrick Perkins,Kendrick,Perkins,C,14,2003,Clifton J. Ozen HS (TX),USA,1984-11-10,2.08,122.5
+244,425,21,Marshall Plumlee,Marshall,Plumlee,C,2,2016,Duke,USA,1992-07-14,2.13,113.4
+245,426,5,Mason Plumlee,Mason,Plumlee,F-C,8,2013,Duke,USA,1990-03-05,2.11,115.2
+246,428,31,Jakob Poeltl,Jakob,Poeltl,C,5,2016,Utah,Austria,1995-10-15,2.16,111.1
+247,429,31,Quincy Pondexter,Quincy,Pondexter,G,0,0,,,,,
+248,430,11,Otto Porter Jr.,Otto,Porter Jr.,F,8,2013,Georgetown,USA,1993-06-03,2.03,89.8
+249,431,21,Bobby Portis,Bobby,Portis,F,6,2015,Arkansas,USA,1995-02-10,2.08,113.4
+250,432,8,Kristaps Porzingis,Kristaps,Porzingis,F-C,5,2015,Cajasol Sevilla,Latvia,1995-08-02,2.21,108.9
+251,433,8,Dwight Powell,Dwight,Powell,F-C,7,2014,Stanford,Canada,1991-07-20,2.08,108.9
+252,434,29,Norman Powell,Norman,Powell,G,6,2015,UCLA,USA,1993-05-25,1.9,97.5
+253,437,22,Taurean Prince,Taurean,Prince,F,5,2016,Baylor,USA,1994-03-22,1.98,98.9
+254,441,24,Julius Randle,Julius,Randle,F-C,7,2014,Kentucky,USA,1994-11-29,2.03,113.4
+255,444,8,JJ Redick,JJ,Redick,G,15,2006,Duke,USA,1984-06-24,1.9,90.7
+256,446,2,Josh Richardson,Josh,Richardson,G,6,2015,Tennessee,USA,1993-09-15,1.96,90.7
+257,447,27,Malachi Richardson,Malachi,Richardson,G,2,2016,Syracuse,USA,1996-01-05,1.98,93.0
+258,448,9,Austin Rivers,Austin,Rivers,G,9,2012,Duke,USA,1992-08-01,1.93,90.7
+259,450,5,Brian Roberts,Brian,Roberts,G,0,0,,,,,
+260,455,7,Rajon Rondo,Rajon,Rondo,G,15,2006,Kentucky,USA,1986-02-22,1.85,81.6
+261,456,24,Derrick Rose,Derrick,Rose,G,12,2008,Memphis,USA,1988-10-04,1.88,90.7
+262,457,26,Terrence Ross,Terrence,Ross,G-F,9,2012,Washington,USA,1991-02-05,1.98,93.4
+263,458,5,Terry Rozier,Terry,Rozier,G,6,2015,Louisville,USA,1994-03-17,1.85,86.2
+264,459,7,Ricky Rubio,Ricky,Rubio,G,10,2011,FC Barcelona,Spain,1990-10-21,1.88,86.2
+265,462,22,D'Angelo Russell,D'Angelo,Russell,G,6,2015,Ohio State,USA,1996-02-23,1.93,87.5
+266,463,15,Domantas Sabonis,Domantas,Sabonis,F-C,5,2016,Gonzaga,Lithuania,1996-05-03,2.11,108.9
+267,466,15,JaKarr Sampson,JaKarr,Sampson,F,6,2014,St. John's,USA,1993-03-20,2.01,97.1
+268,468,28,Dario Saric,Dario,Saric,F-C,5,2016,Anadolu Efes,Croatia,1994-04-08,2.08,102.1
+269,470,23,Tomas Satoransky,Tomas,Satoransky,G,5,2016,FC Barcelona,Czech Republic,1991-10-30,2.01,95.3
+270,472,2,Dennis Schroder,Dennis,Schroder,G,8,2013,Braunschweig,Germany,1993-09-15,1.85,78.0
+271,474,27,Mike Scott,Mike,Scott,F,9,2012,Virginia,USA,1988-07-16,2.01,107.5
+272,475,14,Thabo Sefolosha,Thabo,Sefolosha,F-G,14,2006,Angelico Biella,Switzerland,1984-05-02,1.98,97.5
+273,477,41,Ramon Sessions,Ramon,Sessions,G,0,0,,,,,
+274,479,38,Pascal Siakam,Pascal,Siakam,F,5,2016,New Mexico State,Cameroon,1994-04-02,2.03,104.3
+275,481,27,Ben Simmons,Ben,Simmons,G-F,4,2017,Louisiana State,Australia,1996-07-20,2.11,108.9
+276,482,27,Jonathon Simmons,Jonathon,Simmons,F,4,2015,Houston,USA,1989-09-14,1.98,88.5
+277,484,25,Kyle Singler,Kyle,Singler,F,6,2012,Duke,USA,1988-05-04,2.03,103.4
+278,486,2,Marcus Smart,Marcus,Smart,G,7,2014,Oklahoma State,USA,1994-03-06,1.93,99.8
+279,488,5,Ish Smith,Ish,Smith,G,11,2010,Wake Forest,USA,1988-07-05,1.83,79.4
+280,489,17,JR Smith,JR,Smith,G,0,0,,,,,
+281,492,29,Tony Snell,Tony,Snell,G,8,2013,New Mexico,USA,1991-11-10,1.98,96.6
+282,493,26,Marreese Speights,Marreese,Speights,F,0,0,,,,,
+283,497,15,Lance Stephenson,Lance,Stephenson,F,9,2010,Cincinnati,USA,1990-09-05,1.96,95.3
+284,498,19,Jarnell Stokes,Jarnell,Stokes,F-C,3,2014,Tennessee,USA,1994-01-07,2.06,115.7
+285,505,21,Jeff Teague,Jeff,Teague,G,12,2009,Wake Forest,USA,1988-06-10,1.9,88.5
+286,507,23,Garrett Temple,Garrett,Temple,G-F,11,2009,Louisiana State,USA,1986-05-08,1.96,88.5
+287,508,21,Jason Terry,Jason,Terry,G,19,1999,Arizona,USA,1977-09-15,1.88,83.9
+288,511,4,Lance Thomas,Lance,Thomas,F,0,0,,,,,
+289,513,38,Jason Thompson,Jason,Thompson,F,0,0,,,,,
+290,514,11,Klay Thompson,Klay,Thompson,G,8,2011,Washington State,USA,1990-02-08,1.98,99.8
+291,515,30,Tristan Thompson,Tristan,Thompson,C-F,10,2011,Texas-Austin,Canada,1991-03-13,2.06,115.2
+292,518,21,Axel Toupane,Axel,Toupane,G-F,3,2015,Strasbourg IG,France,1992-07-23,2.01,95.3
+293,519,22,Karl-Anthony Towns,Karl-Anthony,Towns,C-F,6,2015,Kentucky,USA,1995-11-15,2.11,112.5
+294,520,20,P.J. Tucker,P.J.,Tucker,F,10,2006,Texas-Austin,USA,1985-05-05,1.96,111.1
+295,521,22,Evan Turner,Evan,Turner,G-F,10,2010,Ohio State,USA,1988-10-27,1.98,99.8
+296,522,15,Myles Turner,Myles,Turner,C-F,6,2015,Texas-Austin,USA,1996-03-24,2.11,113.4
+297,525,23,Jonas Valanciunas,Jonas,Valanciunas,C,9,2012,Lietuvos rytas Vilnius,Lithuania,1992-05-06,2.11,120.2
+298,526,40,Denzel Valentine,Denzel,Valentine,G,4,2016,Michigan State,USA,1993-11-16,1.93,99.8
+299,527,38,Fred VanVleet,Fred,VanVleet,G,5,2016,Wichita State,USA,1994-02-25,1.85,89.4
+300,531,8,Rashad Vaughn,Rashad,Vaughn,G,3,2015,UNLV,USA,1996-08-16,1.98,95.3
+301,534,6,Nikola Vucevic,Nikola,Vucevic,C,10,2011,Southern California,Montenegro,1990-10-24,2.08,117.9
+302,536,20,Dwyane Wade,Dwyane,Wade,G,0,0,,,,,
+303,537,17,Dion Waiters,Dion,Waiters,G,8,2012,Syracuse,USA,1991-12-10,1.9,95.3
+304,538,24,Kemba Walker,Kemba,Walker,G,10,2011,Connecticut,USA,1990-05-08,1.83,83.5
+305,539,14,John Wall,John,Wall,G,10,2010,Kentucky,USA,1990-09-06,1.9,95.3
+306,540,15,T.J. Warren,T.J.,Warren,F,7,2014,North Carolina State,USA,1993-09-05,2.03,99.8
+307,543,11,David West,David,West,F,0,0,,,,,
+308,544,17,Russell Westbrook,Russell,Westbrook,G,13,2008,UCLA,USA,1988-11-12,1.9,90.7
+309,545,10,Isaiah Whitehead,Isaiah,Whitehead,G,0,0,,,,,
+310,546,40,Hassan Whiteside,Hassan,Whiteside,C,9,2010,Marshall,USA,1989-06-13,2.13,120.2
+311,548,11,Andrew Wiggins,Andrew,Wiggins,F,7,2014,Kansas,Canada,1995-02-23,2.01,89.4
+312,550,4,Alan Williams,Alan,Williams,F-C,4,2015,Cal-Santa Barbara,USA,1993-01-28,2.03,120.2
+313,553,1,Lou Williams,Lou,Williams,G,16,2005,South Gwinnett HS (GA),USA,1986-10-27,1.88,79.4
+314,554,21,Marvin Williams,Marvin,Williams,F,15,2005,North Carolina,USA,1986-06-19,2.03,107.5
+315,556,30,Troy Williams,Troy,Williams,F,3,2016,Indiana,USA,1994-12-30,2.01,98.9
+316,558,16,Justise Winslow,Justise,Winslow,F-G,6,2015,Duke,USA,1996-03-26,1.98,100.7
+317,560,14,Christian Wood,Christian,Wood,F,5,2015,UNLV,USA,1995-09-27,2.06,97.1
+318,561,,WILLY WORKMAN,WILLY,WORKMAN,F,0,0,,,,,
+319,564,1,Delon Wright,Delon,Wright,G,6,2015,Utah,USA,1992-04-26,1.96,83.9
+320,567,24,James Young,James,Young,G-F,4,2014,Kentucky,USA,1995-08-16,2.01,108.4
+321,568,15,Joe Young,Joe,Young,G,3,2015,Oregon,USA,1992-06-27,1.88,83.9
+322,569,9,Nick Young,Nick,Young,G-F,11,2007,Southern California,USA,1985-06-01,2.01,95.3
+323,570,31,Thaddeus Young,Thaddeus,Young,F,14,2007,Georgia Tech,USA,1988-06-21,2.03,106.6
+324,571,29,Cody Zeller,Cody,Zeller,F-C,8,2013,Indiana,USA,1992-10-05,2.11,108.9
+325,574,6,Paul Zipser,Paul,Zipser,F,2,2016,,Germany,1994-02-18,2.03,102.5
+326,575,16,Ivica Zubac,Ivica,Zubac,C,5,2016,Mega Basket,Croatia,1997-03-18,2.13,108.9
+327,586,2,Jonathan Gibson,Jonathan,Gibson,G,3,2016,New Mexico State,USA,1987-11-08,1.88,83.9
+328,591,33,Perry Ellis,Perry,Ellis,F,0,0,,,,,
+329,592,5,Marcus Paige,Marcus,Paige,G,0,0,,,,,
+330,593,11,Gary Payton II,Gary,Payton II,G,5,2016,Oregon State,USA,1992-12-01,1.9,88.5
+331,594,24,Wayne Selden,Wayne,Selden,G,3,2016,Kansas,USA,1994-09-30,1.93,105.2
+332,598,16,Yogi Ferrell,Yogi,Ferrell,G,5,2016,Indiana,USA,1993-05-09,1.83,80.7
+333,599,11,Damion Lee,Damion,Lee,G-F,4,2017,Drexel,USA,1992-10-21,1.96,95.3
+334,600,1,Alex Poythress,Alex,Poythress,F,3,2016,Kentucky,USA,1993-09-06,2.06,106.6
+335,603,4,James Webb III,James,Webb III,F,1,2017,Boise State,USA,1993-08-19,2.06,91.6
+336,610,41,Okaro White,Okaro,White,F,2,2016,Florida State,USA,1992-08-13,2.03,93.0
+337,611,31,Matt Costello,Matt,Costello,F,0,0,,,,,
+338,625,41,Jalen Jones,Jalen,Jones,F,2,2017,Texas A&M,USA,1993-05-27,2.01,99.8
+339,631,6,Alex Caruso,Alex,Caruso,G,4,2017,Texas A&M,USA,1994-02-28,1.96,84.4
+340,691,5,Julyan Stone,Julyan,Stone,G,4,2011,Texas-El Paso,USA,1988-12-07,1.98,90.7
+341,696,7,Brandon Paul,Brandon,Paul,G,1,2017,, ,1991-04-30,1.93,90.7
+342,697,19,DJ Stephens,DJ,Stephens,G-F,1,2013,Memphis,USA,1990-12-19,1.96,85.3
+343,712,17,Travis Wear,Travis,Wear,F,2,2014,UCLA,USA,1990-09-21,2.06,99.3
+344,720,23,Jordan Crawford,Jordan,Crawford,G,6,2010,Xavier,USA,1988-10-23,1.96,88.5
+345,723,14,David Nwaba,David,Nwaba,G-F,5,2016,Cal Poly,USA,1993-01-14,1.96,99.3
+346,724,20,Bam Adebayo,Bam,Adebayo,C-F,4,2017,Kentucky,USA,1997-07-18,2.06,115.7
+347,725,18,Kyle Adnam,Kyle,Adnam,G,0,0,,,,,
+348,726,32,Josh Akognon,Josh,Akognon,,0,0,,,,,
+349,727,7,Jarrett Allen,Jarrett,Allen,C,4,2017,Texas-Austin,USA,1998-04-21,2.08,110.2
+350,729,18,David Andersen,David,Andersen,F,0,0,,,,,
+351,730,3,Zach Andrews,Zach,Andrews,,0,0,,,,,
+352,732,38,OG Anunoby,OG,Anunoby,F,4,2017,Indiana,United Kingdom,1997-07-17,2.01,105.2
+353,735,6,Lonzo Ball,Lonzo,Ball,G,4,2017,UCLA,USA,1997-10-27,1.98,86.2
+354,736,18,David Barlow,David,Barlow,F,0,0,,,,,
+355,737,,Gal Baruch,Gal,Baruch,G,0,0,,,,,
+356,738,6,Jordan Bell,Jordan,Bell,F,4,2017,Oregon,USA,1995-01-07,2.01,98.0
+357,739,38,Khem Birch,Khem,Birch,C,4,2017,UNLV,Canada,1992-09-28,2.06,105.7
+358,740,2,Jabari Bird,Jabari,Bird,G,1,2017,California,USA,1994-07-03,1.98,89.8
+359,741,6,Antonio Blakeney,Antonio,Blakeney,G,2,2017,Louisiana State,USA,1996-10-04,1.93,87.1
+360,742,33,Todd Blanchfield,Todd,Blanchfield,,0,0,,,,,
+361,743,1,Bogdan Bogdanovic,Bogdan,Bogdanovic,G,4,2017,Fenerbahce,Serbia,1992-08-18,1.98,102.1
+362,744,18,Josh Boone,Josh,Boone,C,0,0,,,,,
+363,745,38,Chris Boucher,Chris,Boucher,F-C,4,2017,Oregon,Saint Lucia,1993-01-11,2.06,90.7
+364,746,,Frederic Bourdillon,Frederic,Bourdillon,G,0,0,,,,,
+365,747,,Brandon Bowman,Brandon,Bowman,F-C,0,0,,,,,
+366,748,6,Tony Bradley,Tony,Bradley,C-F,4,2017,North Carolina,USA,1998-01-08,2.08,112.5
+367,749,19,Dillon Brooks,Dillon,Brooks,G-F,4,2017,Oregon,Canada,1996-01-22,2.01,102.1
+368,751,8,Sterling Brown,Sterling,Brown,G-F,4,2017,Southern Methodist,USA,1995-02-10,1.96,99.3
+369,752,3,Shaun Bruce,Shaun,Bruce,G,0,0,,,,,
+370,753,41,Thomas Bryant,Thomas,Bryant,C-F,4,2017,Indiana,USA,1997-07-31,2.08,112.5
+371,754,3,Perrin Buford,Perrin,Buford,GF,0,0,,,,,
+372,755,8,Dwight Buycks,Dwight,Buycks,G,3,2013,Marquette,USA,1989-03-06,1.9,86.2
+373,756,33,Jason Cadee,Jason,Cadee,G,0,0,,,,,
+374,757,33,Jason Cadee,Jason,Cadee,,0,0,,,,,
+375,758,40,Tyler Cavanaugh,Tyler,Cavanaugh,F,2,2017,George Washington,USA,1994-02-09,2.06,108.0
+376,760,25,Antonius Cleveland,Antonius,Cleveland,G,2,2017,S.E. Missouri,USA,1994-02-02,1.96,88.5
+377,761,1,John Collins,John,Collins,F-C,4,2017,Wake Forest,USA,1997-09-23,2.06,102.5
+378,762,31,Zach Collins,Zach,Collins,F-C,3,2017,Gonzaga,USA,1997-11-19,2.11,113.4
+379,763,20,Charles Cooke,Charles,Cooke,G,1,2017,Dayton,USA,1994-07-01,1.96,88.9
+380,764,30,Jack Cooley,Jack,Cooley,C-F,2,2014,Notre Dame,USA,1991-04-12,2.08,124.3
+381,765,15,Torrey Craig,Torrey,Craig,F,4,2017,South Carolina Upstate,USA,1990-12-19,2.01,100.2
+382,766,33,Sam Daly,Sam,Daly,,0,0,,,,,
+383,767,19,Tyler Dorsey,Tyler,Dorsey,G,0,0,,,,,
+384,770,9,P.J. Dozier,P.J.,Dozier,G-F,4,2017,South Carolina,USA,1996-10-25,1.98,93.0
+385,771,23,Larry Drew II,Larry,Drew II,G,2,2014,UCLA,USA,1990-03-05,1.88,81.6
+386,772,25,Jawun Evans,Jawun,Evans,G,0,0,,,,,
+387,773,12,Zhang Fan,Zhang,Fan,G,0,0,,,,,
+388,776,30,De'Aaron Fox,De'Aaron,Fox,G,4,2017,Kentucky,USA,1997-12-20,1.9,83.9
+389,777,32,Jimmer Fredette,Jimmer,Fredette,,0,0,,,,,
+390,778,3,Tom Fullarton,Tom,Fullarton,,0,0,,,,,
+391,779,26,Markelle Fultz,Markelle,Fultz,G,4,2017,Washington,USA,1998-05-29,1.93,94.8
+392,780,33,Tom Garlepp,Tom,Garlepp,F,0,0,,,,,
+393,781,33,Tom Garlepp,Tom,Garlepp,,0,0,,,,,
+394,782,33,Andrew Gaze,Andrew,Gaze,,0,0,,,,,
+395,783,3,Adam Gibson,Adam,Gibson,G,0,0,,,,,
+396,788,32,Luo Hanchen,Luo,Hanchen,,0,0,,,,,
+397,790,3,Tyrell Harrison,Tyrell,Harrison,,0,0,,,,,
+398,791,23,Josh Hart,Josh,Hart,G,4,2017,Villanova,USA,1995-03-06,1.96,97.5
+399,792,30,Nigel Hayes,Nigel,Hayes,F,1,2017,Wisconsin,USA,1994-12-16,2.01,115.2
+400,795,24,Isaiah Hicks,Isaiah,Hicks,F,2,2017,North Carolina,USA,1994-07-24,2.06,104.3
+401,796,3,Stephen Holt,Stephen,Holt,,0,0,,,,,
+402,797,18,Peter Hooley,Peter,Hooley,F,0,0,,,,,
+403,798,,Roi Huber,Roi,Huber,G,0,0,,,,,
+404,799,33,Issac Humphries,Issac,Humphries,C,0,0,,,,,
+405,800,17,Andre Ingram,Andre,Ingram,G,1,2017,American,USA,1985-11-19,1.9,86.2
+406,801,26,Jonathan Isaac,Jonathan,Isaac,F,3,2017,Florida State,USA,1997-10-03,2.08,104.3
+407,803,14,Aaron Jackson,Aaron,Jackson,G,1,2017,,USA,1986-05-06,1.9,83.0
+408,804,10,Frank Jackson,Frank,Jackson,G,3,2018,Duke,USA,1998-05-04,1.9,93.0
+409,805,10,Josh Jackson,Josh,Jackson,G-F,4,2017,Kansas,USA,1997-02-10,2.03,93.9
+410,808,3,Grant Jerrett,Grant,Jerrett,,0,0,,,,,
+411,809,3,Tom Jervis,Tom,Jervis,C,0,0,,,,,
+412,810,25,Dakari Johnson,Dakari,Johnson,C,1,2017,Kentucky,USA,1995-09-22,2.13,115.7
+413,812,12,Mingxing Ju,Mingxing,Ju,,0,0,,,,,
+414,814,16,Luke Kennard,Luke,Kennard,G,4,2017,Duke,USA,1996-06-24,1.96,93.4
+415,815,3,Matthew Kenyon,Matthew,Kenyon,G,0,0,,,,,
+416,816,3,Daniel Kickert,Daniel,Kickert,F,0,0,,,,,
+417,817,8,Maxi Kleber,Maxi,Kleber,F,4,2017,Bayern Munich,Germany,1992-01-29,2.08,108.9
+418,818,27,Furkan Korkmaz,Furkan,Korkmaz,G-F,4,2017,Anadolu Efes,Turkey,1997-07-24,2.01,91.6
+419,820,41,Kyle Kuzma,Kyle,Kuzma,F,4,2017,Utah,USA,1995-07-24,2.06,100.2
+420,821,29,T.J. Leaf,T.J.,Leaf,F,4,2017,UCLA,USA,1997-04-30,2.08,100.7
+421,822,3,Andrej Lemanis,Andrej,Lemanis,,0,0,,,,,
+422,823,33,Travis Leslie,Travis,Leslie,G,0,0,,,,,
+423,825,33,Kevin Lisch,Kevin,Lisch,G,0,0,,,,,
+424,826,33,Kevin Lisch,Kevin,Lisch,,0,0,,,,,
+425,828,3,Will Magnay,Will,Magnay,,0,0,,,,,
+426,829,18,Majok Majok,Majok,Majok,C,0,0,,,,,
+427,830,7,Lauri Markkanen,Lauri,Markkanen,F-C,4,2017,Arizona,Finland,1997-05-22,2.11,108.9
+428,831,,Luke Martinez,Luke,Martinez,G,0,0,,,,,
+429,832,17,Frank Mason,Frank,Mason,G,0,0,,,,,
+430,833,5,Mangok Mathiang,Mangok,Mathiang,F-C,1,2017,Louisville,Australia,1992-10-08,2.08,104.3
+431,834,40,Erik McCree,Erik,McCree,F,1,2017,Louisiana Tech,USA,1993-12-20,2.03,102.1
+432,835,6,Alfonzo McKinnie,Alfonzo,McKinnie,F,4,2017,Wisconsin-Green Bay,USA,1992-09-17,2.01,97.5
+433,837,40,Malcolm Miller,Malcolm,Miller,G-F,3,2017,Holy Cross,USA,1993-03-06,2.01,95.3
+434,839,32,Nick Minnerath,Nick,Minnerath,,0,0,,,,,
+435,840,40,Donovan Mitchell,Donovan,Mitchell,G,4,2017,Louisville,USA,1996-09-07,1.85,97.5
+436,841,18,Craig Moller,Craig,Moller,F,0,0,,,,,
+437,842,17,Malik Monk,Malik,Monk,G,4,2017,Kentucky,USA,1998-02-04,1.9,90.7
+438,843,31,Ben Moore,Ben,Moore,F,0,0,,,,,
+439,844,31,Jaylen Morris,Jaylen,Morris,G,2,2017,Molloy,USA,1995-09-19,1.96,83.9
+440,845,9,Monte Morris,Monte,Morris,G,4,2017,Iowa State,USA,1995-06-27,1.88,83.0
+441,847,28,Abdel Nader,Abdel,Nader,F,4,2017,Iowa State,Egypt,1993-09-25,1.96,102.1
+442,848,17,Brad Newley,Brad,Newley,G,0,0,,,,,
+443,849,33,Brad Newley,Brad,Newley,,0,0,,,,,
+444,850,8,Frank Ntilikina,Frank,Ntilikina,G,4,2017,Strasbourg IG,France,1998-07-28,1.93,90.7
+445,851,40,Royce O'Neale,Royce,O'Neale,F,4,2017,Baylor,USA,1993-06-05,1.96,102.5
+446,852,21,Semi Ojeleye,Semi,Ojeleye,F,4,2017,Southern Methodist,USA,1994-12-05,1.98,108.9
+447,854,7,Cedi Osman,Cedi,Osman,F,4,2017,Anadolu Efes,Turkey,1995-04-08,2.01,104.3
+448,856,32,Yan Peng,Yan,Peng,,0,0,,,,,
+449,857,28,Alec Peters,Alec,Peters,F,1,2017,Valparaiso,USA,1995-04-13,2.06,106.6
+450,858,3,Anthony Petrie,Anthony,Petrie,F,0,0,,,,,
+451,859,33,Dane Pineau,Dane,Pineau,F,0,0,,,,,
+452,860,33,Dane Pineau,Dane,Pineau,,0,0,,,,,
+453,861,18,Casey Prather,Casey,Prather,F,0,0,,,,,
+454,862,26,Rodney Purvis,Rodney,Purvis,G,1,2017,Connecticut,USA,1994-02-14,1.93,93.0
+455,863,14,Zhou Qi,Zhou,Qi,F-C,1,2017,,China,1996-01-16,2.16,95.3
+456,865,9,Davon Reed,Davon,Reed,G,2,2017,Miami,USA,1995-06-11,1.96,93.4
+457,866,15,Devin Robinson,Devin,Robinson,F,0,0,,,,,
+458,867,,Angel Rodriguez,Angel,Rodriguez,G,0,0,,,,,
+459,868,12,Sani Sakakini,Sani,Sakakini,F,0,0,,,,,
+460,869,,Samardo Samuels,Samardo,Samuels,C,0,0,,,,,
+461,870,12,Jun Shi,Jun,Shi,,0,0,,,,,
+462,873,5,Kobi Simmons,Kobi,Simmons,G,0,0,,,,,
+463,874,33,Amritpal Singh,Amritpal,Singh,C,0,0,,,,,
+464,875,33,Amritpal Singh,Amritpal,Singh,,0,0,,,,,
+465,876,29,Dennis Smith Jr.,Dennis,Smith Jr.,G,4,2017,North Carolina State,USA,1997-11-25,1.88,93.0
+466,879,19,David Stockton,David,Stockton,G,0,0,,,,,
+467,881,29,Caleb Swanigan,Caleb,Swanigan,F,3,2017,Purdue,USA,1997-04-18,2.06,117.9
+468,882,2,Jayson Tatum,Jayson,Tatum,F-G,4,2017,Duke,USA,1998-03-03,2.03,95.3
+469,883,19,Marquis Teague,Marquis,Teague,G,3,2012,Kentucky,USA,1993-02-28,1.88,85.7
+470,885,3,Reuben Te Rangi,Reuben,Te Rangi,F,0,0,,,,,
+471,886,14,Daniel Theis,Daniel,Theis,F-C,4,2017,Brose Bamberg,Germany,1992-04-04,2.06,111.1
+472,887,26,Sindarius Thornwell,Sindarius,Thornwell,G,4,2017,South Carolina,USA,1994-11-15,1.93,97.5
+473,888,33,Adam Thoseby,Adam,Thoseby,G,0,0,,,,,
+474,889,33,Adam Thoseby,Adam,Thoseby,,0,0,,,,,
+475,891,3,Travis Trice,Travis,Trice,PG,0,0,,,,,
+476,892,40,Ekpe Udoh,Ekpe,Udoh,C-F,7,2010,Baylor,USA,1987-05-20,2.08,111.1
+477,894,10,Derrick Walton Jr.,Derrick,Walton Jr.,G,2,2017,Michigan,USA,1995-04-03,1.83,83.9
+478,895,32,Tseng Wenting,Tseng,Wenting,,0,0,,,,,
+479,896,18,Tai Wesley,Tai,Wesley,F,0,0,,,,,
+480,897,31,Derrick White,Derrick,White,G,4,2017,Colorado,USA,1994-07-02,1.93,86.2
+481,898,24,Andrew White III,Andrew,White III,F,0,0,,,,,
+482,899,38,D.J. Wilson,D.J.,Wilson,F,4,2017,Michigan,USA,1996-02-19,2.08,104.8
+483,900,12,Zhang Xiaolei,Zhang,Xiaolei,F,0,0,,,,,
+484,902,12,Luo Xuedong,Luo,Xuedong,G,0,0,,,,,
+485,903,12,Zhu Xuhang,Zhu,Xuhang,F,0,0,,,,,
+486,904,2,Guerschon Yabusele,Guerschon,Yabusele,F,2,2017, ,France,1995-12-17,2.03,117.9
+487,905,32,Zhai Yi,Zhai,Yi,,0,0,,,,,
+488,907,12,Chen Yingjun,Chen,Yingjun,G,0,0,,,,,
+489,908,,Dagan Yivzuri,Dagan,Yivzuri,G,0,0,,,,,
+490,909,3,Mitchell Young,Mitchell,Young,F,0,0,,,,,
+491,913,12,Fan Zhang,Fan,Zhang,,0,0,,,,,
+492,915,32,Luo Zhi,Luo,Zhi,,0,0,,,,,
+493,917,12,Liu Zihao,Liu,Zihao,F,0,0,,,,,
+494,919,12,Fan Ziming,Fan,Ziming,C,0,0,,,,,
+495,920,7,Ante Zizic,Ante,Zizic,C,0,0,,,,,
+496,922,4,Deng Adel,Deng,Adel,F,1,2018,Louisville,South Sudan,1997-02-01,2.01,88.9
+497,924,6,Bryce Alford,Bryce,Alford,G,0,0,,,,,
+498,926,21,Grayson Allen,Grayson,Allen,G,3,2018,Duke,USA,1995-10-08,1.93,89.8
+499,928,17,Kostas Antetokounmpo,Kostas,Antetokounmpo,F,3,2018,Dayton,Greece,1997-11-20,2.08,90.7
+500,930,28,Deandre Ayton,Deandre,Ayton,C,3,2018,Arizona,Bahamas,1998-07-23,2.11,113.4
+501,931,30,Marvin Bagley III,Marvin,Bagley III,F,3,2018,Duke,USA,1999-03-14,2.11,106.6
+502,932,26,Mo Bamba,Mo,Bamba,C,3,2018,Texas-Austin,USA,1998-05-12,2.13,104.8
+503,934,31,Keita Bates-Diop,Keita,Bates-Diop,F,3,2018,Ohio State,USA,1996-01-23,2.03,103.9
+504,936,14,Jaron Blossomgame,Jaron,Blossomgame,F,1,2018,Clemson,USA,1993-09-16,2.01,99.8
+505,939,38,Isaac Bonga,Isaac,Bonga,G,3,2018,Skyliners Frankfurt,Germany,1999-11-08,2.03,81.6
+506,940,28,Mikal Bridges,Mikal,Bridges,F,3,2018,Villanova,USA,1996-08-30,1.98,94.8
+507,941,5,Miles Bridges,Miles,Bridges,F,3,2018,Michigan State,USA,1998-03-21,2.01,102.1
+508,942,26,Isaiah Briscoe,Isaiah,Briscoe,G,0,2018,,USA,1996-04-13,1.9,97.5
+509,943,27,Ryan Broekhoff,Ryan,Broekhoff,G-F,2,2018,Valparaiso,Australia,1990-08-23,1.98,97.5
+510,944,4,Bruce Brown,Bruce,Brown,G-F,3,2018,Miami,USA,1996-08-15,1.93,91.6
+511,945,6,Troy Brown Jr.,Troy,Brown Jr.,G-F,3,2018,Oregon,USA,1999-07-28,1.98,97.5
+512,946,8,Jalen Brunson,Jalen,Brunson,G,3,2018,Villanova,USA,1996-08-31,1.85,86.2
+513,947,25,Deonte Burton,Deonte,Burton,G-F,2,0,Iowa State,USA,1994-01-31,1.93,108.9
+514,949,4,Jevon Carter,Jevon,Carter,G,3,2018,West Virginia,USA,1995-09-14,1.85,90.7
+515,950,26,Wendell Carter Jr.,Wendell,Carter Jr.,C-F,3,2018,Duke,USA,1999-04-16,2.08,122.5
+516,953,23,Gary Clark,Gary,Clark,F,3,2018,Cincinnati,USA,1994-11-16,1.98,102.1
+517,954,21,Bonzie Colson,Bonzie,Colson,F,1,2018,Notre Dame,USA,1996-01-12,1.98,102.1
+518,957,25,Tyler Davis,Tyler,Davis,C,0,2018,,USA,1997-05-22,2.08,120.7
+519,958,16,Angel Delgado,Angel,Delgado,C,1,2018,Seton Hall University,Dominican Republic,1994-11-20,2.08,111.1
+520,959,1,Marcus Derrickson,Marcus,Derrickson,F,1,2018,Georgetown,USA,1996-02-01,2.01,113.4
+521,960,10,Hamidou Diallo,Hamidou,Diallo,G,3,2018,Kentucky,USA,1998-07-31,1.96,91.6
+522,962,21,Donte DiVincenzo,Donte,DiVincenzo,G,3,2018,Villanova,USA,1997-01-31,1.93,92.1
+523,963,8,Luka Doncic,Luka,Doncic,F-G,3,2018,Real Madrid,Slovenia,1999-02-28,2.01,104.3
+524,964,14,Trevon Duval,Trevon,Duval,G,0,0,,,,,
+525,965,22,Vincent Edwards,Vincent,Edwards,F,0,0,,,,,
+526,966,31,Drew Eubanks,Drew,Eubanks,F-C,3,2018,Oregon State,USA,1997-02-01,2.06,111.1
+527,967,24,Jacob Evans,Jacob,Evans,G-F,2,0,Cincinnati,USA,1997-06-18,1.93,95.3
+528,968,10,Keenan Evans,Keenan,Evans,G,0,0,,USA,1996-08-23,1.9,86.2
+529,970,16,Wenyen Gabriel,Wenyen,Gabriel,F,2,2019,Kentucky,South Sudan,1997-03-26,2.06,93.0
+530,972,25,Shai Gilgeous-Alexander,Shai,Gilgeous-Alexander,G,3,2018,Kentucky,Canada,1998-07-12,1.98,81.6
+531,973,23,Devonte' Graham,Devonte',Graham,G,3,2018,Kansas,USA,1995-02-22,1.85,88.5
+532,976,40,Isaac Haas,Isaac,Haas,C,0,0,Purdue,USA,1995-10-02,2.18,131.5
+533,978,16,Isaiah Hartenstein,Isaiah,Hartenstein,C-F,3,2018,Zalgiris,Germany,1998-05-05,2.13,113.4
+534,979,41,Aaron Holiday,Aaron,Holiday,G,3,2018,UCLA,USA,1996-09-30,1.83,83.9
+535,980,1,Kevin Huerter,Kevin,Huerter,G-F,3,2018,Maryland,USA,1998-08-27,2.01,89.8
+536,982,19,Jaren Jackson Jr.,Jaren,Jackson Jr.,F-C,3,2018,Michigan State,USA,1999-09-15,2.11,109.8
+537,983,41,Alize Johnson,Alize,Johnson,F,3,2018,Missouri State,USA,1996-04-22,2.03,96.2
+538,986,8,George King,George,King,F-G,1,2018,Colorado Boulder,USA,1994-01-15,1.98,99.8
+539,987,1,Kevin Knox II,Kevin,Knox II,F,3,2018,Kentucky,USA,1999-08-11,2.01,97.5
+540,990,38,Jordan Loyd,Jordan,Loyd,G,1,2018,Indianapolis,USA,1993-07-27,1.93,95.3
+541,991,10,Kalin Lucas,Kalin,Lucas,G,0,0,,,,,
+542,995,2,Yante Maten,Yante,Maten,F,1,2018,Georgia,USA,1996-08-14,2.03,108.9
+543,997,22,Jordan McLaughlin,Jordan,McLaughlin,G,2,2019,Southern California,USA,1996-04-09,1.8,83.9
+544,998,19,De'Anthony Melton,De'Anthony,Melton,G,3,2018,Southern California,USA,1998-05-28,1.88,90.7
+545,999,30,Chimezie Metu,Chimezie,Metu,F-C,3,2018,Southern California,USA,1997-03-22,2.06,102.1
+546,1001,27,Shake Milton,Shake,Milton,G-F,3,2018,Southern Methodist,USA,1996-09-26,1.96,93.0
+547,1006,38,Svi Mykhailiuk,Svi,Mykhailiuk,G-F,3,2018,Kansas,Ukraine,1997-06-10,2.01,93.0
+548,1007,17,Kendrick Nunn,Kendrick,Nunn,G,2,2019,Oakland,USA,1995-08-03,1.88,86.2
+549,1008,23,James Nunnally,James,Nunnally,F,3,2013,California-Santa Barbara,USA,1990-07-14,2.01,93.0
+550,1010,22,Josh Okogie,Josh,Okogie,G,3,2018,Georgia Tech,Nigeria,1998-09-01,1.93,96.6
+551,1011,1,Cameron Oliver,Cameron,Oliver,F,1,2020,Nevada,USA,1996-07-11,2.03,108.4
+552,1012,40,Norvel Pelle,Norvel,Pelle,C,2,2019,Iona,USA,1993-02-03,2.08,104.8
+553,1013,8,Theo Pinson,Theo,Pinson,G-F,3,2018,North Carolina,USA,1995-11-05,1.96,96.2
+554,1014,9,Michael Porter Jr.,Michael,Porter Jr.,F,2,2019,Missouri,USA,1998-06-29,2.08,98.9
+555,1015,7,Billy Preston,Billy,Preston,F,0,0,University of Kansas,USA,1997-10-26,2.08,108.9
+556,1018,20,Duncan Robinson,Duncan,Robinson,F,3,2018,Michigan,USA,1994-04-22,2.01,97.5
+557,1020,24,Mitchell Robinson,Mitchell,Robinson,C-F,3,2018,Western Kentucky,USA,1998-04-01,2.13,108.9
+558,1021,7,Collin Sexton,Collin,Sexton,G,3,2018,Alabama,USA,1999-01-04,1.85,86.2
+559,1022,28,Landry Shamet,Landry,Shamet,G,3,2018,Wichita State,USA,1997-03-13,1.93,86.2
+560,1023,29,Anfernee Simons,Anfernee,Simons,G,3,2018,Edgewater HS (FL),USA,1999-06-08,1.9,82.1
+561,1025,19,Zhaire Smith,Zhaire,Smith,G,2,2018,Texas Tech,USA,1999-06-04,1.9,93.0
+562,1031,22,Jared Terrell,Jared,Terrell,G,0,0,,,,,
+563,1032,28,Emanuel Terry,Emanuel,Terry,F,1,2018,Lincoln Memorial,USA,1996-08-21,2.06,99.8
+564,1033,14,Khyri Thomas,Khyri,Thomas,G,3,2018,Creighton,USA,1996-05-08,1.9,95.3
+565,1034,29,Gary Trent Jr.,Gary,Trent Jr.,G,0,0,,,,,
+566,1036,22,Jarred Vanderbilt,Jarred,Vanderbilt,F,3,2018,Kentucky,USA,1999-04-03,2.06,97.1
+567,1037,26,Moritz Wagner,Moritz,Wagner,F-C,3,2018,Michigan,Germany,1997-04-26,2.11,111.1
+568,1038,31,Lonnie Walker IV,Lonnie,Walker IV,G-F,3,2018,Miami,USA,1998-12-14,1.93,92.5
+569,1040,38,Yuta Watanabe,Yuta,Watanabe,G-F,3,2018,George Washington,Japan,1994-10-13,2.06,97.5
+570,1043,41,Johnathan Williams,Johnathan,Williams,F,2,0,Gonzaga,USA,1995-05-22,2.06,103.4
+571,1044,25,Kenrich Williams,Kenrich,Williams,G-F,3,2018,TCU,USA,1994-12-02,1.98,95.3
+572,1045,2,Robert Williams III,Robert,Williams III,C-F,3,2018,Texas A&M,USA,1997-10-17,2.06,107.5
+573,1046,1,Trae Young,Trae,Young,G,3,2018,Oklahoma,USA,1998-09-19,1.85,74.4
+574,1053,22,Mitchell Creek,Mitchell,Creek,G,0,0,,,,,
+575,1055,15,Amida Brimah,Amida,Brimah,C,1,2020,Connecticut,USA,1994-02-11,2.08,104.3
+576,1056,22,Brian Bowen II,Brian,Bowen II,F-G,2,2019,Sydney Kings,USA,1998-10-02,1.98,86.2
+577,1057,7,Malik Newman,Malik,Newman,G,1,2019,Kansas,USA,1997-02-21,1.9,86.2
+578,1058,38,Gary Trent Jr.,Gary,Trent Jr.,G-F,3,2018,Duke,USA,1999-01-18,1.96,94.8
+579,1063,7,Brandon Goodwin,Brandon,Goodwin,G,3,2018,Florida Gulf Coast,USA,1995-10-02,1.83,81.6
+580,1067,26,BJ Johnson,BJ,Johnson,F,2,2018,La Salle,USA,1995-12-21,1.98,90.7
+581,1069,11,Chris Chiozza,Chris,Chiozza,G,3,2018,Florida,USA,1995-11-21,1.8,79.4
+582,1071,4,Kaiser Gates,Kaiser,Gates,F,0,0,Xavier,USA,1996-11-08,2.01,102.1
+583,1771,8,Donte Ingram,Donte,Ingram,G,0,0,Loyola (Chicago),USA,1996-08-15,1.98,97.5
+584,1772,6,Brandon Sampson,Brandon,Sampson,G,1,2018,Louisiana State University,USA,1997-05-01,1.96,83.5
+585,1775,20,Gabe Vincent,Gabe,Vincent,G,2,2019,California-Santa Barbara,USA,1996-06-14,1.9,90.7
+586,1780,28,Jimmer Fredette,Jimmer,Fredette,F,6,2011,Brigham Young,USA,1989-02-25,1.88,88.5
+587,1782,17,Scott Machado,Scott,Machado,G,1,2012,Iona,USA,1990-06-08,1.85,93.0
+588,1811,,John Petrucelli,John,Petrucelli,G,0,0,Molloy,USA,1992-10-27,1.93,86.2
+589,1812,,John Petrucelli,John,Petrucelli,G,0,0,Molloy College,USA,1992-10-27,1.93,86.2
+590,1813,,Angel Rodriguez,Angel,Rodriguez,G,0,0,,,,,
+591,1814,,Dez Wells,Dez,Wells,G,0,0,,,,,
+592,1816,11,Julian Washburn,Julian,Washburn,F-G,1,2018,Texas-El Paso,USA,1991-12-18,2.03,94.8
+593,1817,15,Stephan Hicks,Stephan,Hicks,G,0,0,,,,,
+594,1818,15,Stephan Hicks,Stephan,Hicks,G,0,0,Cal State-Northridge,USA,1992-04-02,1.98,90.7
+595,1821,23,Dairis Bertans,Dairis,Bertans,G,0,0,,,,,
+596,1822,23,Dairis Bertans,Dairis,Bertans,G,0,0,,,,,
+597,1823,23,Dairis Bertans,Dairis,Bertans,G,0,0,,,,,
+598,1824,23,Dairis Bertans,Dairis,Bertans,G,0,0,,,,,
+599,1825,23,Dairis Bertans,Dairis,Bertans,G,1,2018, ,Latvia,1989-09-09,1.93,90.7
+600,1826,30,Cody Demps,Cody,Demps,F,0,0,Sacramento State,USA,1993-12-02,1.93,88.5
+601,1828,17,Jemerrio Jones,Jemerrio,Jones,F,1,2018,New Mexico State,USA,1995-04-09,1.96,79.4
+602,1830,24,Billy Garrett,Billy,Garrett,G-F,1,2018,DePaul University,USA,1994-10-16,1.98,97.5
+603,1831,14,Michael Frazier,Michael,Frazier,G,1,0,Florida,USA,1994-03-08,1.9,90.7
+604,1832,41,Tarik Phillip,Tarik,Phillip,G,1,0,West Virginia,USA,1993-08-10,1.9,88.5
+605,1845,23,Nickeil Alexander-Walker,Nickeil,Alexander-Walker,G,2,2019,Virginia Tech,Canada,1998-09-02,1.96,93.0
+606,1846,24,RJ Barrett,RJ,Barrett,F-G,2,2019,Duke,Canada,2000-06-14,1.98,97.1
+607,1847,25,Darius Bazley,Darius,Bazley,F,2,2019,Princeton HS (OH),USA,2000-06-12,2.03,94.3
+608,1848,15,Goga Bitadze,Goga,Bitadze,C-F,2,2019,Mega Basket,Georgia,1999-07-20,2.13,113.4
+609,1849,9,Bol Bol,Bol,Bol,C-F,2,2019,Oregon,Sudan,1999-11-16,2.18,99.8
+610,1851,40,Jarrell Brantley,Jarrell,Brantley,F,2,2019,College of Charleston,USA,1996-06-07,1.96,113.4
+611,1852,26,Ignas Brazdeikis,Ignas,Brazdeikis,F,2,2019,Michigan,Canada,1999-01-08,1.98,100.2
+612,1853,19,Brandon Clarke,Brandon,Clarke,F,2,2019,Gonzaga,Canada,1996-09-19,2.03,97.5
+613,1854,4,Nic Claxton,Nic,Claxton,F-C,2,2019,Georgia,USA,1999-04-17,2.11,97.5
+614,1855,19,Jarrett Culver,Jarrett,Culver,G-F,2,2019,Texas Tech,USA,1999-02-20,1.98,88.5
+615,1856,17,Sekou Doumbouya,Sekou,Doumbouya,F,2,2019,Limoges,France,2000-12-23,2.06,104.3
+616,1857,19,Carsen Edwards,Carsen,Edwards,G,2,2019,Purdue,USA,1998-03-12,1.8,90.7
+617,1858,2,Bruno Fernando,Bruno,Fernando,F-C,2,2019,Maryland,Angola,1998-08-15,2.06,108.9
+618,1859,41,Daniel Gafford,Daniel,Gafford,F-C,2,2019,Arkansas,USA,1998-10-01,2.06,106.1
+619,1860,7,Darius Garland,Darius,Garland,G,2,2019,Vanderbilt,USA,2000-01-26,1.85,87.1
+620,1861,20,Kyle Guy,Kyle,Guy,G,2,2019,Virginia,USA,1997-08-11,1.85,75.8
+621,1862,41,Rui Hachimura,Rui,Hachimura,F,2,2019,Gonzaga,Japan,1998-02-08,2.03,104.3
+622,1863,10,Jaylen Hands,Jaylen,Hands,G,0,0,,,,,
+623,1864,23,Jaxson Hayes,Jaxson,Hayes,C-F,2,2019,Texas-Austin,USA,2000-05-23,2.11,99.8
+624,1865,38,Dewan Hernandez,Dewan,Hernandez,C-F,0,0,,,,,
+625,1866,20,Tyler Herro,Tyler,Herro,G,2,2019,Kentucky,USA,2000-01-20,1.96,88.5
+626,1867,17,Talen Horton-Tucker,Talen,Horton-Tucker,G,2,2019,Iowa State,USA,2000-11-25,1.93,106.1
+627,1868,1,De'Andre Hunter,De'Andre,Hunter,F-G,2,2019,Virginia,USA,1997-12-02,2.03,100.2
+628,1870,25,Ty Jerome,Ty,Jerome,G-F,2,2019,Virginia,USA,1997-07-08,1.96,88.5
+629,1871,28,Cameron Johnson,Cameron,Johnson,F,2,2019,North Carolina,USA,1996-03-03,2.03,95.3
+630,1872,31,Keldon Johnson,Keldon,Johnson,F-G,2,2019,Kentucky,USA,1999-10-11,1.98,99.8
+631,1873,14,Mfiondu Kabengele,Mfiondu,Kabengele,F-C,2,2019,Florida State,Canada,1997-08-14,2.06,113.4
+632,1874,2,Romeo Langford,Romeo,Langford,G-F,2,2019,Indiana,USA,1999-10-25,1.96,98.0
+633,1875,29,Nassir Little,Nassir,Little,F-G,2,2019,North Carolina,USA,2000-02-11,1.96,99.8
+634,1876,23,Didi Louzada,Didi,Louzada,G,1,2020,Sydney Kings,Brazil,1999-07-02,1.96,85.3
+635,1877,16,Terance Mann,Terance,Mann,G-F,2,2019,Florida State,USA,1996-10-18,1.96,97.5
+636,1878,30,Vanja Marinkovic,Vanja,Marinkovic,G-F,0,0,,,,,
+637,1879,5,Cody Martin,Cody,Martin,F,2,2019,Nevada-Reno,USA,1995-09-28,1.98,93.0
+638,1880,5,Jalen McDaniels,Jalen,McDaniels,F-C,2,2019,San Diego State,USA,1998-01-31,2.06,93.0
+639,1881,19,Ja Morant,Ja,Morant,G,2,2019,Murray State,USA,1999-08-10,1.9,78.9
+640,1882,22,Jaylen Nowell,Jaylen,Nowell,G,2,2019,Washington,USA,1999-07-09,1.93,91.2
+641,1883,26,Chuma Okeke,Chuma,Okeke,F,1,2020,Auburn,USA,1998-08-18,1.98,103.9
+642,1884,20,KZ Okpala,KZ,Okpala,F-G,2,2019,Stanford,USA,1999-04-28,2.03,97.5
+643,1886,40,Eric Paschall,Eric,Paschall,F,2,2019,Villanova,USA,1996-11-04,1.98,115.7
+644,1887,11,Jordan Poole,Jordan,Poole,G,2,2019,Michigan,USA,1999-06-19,1.93,88.0
+645,1888,14,Kevin Porter Jr.,Kevin,Porter Jr.,G-F,2,2019,Southern California,USA,2000-05-04,1.93,92.1
+646,1889,24,Cam Reddish,Cam,Reddish,F-G,2,2019,Duke,USA,1999-09-01,2.03,98.4
+647,1890,25,Isaiah Roby,Isaiah,Roby,F,2,2019,Nebraska-Lincoln,USA,1998-02-03,2.03,104.3
+648,1891,24,Luka Samanic,Luka,Samanic,F,2,2019,Union Olimpija,Croatia,2000-01-09,2.08,103.0
+649,1892,26,Admiral Schofield,Admiral,Schofield,F,1,2019,Tennessee,United Kingdom,1997-03-30,1.96,109.3
+650,1893,27,Marial Shayok,Marial,Shayok,G-F,0,0,,,,,
+651,1894,10,Deividas Sirvydis,Deividas,Sirvydis,F-G,1,2020,Lietuvos rytas Vilnius,Lithuania,2000-06-10,2.03,86.2
+652,1895,11,Alen Smailagic,Alen,Smailagic,F,1,2019,Beko,Serbia,2000-08-18,2.08,97.5
+653,1896,27,Matisse Thybulle,Matisse,Thybulle,G-F,2,2019,Washington,USA,1997-03-04,1.96,91.2
+654,1897,5,P.J. Washington,P.J.,Washington,F,2,2019,Kentucky,USA,1998-08-23,2.01,104.3
+655,1898,41,Tremont Waters,Tremont,Waters,G,2,2019,Louisiana State,USA,1998-01-10,1.78,79.4
+656,1899,11,Quinndary Weatherspoon,Quinndary,Weatherspoon,G,2,2019,Mississippi State,USA,1996-09-10,1.9,93.0
+657,1900,6,Coby White,Coby,White,G,2,2019,North Carolina,USA,2000-02-16,1.93,88.5
+658,1901,2,Grant Williams,Grant,Williams,F,2,2019,Tennessee,USA,1998-11-30,1.98,107.0
+659,1902,23,Zion Williamson,Zion,Williamson,F,2,2019,Duke,USA,2000-07-06,1.98,128.8
+660,1903,7,Dylan Windler,Dylan,Windler,G-F,1,2020,Belmont,USA,1996-09-22,1.98,88.9
+661,1904,23,Justin Wright-Foreman,Justin,Wright-Foreman,G,0,0,,,,,
+662,2100,6,Adam Mokoka,Adam,Mokoka,G,2,2019,Mega Basket,France,1998-07-18,1.93,86.2
+663,2322,25,Luguentz Dort,Luguentz,Dort,G,2,2019,Arizona State,Canada,1999-04-19,1.9,97.5
+664,2323,24,Mathias Lessort,Mathias,Lessort,F,0,0,,,,,
+665,2348,21,Jalen Lecque,Jalen,Lecque,G,0,0,,,,,
+666,2365,19,John Konchar,John,Konchar,G,2,2019,Indiana-Purdue Fort Wayne,USA,1996-03-22,1.96,95.3
+667,2371,16,Amir Coffey,Amir,Coffey,G-F,2,2019,Minnesota,USA,1997-06-17,2.01,95.3
+668,2373,20,Aric Holman,Aric,Holman,F-C,0,0,Mississippi State,USA,1997-07-11,2.06,102.1
+669,2381,30,Terence Davis,Terence,Davis,G,2,2019,Mississippi,USA,1997-05-16,1.93,91.2
+670,2383,25,Jaylen Hoard,Jaylen,Hoard,F,2,2019,Wake Forest,France,1999-03-30,2.03,98.0
+671,2384,20,Kyle Alexander,Kyle,Alexander,F-C,0,0,,,,,
+672,2385,10,Justin Robinson,Justin,Robinson,G,2,2019,Virginia Tech,USA,1997-10-12,1.85,88.5
+673,2386,27,Charlie Brown Jr.,Charlie,Brown Jr.,G,2,2019,St. Joseph's (PA),USA,1997-02-02,1.98,90.3
+674,2387,31,Devontae Cacok,Devontae,Cacok,F,2,2019,North Carolina-Wilmington,USA,1996-10-08,2.01,108.9
+675,2388,7,Jeremiah Martin,Jeremiah,Martin,G,2,2019,Memphis,USA,1996-06-19,1.88,83.9
+676,2389,14,Garrison Mathews,Garrison,Mathews,G,2,2019,Lipscomb,USA,1996-10-24,1.96,97.5
+677,2390,14,William McDowell-White,William,McDowell-White,G,0,0,Germany,Australia,1998-04-13,1.96,83.9
+678,2391,20,Chris Silva,Chris,Silva,F,2,2019,South Carolina,Gabon,1996-09-19,2.03,106.1
+679,2392,7,Dean Wade,Dean,Wade,F-C,2,2019,Kansas State,USA,1996-11-20,2.06,103.4
+680,2393,14,William Howard,William,Howard,F-G,1,0,Limoges,France,1993-10-25,2.03,93.9
+681,2395,2,Vincent Poirier,Vincent,Poirier,C,0,0,,,,,
+682,2398,17,Jordan Caroline,Jordan,Caroline,F-G,0,0,"University of Nevada, Reno",USA,1996-01-15,2.01,104.3
+683,2399,15,Oshae Brissett,Oshae,Brissett,F-G,2,2019,Syracuse,Canada,1998-06-20,2.01,95.3
+684,2401,40,Zylan Cheatham,Zylan,Cheatham,F,1,2019,Arizona State,USA,1995-11-17,1.96,99.8
+685,2402,4,Josh Gray,Josh,Gray,G,0,0,,,,,
+686,2404,6,Javonte Green,Javonte,Green,G-F,2,2019,Radford,USA,1993-07-23,1.96,93.0
+687,2405,19,Dakota Mathias,Dakota,Mathias,G,1,2020,Purdue,USA,1995-07-11,1.93,90.7
+688,2406,23,Nicolo Melli,Nicolo,Melli,F,0,0,,Italy,1991-01-26,2.06,106.6
+689,2407,20,Max Strus,Max,Strus,G-F,2,2019,DePaul,USA,1996-03-28,1.96,97.5
+690,2408,21,Thanasis Antetokounmpo,Thanasis,Antetokounmpo,F,3,2015,Panathinaikos,Greece,1992-07-18,1.98,99.3
+691,2409,19,DaQuan Jeffries,DaQuan,Jeffries,G-F,2,2019,Tulsa,USA,1997-08-30,1.96,100.7
+692,2410,20,Caleb Martin,Caleb,Martin,F,2,2019,Nevada-Reno,USA,1995-09-28,1.96,93.0
+693,2413,9,Vlatko Cancar,Vlatko,Cancar,F,2,2019,San Pablo Burgos,Slovenia,1997-04-10,2.03,107.0
+694,2415,6,Tyler Cook,Tyler,Cook,F,2,2019,Iowa,USA,1997-09-23,2.03,115.7
+695,2417,26,Hassani Gravett,Hassani,Gravett,G,0,2021,South Carolina,USA,1996-07-16,1.88,84.8
+696,2418,26,Vic Law,Vic,Law,F,1,0,Northwestern,USA,1995-12-19,2.01,91.2
+697,2422,8,Josh Reaves,Josh,Reaves,G-F,1,0,Penn State,USA,1997-06-04,1.93,97.1
+698,2423,6,Matt Thomas,Matt,Thomas,G,2,2019,Iowa State,USA,1994-08-04,1.9,86.2
+699,2424,25,Devon Hall,Devon,Hall,G,0,0,,,,,
+700,2425,21,Lindell Wigginton,Lindell,Wigginton,G,0,2021,Iowa State,Canada,1998-03-28,1.85,85.7
+701,2428,8,Moses Brown,Moses,Brown,C,2,2019,UCLA,USA,1999-10-13,2.18,111.1
+702,2429,31,London Perrantes,London,Perrantes,G,1,2017,Virginia,USA,1994-10-03,1.85,86.2
+703,2430,26,Mychal Mulder,Mychal,Mulder,G,2,2019,Kentucky,Canada,1994-06-12,1.9,83.5
+704,2438,38,Juwan Morgan,Juwan,Morgan,F,2,2019,Indiana,USA,1997-04-17,2.01,105.2
+705,2439,28,Tariq Owens,Tariq,Owens,F,1,0,Texas Tech,USA,1995-06-30,2.08,93.0
+706,2440,29,Keljin Blevins,Keljin,Blevins,G,1,2020,Montana State,USA,1995-11-24,1.93,90.7
+707,2451,11,Juan Toscano-Anderson,Juan,Toscano-Anderson,F,2,2019,Marquette,USA,1993-04-10,1.98,94.8
+708,2466,23,Daulton Hommes,Daulton,Hommes,F,0,0,Point Loma,USA,1996-07-04,2.03,97.5
+709,2474,24,Matt Mooney,Matt,Mooney,G,1,2019,Texas Tech,USA,1997-02-07,1.88,90.3
+710,2482,40,Marques Bolden,Marques,Bolden,C,2,2019,Duke,USA,1998-04-17,2.08,112.9
+711,2485,30,Louis King,Louis,King,F,2,2019,Oregon,USA,1999-04-06,2.01,93.0
+712,2488,9,Rayjon Tucker,Rayjon,Tucker,G,2,2019,Arkansas-Little Rock,USA,1997-09-24,1.9,94.8
+713,2491,8,Nicolo Melli,Nicolo,Melli,F,2,2019,Fenerbahce,Italy,1991-01-26,2.06,107.0
+714,2505,22,Naz Reid,Naz,Reid,C-F,2,2019,Louisiana State,USA,1999-08-26,2.06,119.8
+715,2529,15,Ahmad Caver,Ahmad,Caver,G,0,2021,Old Dominion,USA,1996-09-12,1.88,78.9
+716,2535,20,Bubu Palo,Bubu,Palo,G,0,0,,,,,
+717,2537,22,Gunther Behnke,Gunther,Behnke,C,0,0,,,,,
+718,2538,14,Armoni Brooks,Armoni,Brooks,G,1,2020,Houston,USA,1998-06-05,1.9,88.5
+719,2539,38,Nando De Colo,Nando,De Colo,G,0,0,,,,,
+720,2542,24,Zak Irvin,Zak,Irvin,G,0,0,Michigan,USA,1994-09-05,1.98,97.5
+721,2543,38,Matt Morgan,Matt,Morgan,G,0,0,Cornell,USA,1997-11-07,1.88,78.9
+722,2545,8,Chad Brown,Chad,Brown,F,0,0,Central Florida,,1996-09-06,2.06,111.1
+723,2547,40,MIke Scott,MIke,Scott,G,0,0,Idaho,USA,1993-08-10,1.83,81.6
+724,2551,25,Kevin Hervey,Kevin,Hervey,F,1,0,Texas-Arlington,USA,1996-07-09,2.06,104.3
+725,2552,25,Paul Watson,Paul,Watson,G,2,2019,Fresno State,USA,1994-12-30,1.98,95.3
+726,2557,19,Jontay Porter,Jontay,Porter,C-F,0,2020,Missouri,USA,1999-11-15,2.11,108.9
+727,2559,15,Keifer Sykes,Keifer,Sykes,G,0,2021,Wisconsin-Green Bay,USA,1993-12-30,1.8,75.8
+728,2561,38,Precious Achiuwa,Precious,Achiuwa,F,1,2020,Memphis,Nigeria,1999-09-19,2.03,102.1
+729,2562,28,Ty-Shon Alexander,Ty-Shon,Alexander,G,1,2020,Creighton,USA,1998-07-16,1.9,88.5
+730,2563,26,Cole Anthony,Cole,Anthony,G,1,2020,North Carolina,USA,2000-05-15,1.9,83.9
+731,2564,41,Deni Avdija,Deni,Avdija,F,1,2020,Maccabi Tel Aviv,Israel,2001-01-03,2.06,95.3
+732,2565,40,Udoka Azubuike,Udoka,Azubuike,C-F,1,2020,Kansas,Nigeria,1999-09-17,2.13,122.5
+733,2566,5,LaMelo Ball,LaMelo,Ball,G,1,2020,Illawarra,USA,2001-08-22,2.01,81.6
+734,2567,5,LiAngelo Ball,LiAngelo,Ball,G,0,0,,,,,
+735,2568,19,Desmond Bane,Desmond,Bane,G,1,2020,TCU,USA,1998-06-25,1.96,97.5
+736,2569,10,Saddiq Bey,Saddiq,Bey,F,1,2020,Villanova,USA,1999-04-09,2.01,97.5
+737,2570,14,Tyler Bey,Tyler,Bey,F,1,2020,Colorado,USA,1998-02-10,2.01,97.5
+738,2571,22,Leandro Bolmaro,Leandro,Bolmaro,F,0,2021,FC Barcelona,Argentina,2000-09-11,1.98,90.7
+739,2572,4,Jordan Bowden,Jordan,Bowden,G,0,0,,,,,
+740,2573,9,Facundo Campazzo,Facundo,Campazzo,G,1,2020,Murcia,Argentina,1991-03-23,1.78,88.5
+741,2574,5,Vernon Carey Jr.,Vernon,Carey Jr.,F-C,1,2020,Duke,USA,2001-02-25,2.06,122.5
+742,2578,5,Nate Darling,Nate,Darling,G,0,2020,Delaware,Canada,1998-08-30,1.98,90.7
+743,2579,21,Javin DeLaurier,Javin,DeLaurier,C,0,0,Duke,USA,1998-04-07,2.08,106.1
+744,2580,25,Mamadi Diakite,Mamadi,Diakite,F,1,2020,Virginia,Guinea,1997-01-21,2.06,103.4
+745,2581,27,Lamine Diane,Lamine,Diane,F,0,0,California State-Northridge,Senegal,1997-11-07,2.01,93.0
+746,2582,6,Devon Dotson,Devon,Dotson,G,1,2020,Kansas,USA,1999-08-02,1.85,83.9
+747,2584,22,Anthony Edwards,Anthony,Edwards,G,1,2020,Georgia,USA,2001-08-05,1.93,102.1
+748,2585,29,CJ Elleby,CJ,Elleby,F-G,1,2020,Washington State,USA,2000-06-16,1.98,90.7
+749,2587,38,Malachi Flynn,Malachi,Flynn,G,1,2020,San Diego State,USA,1998-05-09,1.85,79.4
+750,2588,16,Jordan Ford,Jordan,Ford,G,0,0,,USA,1998-05-26,1.85,79.4
+751,2589,40,Trent Forrest,Trent,Forrest,G,1,2020,Florida State,USA,1998-06-12,1.93,95.3
+752,2590,41,Anthony Gill,Anthony,Gill,F,1,2020,Virginia,USA,1992-10-17,2.01,104.3
+753,2592,26,Freddie Gillespie,Freddie,Gillespie,C,1,2020,Baylor,USA,1997-06-14,2.06,111.1
+754,2593,8,Josh Green,Josh,Green,G,1,2020,Arizona,Australia,2000-11-16,1.96,90.7
+755,2594,38,Ashton Hagans,Ashton,Hagans,G-F,0,0,,,,,
+756,2595,30,Tyrese Haliburton,Tyrese,Haliburton,G,1,2020,Iowa State,USA,2000-02-29,1.96,83.9
+757,2597,26,R.J. Hampton,R.J.,Hampton,G,1,2020,New Zealand Breakers,USA,2001-02-07,1.93,79.4
+758,2599,10,Killian Hayes,Killian,Hayes,G,1,2020,Ratiopharm Ulm,France,2001-07-27,1.96,88.5
+759,2600,41,Caleb Homesley,Caleb,Homesley,G,0,0,Liberty,USA,1996-11-27,1.98,93.0
+760,2601,9,Markus Howard,Markus,Howard,G,1,2020,Marquette,USA,1999-03-03,1.78,79.4
+761,2602,40,Elijah Hughes,Elijah,Hughes,G,1,2020,Syracuse,USA,1998-03-10,1.96,97.5
+762,2603,11,Justinian Jessup,Justinian,Jessup,G,0,0,,,,,
+763,2604,27,Isaiah Joe,Isaiah,Joe,G,1,2020,Arkansas,USA,1999-07-02,1.93,74.8
+764,2605,17,Mason Jones,Mason,Jones,G,1,2020,Arkansas,USA,1998-07-21,1.93,90.7
+765,2606,31,Tre Jones,Tre,Jones,G,1,2020,Duke,USA,2000-01-08,1.85,83.9
+766,2607,22,Nathan Knight,Nathan,Knight,F-C,1,2020,William & Mary,USA,1997-09-20,2.08,114.8
+767,2608,25,Vit Krejci,Vit,Krejci,G,0,2021,Zaragoza,Czech Republic,2000-06-19,2.03,88.5
+768,2609,31,Anthony Lamb,Anthony,Lamb,F,1,2020,Vermont,USA,1998-01-20,1.98,103.0
+769,2610,10,Saben Lee,Saben,Lee,G,1,2020,Vanderbilt,USA,1999-06-23,1.88,83.0
+770,2611,23,Kira Lewis Jr.,Kira,Lewis Jr.,G,1,2020,Alabama,USA,2001-04-06,1.85,77.1
+771,2612,2,Yam Madar,Yam,Madar,G,0,0,,,,,
+772,2614,25,Theo Maledon,Theo,Maledon,G,1,2020,Asvel,France,2001-06-12,1.93,79.4
+773,2616,11,Nico Mannion,Nico,Mannion,G,1,2020,Arizona,Italy,2001-03-14,1.88,86.2
+774,2617,14,Kenyon Martin Jr.,Kenyon,Martin Jr.,F,1,2020,IMG Academy (FL),USA,2001-01-06,1.96,97.5
+775,2619,27,Tyrese Maxey,Tyrese,Maxey,G,1,2020,Kentucky,USA,2000-11-04,1.88,90.7
+776,2620,1,Skylar Mays,Skylar,Mays,G,1,2020,Louisiana State,USA,1997-09-05,1.93,93.0
+777,2621,22,Jaden McDaniels,Jaden,McDaniels,F,1,2020,Washington,USA,2000-09-29,2.06,83.9
+778,2622,19,Sean McDermott,Sean,McDermott,F,1,2020,Butler,USA,1996-11-03,1.98,88.5
+779,2623,19,Sam Merrill,Sam,Merrill,G,1,2020,Utah State,USA,1996-05-15,1.93,93.0
+780,2625,30,Ade Murkey,Ade,Murkey,G,0,2021,Denver,USA,1998-01-29,1.96,90.7
+781,2626,2,Aaron Nesmith,Aaron,Nesmith,G-F,1,2020,Vanderbilt,USA,1999-10-16,1.96,97.5
+782,2627,9,Zeke Nnaji,Zeke,Nnaji,F-C,1,2020,Arizona,USA,2001-01-09,2.06,108.9
+783,2628,21,Jordan Nwora,Jordan,Nwora,F,1,2020,Louisville,USA,1998-09-09,2.03,102.1
+784,2629,1,Onyeka Okongwu,Onyeka,Okongwu,F-C,1,2020,Southern California,USA,2000-12-11,2.03,108.9
+785,2630,7,Isaac Okoro,Isaac,Okoro,F-G,1,2020,Auburn,USA,2001-01-26,1.96,102.1
+786,2631,38,Daniel Oturu,Daniel,Oturu,C,1,2020,Minnesota,USA,1999-09-20,2.03,108.9
+787,2632,29,Reggie Perry,Reggie,Perry,F-C,1,2020,Mississippi State,USA,2000-03-21,2.03,113.4
+788,2633,25,Aleksej Pokusevski,Aleksej,Pokusevski,F,1,2020,Olympiacos,Serbia,2001-12-26,2.13,86.2
+789,2634,27,Myles Powell,Myles,Powell,G,0,2021,Seton Hall,USA,1997-07-07,1.88,88.5
+790,2635,2,Payton Pritchard,Payton,Pritchard,G,1,2020,Oregon,USA,1998-01-28,1.85,88.5
+791,2636,24,Immanuel Quickley,Immanuel,Quickley,G,1,2020,Kentucky,USA,1999-06-17,1.9,86.2
+792,2637,30,Jahmi'us Ramsey,Jahmi'us,Ramsey,G,1,2020,Texas Tech,USA,2001-06-09,1.9,86.2
+793,2638,27,Paul Reed,Paul,Reed,F,1,2020,DePaul,USA,1999-06-14,2.06,95.3
+794,2639,5,Nick Richards,Nick,Richards,C,1,2020,Kentucky,Jamaica,1997-11-29,2.13,111.1
+795,2640,27,Grant Riller,Grant,Riller,G,1,2020,College of Charleston,USA,1997-02-08,1.85,86.2
+796,2641,16,Jay Scrubb,Jay,Scrubb,G,1,2020,John A. Logan,USA,2000-09-01,1.96,99.8
+797,2642,4,Nathan Sestina,Nathan,Sestina,F,0,0,Kentucky,USA,1997-05-12,2.06,106.1
+798,2643,6,Marko Simonovic,Marko,Simonovic,C,0,2021,Mega Basket,Montenegro,1999-10-15,2.11,99.8
+799,2644,28,Jalen Smith,Jalen,Smith,F-C,1,2020,Maryland,USA,2000-03-16,2.08,97.5
+800,2645,19,Xavier Sneed,Xavier,Sneed,F,0,2021,Kansas State,USA,1997-12-21,1.96,97.5
+801,2646,10,Cassius Stanley,Cassius,Stanley,G,1,2020,Duke,USA,1999-08-18,1.96,86.2
+802,2647,7,Lamar Stevens,Lamar,Stevens,F,1,2020,Penn State,USA,1997-07-09,1.98,104.3
+803,2648,10,Isaiah Stewart,Isaiah,Stewart,F-C,1,2020,Washington,USA,2001-05-22,2.03,113.4
+804,2650,14,Jae'Sean Tate,Jae'Sean,Tate,F,1,2020,Ohio State,USA,1995-10-28,1.93,104.3
+805,2652,19,Tyrell Terry,Tyrell,Terry,G,1,2020,Stanford,USA,2000-09-28,1.88,72.6
+806,2653,19,Jon Teske,Jon,Teske,C,0,2021,Michigan,USA,1997-05-04,2.16,120.2
+807,2654,2,Brodric Thomas,Brodric,Thomas,G,1,2020,Truman State,USA,1997-01-28,1.96,83.9
+808,2655,19,Killian Tillie,Killian,Tillie,F-C,1,2020,Gonzaga,France,1998-03-05,2.06,99.8
+809,2656,19,Xavier Tillman,Xavier,Tillman,F,1,2020,Michigan State,USA,1999-01-12,2.03,111.1
+810,2658,24,Obi Toppin,Obi,Toppin,F,1,2020,Dayton,USA,1998-03-04,2.06,99.8
+811,2660,38,Breein Tyree,Breein,Tyree,G,0,0,,,,,
+812,2661,31,Devin Vassell,Devin,Vassell,G-F,1,2020,Florida State,USA,2000-08-23,1.96,90.7
+813,2664,6,Patrick Williams,Patrick,Williams,F,1,2020,Florida State,USA,2001-08-26,2.01,97.5
+814,2665,41,Cassius Winston,Cassius,Winston,G,1,2020,Michigan State,USA,1998-02-28,1.85,83.9
+815,2666,11,James Wiseman,James,Wiseman,C,1,2020,Memphis,USA,2001-03-31,2.13,108.9
+816,2667,30,Robert Woodard II,Robert,Woodard II,F,1,2020,Mississippi State,USA,1999-09-22,1.98,106.6
+817,2668,23,Naji Marshall,Naji,Marshall,F,1,2020,Xavier,USA,1998-01-24,2.01,99.8
+818,2669,30,Quinton Rose,Quinton,Rose,G-F,0,0,Temple,USA,1998-01-26,2.03,83.9
+819,2670,31,Kylor Kelley,Kylor,Kelley,,0,0, ,,1997-08-26,,
+820,2671,14,Trevelin Queen,Trevelin,Queen,G,0,2021,New Mexico State,USA,1997-02-25,1.98,86.2
+821,2672,15,Nate Hinton,Nate,Hinton,G-F,1,2020,Houston,USA,1999-06-08,1.96,95.3
+822,2673,38,Josh Hall,Josh,Hall,F,0,0,,,,,
+823,2676,24,Tyler Hall,Tyler,Hall,G,0,2021,Montana State,USA,1997-03-25,1.96,94.8
+824,2677,17,Kevon Harris,Kevon,Harris,,0,0, ,,1997-06-24,,
+825,2678,25,Zavier Simpson,Zavier,Simpson,G,0,0,,,,,
+826,2680,19,Christian Vital,Christian,Vital,G,0,0,Connecticut,USA,1997-03-21,1.88,84.8
+827,2681,4,Bryce Brown,Bryce,Brown,G,0,0,,,,,
+828,2682,19,Shaq Buchanan,Shaq,Buchanan,G,0,2021,Murray State,USA,1997-01-30,1.9,86.2
+829,2683,14,Trey Mourning,Trey,Mourning,F,0,0,Georgetown,USA,1996-08-21,2.06,99.8
+830,2684,8,Devonte Patterson,Devonte,Patterson,F,0,0,,,,,
+831,2685,30,Dimitrios Agravanis,Dimitrios,Agravanis,F,0,0,,,,,
+832,2686,28,Cenk Akyol,Cenk,Akyol,G,0,0,,,,,
+833,2687,40,Mario Austin,Mario,Austin,F,0,0,,,,,
+834,2688,20,George Banks,George,Banks,F,0,0,,,,,
+835,2689,8,Stanko Barac,Stanko,Barac,C,0,0,,,,,
+836,2690,7,Edin Bavcic,Edin,Bavcic,F,0,0,,,,,
+837,2691,9,Sani Becirovic,Sani,Becirovic,G,0,0,,,,,
+838,2692,15,Andrew Betts,Andrew,Betts,C,0,0,,,,,
+839,2693,1,Augusto Binelli,Augusto,Binelli,C,0,0,,,,,
+840,2694,28,Dwayne Collins,Dwayne,Collins,F,0,0,,,,,
+841,2695,4,Isaia Cordinier,Isaia,Cordinier,G,0,0,,,,,
+842,2697,4,Nemanja Dangubic,Nemanja,Dangubic,F,0,0,,,,,
+843,2698,6,Jon Diebler,Jon,Diebler,G,0,0,,,,,
+844,2699,29,Daniel Diez,Daniel,Diez,F,0,0,,,,,
+845,2700,1,Alain Digbeau,Alain,Digbeau,G,0,0,,,,,
+846,2701,24,Tadija Dragicevic,Tadija,Dragicevic,F,0,0,,,,,
+847,2702,4,Christian Drejer,Christian,Drejer,F,0,0,,,,,
+848,2703,29,Bojan Dubljevic,Bojan,Dubljevic,F,0,0,,,,,
+849,2704,20,Roberto Duenas,Roberto,Duenas,C,0,0,,,,,
+850,2705,11,Lior Eliyahu,Lior,Eliyahu,F,0,0,,,,,
+851,2706,28,Ron Ellis,Ron,Ellis,F,0,0,,,,,
+852,2707,17,Chinemelu Elonu,Chinemelu,Elonu,F,0,0,,,,,
+853,2708,1,Marcus Eriksson,Marcus,Eriksson,F,0,0,,,,,
+854,2709,40,Peter Fehse,Peter,Fehse,F,0,0,,,,,
+855,2710,21,Andrei Fetisov,Andrei,Fetisov,F,0,0,,,,,
+856,2711,7,Sergiy Gladyr,Sergiy,Gladyr,G,0,0,,,,,
+857,2712,26,Rashard Griffith,Rashard,Griffith,C,0,0,,,,,
+858,2713,7,Arturas Gudaitis,Arturas,Gudaitis,C-F,0,0,,,,,
+859,2714,25,Yotam Halperin,Yotam,Halperin,G,0,0,,,,,
+860,2715,14,Venson Hamilton,Venson,Hamilton,C-F,0,0,,,,,
+861,2716,31,Adam Hanga,Adam,Hanga,G-F,0,0,,,,,
+862,2717,25,DeVon Hardin,DeVon,Hardin,F,0,0,,,,,
+863,2718,19,Tyler Harvey,Tyler,Harvey,G,0,0,,,,,
+864,2719,24,Axel Hervelle,Axel,Hervelle,F,0,0,,,,,
+865,2720,38,DeeAndre Hulett,DeeAndre,Hulett,G-F,0,0,,,,,
+866,2721,26,Justin Jackson,Justin,Jackson,F,0,0,,,,,
+867,2722,24,Ognen Jaramaz,Ognen,Jaramaz,G,0,0,,,,,
+868,2723,31,Robertas Javtokas,Robertas,Javtokas,F,0,0,,,,,
+869,2724,1,Alpha Kaba,Alpha,Kaba,F,0,0,,,,,
+870,2725,29,Federico Kammerichs,Federico,Kammerichs,F,0,0,,,,,
+871,2726,21,Ilkan Karaman,Ilkan,Karaman,F,0,0,,,,,
+872,2727,31,Sergei Karaulov,Sergei,Karaulov,C,0,0,,,,,
+873,2728,8,Petteri Koponen,Petteri,Koponen,G,0,0,,,,,
+874,2729,5,Arnoldas Kulboka,Arnoldas,Kulboka,F,0,2021,Bilbao,Lithuania,1998-01-04,2.08,94.8
+875,2730,24,Louis Labeyrie,Louis,Labeyrie,F-C,0,0,,,,,
+876,2731,31,Cady Lalanne,Cady,Lalanne,C-F,0,0,,,,,
+877,2732,15,Maarty Leunen,Maarty,Leunen,F,0,0,,,,,
+878,2733,14,Sergei Lishouk,Sergei,Lishouk,F,0,0,,,,,
+879,2734,24,Sergio Llull,Sergio,Llull,G,0,0,,,,,
+880,2735,31,Erazem Lorbek,Erazem,Lorbek,F,0,0,,,,,
+881,2736,7,MIlan Macvan,MIlan,Macvan,F,0,0,,,,,
+882,2737,7,Chukwudiebere Maduabum,Chukwudiebere,Maduabum,F,0,0,,,,,
+883,2738,16,David Michineau,David,Michineau,G,0,0,,,,,
+884,2739,25,Vasilije Micic,Vasilije,Micic,G,0,0,,,,,
+885,2740,31,Nikola Milutinov,Nikola,Milutinov,C-F,0,0,,,,,
+886,2741,6,Albert Miralles,Albert,Miralles,C,0,0,,,,,
+887,2742,30,Luka Mitrovic,Luka,Mitrovic,F,0,0,,,,,
+888,2743,25,Paccelis Morlende,Paccelis,Morlende,G,0,0,,,,,
+889,2744,29,Marcelo Nicola,Marcelo,Nicola,F-C,0,0,,,,,
+890,2745,22,Henk Norel,Henk,Norel,F,0,0,,,,,
+891,2746,30,Alex Oriakhi,Alex,Oriakhi,F,0,0,,,,,
+892,2747,2,Ben Pepper,Ben,Pepper,C,0,0,,,,,
+893,2748,27,Emir Preldzic,Emir,Preldzic,F,0,0,,,,,
+894,2749,22,Paulao Prestes,Paulao,Prestes,C,0,0,,,,,
+895,2750,31,Giorgos Printezis,Giorgos,Printezis,F,0,0,,,,,
+896,2751,10,Nikola Radicevic,Nikola,Radicevic,G,0,0,,,,,
+897,2752,29,Milovan Rakovic,Milovan,Rakovic,F,0,0,,,,,
+898,2753,31,Viktor Sanikidze,Viktor,Sanikidze,F,0,0,,,,,
+899,2754,14,Issuf Sanon,Issuf,Sanon,G,0,0,,,,,
+900,2755,25,Sofoklis Schortsanitis,Sofoklis,Schortsanitis,F-C,0,0,,,,,
+901,2756,7,Renaldas Seibutis,Renaldas,Seibutis,G,0,0,,,,,
+902,2757,11,Mladen Sekularac,Mladen,Sekularac,G,0,0,,,,,
+903,2758,2,Josip Sesar,Josip,Sesar,G,0,0,,,,,
+904,2759,25,Abdul Shamsid-Deen,Abdul,Shamsid-Deen,F,0,0,,,,,
+905,2760,29,Doron Sheffer,Doron,Sheffer,G,0,0,,,,,
+906,2761,29,Nedzad Sinanovic,Nedzad,Sinanovic,C,0,0,,,,,
+907,2762,19,Satnam Singh,Satnam,Singh,C,0,0,,,,,
+908,2763,25,Szymon Szewczyk,Szymon,Szewczyk,F,0,0,,,,,
+909,2764,26,Janis Timma,Janis,Timma,F,0,0,,,,,
+910,2765,24,Ante Tomic,Ante,Tomic,C,0,0,,,,,
+911,2766,9,Izzet Turkyilmaz,Izzet,Turkyilmaz,F,0,0,,,,,
+912,2767,7,Ejike Ugboaja,Ejike,Ugboaja,F,0,0,,,,,
+913,2768,26,Remon Van de Hare,Remon,Van de Hare,C,0,0,,,,,
+914,2769,4,Juan Pablo Vaulet,Juan Pablo,Vaulet,F,0,0,,,,,
+915,2770,26,Fran Vazquez,Fran,Vazquez,F-C,0,0,,,,,
+916,2771,16,Vladimir Veremeenko,Vladimir,Veremeenko,F,0,0,,,,,
+917,2772,7,Aleksandar Vezenkov,Aleksandar,Vezenkov,F,0,0,,,,,
+918,2773,28,Milos Vujanic,Milos,Vujanic,G,0,0,,,,,
+919,2774,4,Aaron White,Aaron,White,F,0,0,,,,,
+920,2775,23,Latavious Williams,Latavious,Williams,F,0,0,,,,,
+921,2776,9,Xue Yuyang,Xue,Yuyang,F-C,0,0,,,,,
+922,2777,19,Wang Zhelin,Wang,Zhelin,,0,0,,,,,
+923,2778,21,Aurelijius Zukauskas,Aurelijius,Zukauskas,C,0,0,,,,,
+924,2782,4,Mike James,Mike,James,G,2,2017,Lamar,USA,1990-08-18,1.85,79.4
+925,2783,24,Luca Vildoza,Luca,Vildoza,G,0,0,Baskonia,Argentina,1995-08-11,1.9,86.2
+926,2785,20,Omer Yurtseven,Omer,Yurtseven,C,0,2021,Georgetown,Turkey,1998-06-19,2.11,124.7
+927,2786,19,Santi Aldama,Santi,Aldama,F-C,0,2021,Loyola-Maryland,Spain,2001-01-10,2.11,97.5
+928,2787,41,Joel Ayayi,Joel,Ayayi,G,0,2021,Gonzaga,France,2000-03-05,1.93,81.6
+929,2788,38,Dalano Banton,Dalano,Banton,F,0,2021,Nebraska,Canada,1999-11-07,2.01,92.5
+930,2789,38,Scottie Barnes,Scottie,Barnes,F,0,2021,Florida State,USA,2001-08-01,2.01,102.1
+931,2790,27,Charles Bassey,Charles,Bassey,C-F,0,2021,Western Kentucky,Nigeria,2000-10-28,2.06,104.3
+932,2791,2,Juhann Begarin,Juhann,Begarin,G,0,0,Paris Basketball,France,2002-08-07,1.96,83.9
+933,2792,16,Brandon Boston Jr.,Brandon,Boston Jr.,G,0,2021,Kentucky,USA,2001-11-28,1.98,85.3
+934,2793,5,James Bouknight,James,Bouknight,G,0,2021,Connecticut,USA,2000-09-18,1.93,86.2
+935,2794,1,Chaundee Brown Jr.,Chaundee,Brown Jr.,F,0,2021,Michigan,USA,1998-12-04,1.96,97.5
+936,2795,29,Greg Brown III,Greg,Brown III,F,0,2021,Texas-Austin,USA,2001-09-01,2.01,93.4
+937,2796,40,Jared Butler,Jared,Butler,G,0,2021,Baylor,USA,2000-08-25,1.9,87.5
+938,2797,5,D.J. Carton,D.J.,Carton,G,0,0,Marquette,USA,2000-08-05,1.88,90.7
+939,2798,38,Justin Champagnie,Justin,Champagnie,G-F,0,2021,Pittsburgh,USA,2001-06-29,1.98,93.4
+940,2799,14,Josh Christopher,Josh,Christopher,G,0,2021,Arizona State,USA,2001-12-08,1.9,97.5
+941,2800,1,Sharife Cooper,Sharife,Cooper,G,0,2021,Auburn,USA,2001-06-11,1.85,79.8
+942,2801,10,Cade Cunningham,Cade,Cunningham,G,0,2021,Oklahoma State,USA,2001-09-25,1.98,99.8
+943,2802,6,Ayo Dosunmu,Ayo,Dosunmu,G,0,2021,Illinois,USA,2000-01-17,1.93,90.7
+944,2803,15,Chris Duarte,Chris,Duarte,G,0,2021,Oregon,Dominican Republic,1997-06-13,1.96,86.2
+945,2804,4,David Duke Jr.,David,Duke Jr.,G,0,2021,Providence,USA,1999-10-13,1.93,92.5
+946,2805,4,Kessler Edwards,Kessler,Edwards,F,0,2021,Pepperdine,USA,2000-08-09,2.01,92.1
+947,2806,14,Usman Garuba,Usman,Garuba,F,0,2021,Real Madrid,Spain,2002-03-09,2.03,103.9
+948,2807,10,Luka Garza,Luka,Garza,C,0,2021,Iowa,USA,1998-12-27,2.08,110.2
+949,2808,25,Josh Giddey,Josh,Giddey,G,0,2021,NBA Global Academy,Australia,2002-10-10,2.03,93.0
+950,2809,4,RaiQuan Gray,RaiQuan,Gray,F,0,0,Florida State,USA,1999-07-07,2.01,122.0
+951,2810,14,Jalen Green,Jalen,Green,G,0,2021,NBA G League Ignite,USA,2002-02-09,1.93,84.4
+952,2811,24,Quentin Grimes,Quentin,Grimes,G,0,2021,Houston,USA,2000-05-08,1.93,95.3
+953,2812,2,Sam Hauser,Sam,Hauser,F,0,2021,Virginia,USA,1997-12-08,2.01,98.4
+954,2813,27,Aaron Henry,Aaron,Henry,F,0,2021,Michigan State,USA,1999-08-30,1.96,95.3
+955,2814,17,Jay Huff,Jay,Huff,F,0,2021,Virginia,USA,1997-08-25,2.16,108.9
+956,2815,19,Matt Hurt,Matt,Hurt,F,0,0,,,,,
+957,2816,9,Bones Hyland,Bones,Hyland,G,0,2021,Virginia Commonwealth,USA,2000-09-14,1.88,76.7
+958,2817,15,Isaiah Jackson,Isaiah,Jackson,F,0,2021,Kentucky,USA,2002-01-10,2.08,93.0
+959,2818,38,David Johnson,David,Johnson,G,0,2021,Louisville,USA,2001-02-26,1.93,92.1
+960,2819,1,Jalen Johnson,Jalen,Johnson,F,0,2021,Duke,USA,2001-12-18,2.03,99.3
+961,2820,16,Keon Johnson,Keon,Johnson,G,0,2021,Tennessee,USA,2002-03-10,1.93,83.9
+962,2821,24,Rokas Jokubaitis,Rokas,Jokubaitis,G,0,0,Zalgiris,Lithuania,2000-11-19,1.93,88.0
+963,2822,23,Herbert Jones,Herbert,Jones,F,0,2021,Alabama,USA,1998-10-06,2.01,93.4
+964,2823,5,Kai Jones,Kai,Jones,C-F,0,2021,Texas-Austin,Bahamas,2001-01-19,2.08,100.2
+965,2824,21,Georgios Kalaitzakis,Georgios,Kalaitzakis,F,0,2021,Panathinaikos,Greece,1999-01-02,2.01,87.1
+966,2825,41,Corey Kispert,Corey,Kispert,F,0,2021,Gonzaga,USA,1999-03-03,1.98,101.6
+967,2826,10,Balsa Koprivica,Balsa,Koprivica,C,0,0,Florida State,Serbia,2000-05-01,2.16,108.9
+968,2827,11,Jonathan Kuminga,Jonathan,Kuminga,F,0,2021,NBA G League Ignite,DRC,2002-10-06,2.01,102.1
+969,2828,5,Scottie Lewis,Scottie,Lewis,G,0,2021,Florida,USA,2000-03-12,1.96,83.9
+970,2829,10,Isaiah Livers,Isaiah,Livers,F,0,2021,Michigan,USA,1998-07-28,1.98,105.2
+971,2830,21,Sandro Mamukelashvili,Sandro,Mamukelashvili,F-C,0,2021,Seton Hall,Georgia,1999-05-23,2.06,108.9
+972,2831,25,Tre Mann,Tre,Mann,G,0,2021,Florida,USA,2001-02-03,1.9,80.7
+973,2832,24,Miles McBride,Miles,McBride,G,0,2021,West Virginia,USA,2000-09-08,1.85,88.5
+974,2833,6,Mac McClung,Mac,McClung,G,0,2021,Texas Tech,USA,1999-01-06,1.88,83.9
+975,2834,30,Davion Mitchell,Davion,Mitchell,G,0,2021,Baylor,USA,1998-09-05,1.83,91.6
+976,2835,7,Evan Mobley,Evan,Mobley,C,0,2021,Southern California,USA,2001-06-18,2.11,97.5
+977,2836,11,Moses Moody,Moses,Moody,G,0,2021,Arkansas,USA,2002-05-31,1.96,95.7
+978,2837,23,Trey Murphy III,Trey,Murphy III,F,0,2021,Virginia,USA,2000-06-18,2.03,93.4
+979,2838,8,Eugene Omoruyi,Eugene,Omoruyi,F,0,2021,Oregon,Nigeria,1997-02-14,1.98,106.6
+980,2839,27,Filip Petrusev,Filip,Petrusev,C,0,0,Gonzaga,Serbia,2000-04-15,2.11,102.1
+981,2840,10,Jamorko Pickett,Jamorko,Pickett,F,0,2021,Georgetown,USA,1997-12-24,2.06,93.4
+982,2841,19,Yves Pons,Yves,Pons,F,0,2021,Tennessee,France,1999-05-07,1.96,93.4
+983,2842,16,Jason Preston,Jason,Preston,G,0,0,Ohio,USA,1999-08-10,1.9,82.1
+984,2843,31,Joshua Primo,Joshua,Primo,G,0,2021,Alabama,Canada,2002-12-24,1.93,85.7
+985,2844,30,Neemias Queta,Neemias,Queta,C,0,2021,Utah State,Portugal,1999-07-13,2.13,112.5
+986,2845,17,Austin Reaves,Austin,Reaves,G,0,2021,Oklahoma,USA,1998-05-29,1.96,89.4
+987,2846,25,Jeremiah Robinson-Earl,Jeremiah,Robinson-Earl,F,0,2021,Villanova,USA,2000-11-03,2.03,109.8
+988,2847,14,Alperen Sengun,Alperen,Sengun,C,0,2021,Besiktas,Turkey,2002-07-25,2.08,110.2
+989,2848,4,Day'Ron Sharpe,Day'Ron,Sharpe,F,0,2021,North Carolina,USA,2001-11-06,2.06,120.2
+990,2849,24,Jericho Sims,Jericho,Sims,C,0,2021,Texas-Austin,USA,1998-10-20,2.06,113.4
+991,2850,10,Chris Smith,Chris,Smith,F,0,0,UCLA,USA,1999-12-24,2.06,97.5
+992,2851,27,Jaden Springer,Jaden,Springer,G,0,2021,Tennessee,USA,2002-09-25,1.93,91.6
+993,2852,26,Jalen Suggs,Jalen,Suggs,G,0,2021,Gonzaga,USA,2001-06-03,1.96,93.0
+994,2853,15,Terry Taylor,Terry,Taylor,F,0,2021,Austin Peay,USA,1999-09-23,1.96,104.3
+995,2854,40,MaCio Teague,MaCio,Teague,G,0,0,Baylor,USA,1997-06-11,1.93,88.5
+996,2855,4,Cam Thomas,Cam,Thomas,G,0,2021,Louisiana State,Japan,2001-10-13,1.9,95.3
+997,2856,5,JT Thor,JT,Thor,F,0,2021,Auburn,USA,2002-08-26,2.06,92.1
+998,2857,41,Isaiah Todd,Isaiah,Todd,F,0,2021,NBA G League Ignite,USA,2001-10-17,2.06,99.3
+999,2858,26,Franz Wagner,Franz,Wagner,F,0,2021,Michigan,Germany,2001-08-27,2.08,99.8
+1000,2859,28,Ish Wainright,Ish,Wainright,F,0,2021,Baylor,USA,1994-09-12,1.96,113.4
+1001,2860,15,Duane Washington Jr.,Duane,Washington Jr.,G,0,2021,Ohio State,Germany,2000-03-24,1.9,89.4
+1002,2861,29,Trendon Watford,Trendon,Watford,F,0,2021,Louisiana State,USA,2000-11-09,2.03,107.5
+1003,2862,31,Joe Wieskamp,Joe,Wieskamp,G-F,0,2021,Iowa,USA,1999-08-23,1.98,93.0
+1004,2863,25,Aaron Wiggins,Aaron,Wiggins,G,0,2021,Maryland,USA,1999-01-02,1.93,86.2
+1005,2864,19,Ziaire Williams,Ziaire,Williams,F,0,2021,Stanford,USA,2001-09-12,2.06,83.9
+1006,2865,22,McKinley Wright IV,McKinley,Wright IV,G,0,2021,Colorado,USA,1998-10-25,1.8,87.1
+1007,2866,4,Marcus Zegarowski,Marcus,Zegarowski,G,0,0,Creighton,USA,1998-08-03,1.85,82.1
+1008,3338,20,DJ Stewart,DJ,Stewart,G,0,0,Mississippi State,USA,1999-07-28,1.98,93.0
+1009,3339,1,A.J. Lawson,A.J.,Lawson,G,0,0,South Carolina,Canada,2000-07-15,1.98,81.2
+1010,3340,23,Jose Alvarado,Jose,Alvarado,G,0,2021,Georgia Tech,USA,1998-04-12,1.83,81.2
+1011,3342,8,EJ Onu,EJ,Onu,F,0,0,Shawnee State,USA,1999-07-31,2.11,108.9
+1012,3343,24,Aamir Simms,Aamir,Simms,F,0,0,Clemson,USA,1999-02-17,2.03,111.1
+1013,3344,31,Jock Landale,Jock,Landale,C,0,2021,                                   ,Australia,1995-10-25,2.11,115.7
+1014,3346,28,MJ Walker,MJ,Walker,G,0,2021,Florida State,USA,1998-03-28,1.96,96.6
+1015,3347,23,Feron Hunt,Feron,Hunt,F,0,0,Southern Methodist,USA,1999-07-05,2.03,88.5
+1016,3348,9,Carlik Jones,Carlik,Jones,G,0,2021,Louisville,USA,1997-12-23,1.83,78.9
+1017,3349,14,DeJon Jarreau,DeJon,Jarreau,G,0,2021,Houston,USA,1998-01-23,1.96,83.9
+1018,3350,14,Daishen Nix,Daishen,Nix,G,0,2021,NBA G League Ignite,USA,2002-02-13,1.93,102.5
+1019,3351,20,Marcus Garrett,Marcus,Garrett,G,0,2021,Kansas,USA,1998-11-09,1.96,93.0
+1020,3352,8,JaQuori McLaughlin,JaQuori,McLaughlin,G,0,2021,California-Santa Barbara,USA,1998-01-29,1.93,86.2
+1021,3353,6,Ethan Thompson,Ethan,Thompson,G,0,0,Oregon State,Puerto Rico,1999-05-04,1.96,88.5
+1022,3354,21,Jeff Dowtin,Jeff,Dowtin,G,0,2021,Rhode Island,USA,1997-05-10,1.9,80.3
+1023,3355,16,Moses Wright,Moses,Wright,F,0,2021,Georgia Tech,USA,1998-12-23,2.03,102.5
+1024,3356,7,Mitch Ballock,Mitch,Ballock,G,0,0,Creighton,USA,1998-07-02,1.96,93.0
+1025,3357,7,RJ Nembhard Jr.,RJ,Nembhard Jr.,G,0,2021,TCU,USA,1999-03-22,1.93,90.7
+1026,3359,21,Javonte Smart,Javonte,Smart,G,0,2021,Louisiana State,USA,1999-06-03,1.93,93.0
+1027,3361,40,Derrick Alston Jr.,Derrick,Alston Jr.,F,0,0,Boise State,USA,1997-09-17,2.06,85.3
+1028,3362,10,Anthony Tarke,Anthony,Tarke,G,0,0,Coppin State,USA,1997-05-27,1.98,99.8
+1029,3363,7,Kevin Pangos,Kevin,Pangos,G,0,2021,Gonzaga,Canada,1993-01-26,1.85,81.2
+1030,3364,41,Jordan Schakel,Jordan,Schakel,G,0,2021,San Diego State,USA,1998-06-13,1.98,90.7
+1031,3365,22,Matt Lewis,Matt,Lewis,G,0,0,James Madison,USA,1998-12-21,1.96,90.7
+1032,3366,22,Isaiah Miller,Isaiah,Miller,G,0,0,North Carolina-Greensboro,USA,1998-11-09,1.83,81.6
+1033,3367,30,Matt Coleman III,Matt,Coleman III,G,0,0,Texas,USA,1998-01-22,1.88,81.6
+1034,3368,25,Rob Edwards,Rob,Edwards,G,0,2021,Arizona State,USA,1997-01-20,1.96,93.0
+1035,3369,30,DJ Steward,DJ,Steward,G,0,0,Duke,USA,2001-10-02,1.85,73.5
+1036,3370,9,Matt Ryan,Matt,Ryan,F,0,0,Tennessee-Chattanooga,USA,1997-04-17,2.01,97.5
+1037,3372,31,Nate Renfro,Nate,Renfro,F,0,0,,,,,
+1038,3373,31,Denzel Mahoney,Denzel,Mahoney,,0,0,,,,,
+1039,3375,5,Jalen Crutcher,Jalen,Crutcher,G,0,0,,,,,
+1040,3377,19,Romeo Weems,Romeo,Weems,F,0,0,,,,,
+1041,3380,6,Malcolm Hill,Malcolm,Hill,F,0,2021,Illinois,USA,1995-10-26,1.98,99.8
+1042,3381,4,Brandon Rachal,Brandon,Rachal,G,0,0,,,,,
+1043,3383,27,Jared Brownridge,Jared,Brownridge,G,0,0,,,,,
+1044,3384,31,Jordan Burns,Jordan,Burns,G,0,0,,,,,
+1045,3385,30,Damien Jefferson,Damien,Jefferson,F,0,0,,,,,
+1046,3386,27,Braxton Key,Braxton,Key,F,0,2021,Virginia,USA,1997-02-14,2.03,102.1
+1047,3387,38,Alex Antetokounmpo,Alex,Antetokounmpo,F,0,0,,,,,
+1048,3390,23,John Petty Jr.,John,Petty Jr.,G,0,0,,,,,
+1049,3391,41,Devontae Shuler,Devontae,Shuler,G,0,0,,,,,
+1050,3393,40,Nino Johnson,Nino,Johnson,F,0,0,,,,,
+1051,3396,16,Xavier Moon,Xavier,Moon,G,0,2021,Morehead State,USA,1995-01-02,1.88,74.8
+1052,3399,25,Olivier Sarr,Olivier,Sarr,C,0,2021,Kentucky,France,1999-02-20,2.13,108.9
+1053,3402,28,Paris Bass,Paris,Bass,F,0,2021,Detroit Mercy,USA,1995-08-29,2.03,90.7
